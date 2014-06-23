@@ -14,7 +14,7 @@
 
 	  function readFirebase() {
 	  myRootRef.on('value', function(snapshot) {
-	  alert(snapshot.val());
+	  alert("Hi " + snapshot.val()['author']);
 	  });
 	  }
 	</script>
