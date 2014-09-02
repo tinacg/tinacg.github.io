@@ -13,17 +13,18 @@
 
   $("#start").click(function () {
 	var mins = parseInt($("#mins").val());
-    var secs = 60 * mins;
-
-    clearInterval(intv);
-    
+	var secs = 60 * mins;
+    document.title = "Start...";
+  
+	clearInterval(intv);
+		
 	intv = setInterval(function () {
-      document.title = secstomins(secs--);
-    }, 1000);
+	  document.title = secstomins(secs--);
+	}, 1000);
 
-    if (secs < 1) {
-      clearInterval(intv);
-    }
+	if (secs < 1) {
+	  clearInterval(intv);
+	}
   });
 
 function secstomins(s) {
