@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+  <script src="jquery-1.11.0.min.js"></script>
+  <script src="https://cdn.firebase.com/js/client/1.0.21/firebase.js"></script>
+  </head>
+  <body>
+  <pre>
+	<div id="output"></div>
+  </pre>
+  
+<input type="text" id="title">
+<input type="text" id="entry">
+<button id="send_entry">send entry</button>
+
+  <script>
+  "use strict;"
+$(document).ready(function () { 
+  // $("#output").html("o hai");
+  var fireRef = new Firebase("https://glaring-heat-3050.firebaseio.com/");
+
+  /*
+  myFirebaseRef.child("files/My document").set({
+    "contents": "the text",
+    "last modified": "20140911"
+  });
+  */
+
+  fireRef.child("something").on('child_added', function (snapshot) {
+    // alert(snapshot.val().contents);
+    // $("#output").append('on snapshot');
+    var fireObj = snapshot.val();
+    //for (var property in fireObj) {
+    //  if (fireObj.hasOwnProperty(property)) {
+    //    $("#output").append(fireObj[property].contents);
+    //  }
+    //}
+    if (fireObj.title === "extra") {
+      $("#output").append(fireObj.contents + "\n");
+    }
+  });
+  
+  $("#send_entry").click(function () {
+    fireRef.child("something").push({
+      title: $("#title").val(),
+      contents: $("#entry").val()
+    });
+  });
+});
+
+
+	</script>
+  </body>
+</html>
