@@ -1,0 +1,4 @@
+<form ... novalidate>  // turns off default HTML browser validation
+
+<textarea ... required></textarea>
+<input ... required/>

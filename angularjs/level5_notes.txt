@@ -1,0 +1,46 @@
+new module
+
+(function () {
+	var app = angular.module('store-products', []);
+
+	app.directive(...);
+
+})();
+
+in enclosing app:
+(function () {
+	var app = angular.module('store', ['store-products']);
+
+	...
+	// reusing the name 'app' is ok because each is in its own closure
+
+})();
+
+include both files in index.html
+
+Services
+
+fetch JSON with $http
+Log with $log
+Filter an array with $filter
+
+app.controller('SomeController', ['$http', function($http) {
+
+}]);
+
+
+(function () {
+	var app = angular.module('store', ['store-products']);
+	app.controller('StoreController', ['$http', function($http) {
+		var store = this;
+		store.products = [];  // initialize before success returns
+		
+		$http.get('/products.json').success(function(data) {
+			store.products = data;
+		});
+	}]);
+})();
+
+
+$http.post('/path', { param: 'value' });
+

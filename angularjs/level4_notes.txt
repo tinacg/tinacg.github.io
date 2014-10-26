@@ -1,0 +1,24 @@
+put repetitive html in its own file
+
+<h3 ng-include="'product-title.html'"> single quotes inside double
+
+custom directives
+
+<product-title></product-title>
+
+HTML expresses behavior of your app
+
+in app.js
+
+app.directive('productTitle', function () {  // dashed to camelCase
+	return {
+		restrict: 'E',  // Element
+		templateUrl: 'product-title.html'
+	};
+});
+
+Attribute-style for mixins like tooltip
+restrict: 'A',
+
+
+
