@@ -1,0 +1,20 @@
+Under the directory entry
+"${path}/data/localweb"
+=========================
+
+<Directory "c:/users/heitor/desktop/emacs-24.3/bin/tinacg.github.io">
+	Options Indexes MultiViews FollowSymLinks Includes ExecCGI
+	AllowOverride All
+	Require all granted
+	Allow from all
+</Directory>
+
+
+Under Alias /home "${path}...
+=============================
+Alias /tinacg "c:/users/heitor/desktop/emacs-24.3/bin/tinacg.github.io"
+
+
+Restart Apache
+==============
+

@@ -1,5 +1,5 @@
 angular.module('project', ['ngRoute', 'firebase'])
-  .value('fbURL', 'https://tinacg.firebaseio.com/')
+  .value('fbURL', 'https://tinacg.firebaseio.com/javascript-projects')
   .factory('Projects', function ($firebase, fbURL) {
     return $firebase(new Firebase(fbURL)).$asArray();
   })
