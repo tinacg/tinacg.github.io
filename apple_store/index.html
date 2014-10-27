@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="appleApp">
+  <head>
+	<meta charset="utf-8">
+	<script src="../js/angular.min.js"></script>
+	<script src="https://cdn.firebase.com/js/client/1.1.2/firebase.js"></script>
+	<script src="https://cdn.firebase.com/libs/angularfire/0.8.2/angularfire.min.js"></script>
+	<script src="app.js"></script>
+  </head>
+
+  <body ng-controller="StoreController as store">
+
+	<!-- <h1>The Apple Store (TM) Selling Fujis, Granny Smiths, and Golden Delicious Apples</h1> -->
+
+	Your buyer ID: {{localUid}}
+	
+	<form name="loginForm" ng-submit="login()">
+
+	  {{loginStatus}}
+		<input ng-model="user.email" type="text" title="Email" />
+		<input ng-model="user.password" type="password" title="Password" />
+		<input type="submit" value="Log in" />
+	</form>
+	
+	<form name="logoutForm" ng-submit="logout()">
+		<input type="submit" value="Log out">
+	</form>
+	{{status}}<br><br>
+	
+	Total sales: {{totalSales}}
+	<ul>
+	  <li ng-repeat="sale in sales">
+		{{sale.quantity}} pcs. {{sale.type}} <a href ng-click="sales.$remove(sale)">delete</a>
+	  </li>
+	</ul>
+
+	<form ng-submit="addSale(saleQuantity, saleType)">
+	  Quantity: <input ng-model="saleQuantity" />
+	  Type: <input ng-model="saleType" />
+	  <button type="submit">add sale</button>
+	</form>
+	
+  </body>
+</html>
+

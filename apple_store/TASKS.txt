@@ -1,0 +1,9 @@
+Tasks
+
+set child "apple_store" as root for this app
+
+set sales as array
+
+a sale is { 'type': 'fuji', quantity: 10 }
+
+push sale

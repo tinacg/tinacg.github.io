@@ -1,0 +1,5 @@
+Single page with login bar on top
+
+when logging in, load the whole database in the callback with angular fire and
+run calculations in javascript.
+

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="pearApp">
+  <head>
+	<meta charset="utf-8">
+	<script src="https://cdn.firebase.com/js/client/1.1.2/firebase.js"></script>
+	<script src="../js/angular.min.js"></script>
+	<script src="https://cdn.firebase.com/libs/angularfire/0.8.2/angularfire.min.js"></script>
+	<script src="app.js"></script>
+  </head>
+
+  <body ng-controller="StoreController">
+	<!-- if not logged in -->
+	<div ng-hide="loggedIn">
+	  <a href="login.html">Click here to log in</a>
+	</div>
+
+	LOG OUT LINK
+	
+	<div ng-show="loggedIn">
+	  Sales: (place as tab later)
+	  <br>
+	  Total sales: {{totalSales}}
+	  <ul>
+		<li ng-repeat="sale in sales">
+		  {{sale.quantity}} pcs. {{sale.type}} <a href ng-click="sales.$remove(sale)">delete</a>
+		</li>
+	  </ul>
+
+	  <form ng-submit="addSale(saleClientId, saleQuantity, saleType)">
+		client id: <input ng-model="saleClientId" /><br>
+		quantity: <input ng-model="saleQuantity" /><br>
+		type: <input ng-model="saleType" /><br>
+		<input type="submit" />
+	  </form>
+
+	  Clients: (place as tab)
+	</div>
+  </body>
+</html>
