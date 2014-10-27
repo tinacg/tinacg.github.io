@@ -6,25 +6,40 @@
   
   app.controller("StoreController", ['$scope', '$firebase', function($scope, $firebase) {
     $scope.totalSales = 0;
+
+    $scope.codigoTotals = {};
+    
     var sync = $firebase(salesRef);
     
     function init(authData) {
       $scope.loginStatus = "Welcome " + authData.uid;
       $scope.sales = sync.$asArray();
       $scope.loggedIn = true;
+      $scope.userId = authData.uid;
+      
       salesRef.on('child_added', function(childSnapshot) {
-        $scope.totalSales += childSnapshot.val().quantity;
+        var sale = childSnapshot.val();
+        $scope.totalSales += sale.quantity;
+        if ($scope.codigoTotals.hasOwnProperty(sale.type)) {
+          $scope.codigoTotals[sale.type] += sale.quantity;
+        } else {
+          $scope.codigoTotals[sale.type] = sale.quantity;
+        }
       });
 
       salesRef.on('child_removed', function(childSnapshot) {
-        $scope.totalSales -= childSnapshot.val().quantity;
+        var sale = childSnapshot.val();
+        $scope.totalSales -= sale.quantity;
+        $scope.codigoTotals[sale.type] -= sale.quantity;        
       });
 
       $scope.addSale = function(saleClientId, saleQuantity, saleType) {
-        $scope.sales.$add({ clientId: saleClientId, quantity: parseInt(saleQuantity), type: saleType });
+        $scope.sales.$add({ clientId: saleClientId, quantity: parseInt(saleQuantity), type: saleType, userId: $scope.userId });
         $scope.saleClientId = "";
         $scope.saleQuantity = "";
         $scope.saleType = "";
+
+        $scope.$broadcast("newSaleAdded");
       };
 
       
@@ -36,6 +51,11 @@
       $scope.loggedIn = false;
     }
 
+    $scope.logout = function() {
+      ref.unauth();
+      document.location.href = "login.html";
+    }
+    
     var authData = ref.getAuth();
 
     if (authData) {
@@ -44,4 +64,12 @@
       clean();
     }    
   }]);
+
+  app.directive('focusOn', function() {
+    return function(scope, elem, attr) {
+      scope.$on(attr.focusOn, function(e) {
+        elem[0].focus();
+      });
+    };
+  });
 })();

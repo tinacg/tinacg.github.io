@@ -1,31 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="pearLoginApp">
   <head>
 	<meta charset="utf-8">
 	<script src="https://cdn.firebase.com/js/client/1.1.2/firebase.js"></script>
+	<script src="../js/angular.min.js"></script>
+	<script src="https://cdn.firebase.com/libs/angularfire/0.8.2/angularfire.min.js"></script>
   </head>
-  <body>
-	  Email: <input type="text" id="userEmail" /><br>
-	  Password: <input type="password" id="userPassword" /><br>
-	  <button onclick="firebaseLogin();">Log in</button>
-	<div id="status"></div>
-  <script>
-  
-var ref = new Firebase("https://tinacg.firebaseio.com");
-
-function firebaseLogin() {
-  ref.authWithPassword({
-    email: document.getElementById("userEmail").value,
-    password: document.getElementById("userPassword").value
-  }, function(err, authData) {
-    if (err === null) {
-      document.location.href = 'index.html';
-    } else {
-      document.getElementById("status").innerHTML = err;
-    }
-  });
-}
-	</script>
+  <body ng-controller="LoginController">
+	<form ng-submit="firebaseLogin(userEmail, userPassword)" id="loginForm">
+	  Email: <input ng-model="userEmail" /><br>
+	  Password: <input type="password" ng-model="userPassword" /><br>
+	  <input type="submit" value="Log in" />
+	</form>
 	
+	<div id="status"></div>
+	<script src="loginapp.js"></script>
   </body>
 </html>

@@ -1,0 +1,12 @@
+rename sale to lineItem
+
+add "ja reservado" to lineItem
+
+add a "status" field to lineItem, Desistência or Container, whole stringand not
+a numerical code, to avoid puzzlement later
+
+if Desistência, then do not subtract from container totals (Chegando)
+
+compare model to spreadsheet
+
+copy product data into a Firebase child
