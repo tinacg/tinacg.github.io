@@ -17,21 +17,63 @@
 	<div ng-show="loggedIn">
 	  {{loginStatus}}<br>
 	  <a href ng-click="logout()">log out</a>
-	  <br><br>
 
 	  <form ng-submit="addTask(false, taskDescription, taskCategory, taskDueDate)">
-		Task: <input ng-model="taskDescription"><br>
-		Category: <input ng-model="taskCategory"><br>
-		Due date: <input ng-model="taskDueDate"><br>
-		<input type="submit" />
+		<table>
+		  <thead>
+			<th>?</th>
+			<th>Category</th>
+			<th>Task</th>
+			<th>Due date</th>
+			<th>Created</th>
+		  </thead>
+		  <tbody>
+			<tr>
+			  <td>add</td>
+			  <td><input ng-model="taskCategory" focus-on="newTaskAdded" /></td>
+			  <td><input ng-model="taskDescription" /></td>
+			  <td><input ng-model="taskDueDate" /></td>
+			  <td><input type="submit" value="Add Task" /></td>
+			</tr>
+			<tr ng-repeat="task in tasks | orderBy:['done','category','createDate']">
+			  <td style="padding-right: 10px;"><input type="checkbox" ng-model="task.done" ng-change="tasks.$save(task)"></td>
+			  <td style="padding-right: 10px;">{{task.category}}</td>
+			  <td style="padding-right: 10px;">
+				{{task.description}}
+				<span ng-show="task.done">
+				  <a href ng-click="tasks.$remove(task)"><b>(delete)</b></a>
+				</span>
+			  </td>
+			  <td style="padding-right: 10px;">{{task.dueDate}}</td>
+			  <td>{{task.createDate | date}}</td>
+			</tr>			
+		  </tbody>
+		</table>
 	  </form>
-	  
-	  <ul>
-		<li ng-repeat="task in tasks">
-		  <input type="checkbox" ng-model="task.done">
-		  {{task.description}} @{{task.category}} due: {{task.dueDate}} began {{task.createDate | date}}		  			
-		</li>
-	  </ul>
+
+	  <!--
+		  <hr>
+		  <table border="0">
+			<thead>
+			  <tr>
+				<th>Done?</th>
+				<th>Category</th>
+				<th>Task</th>
+				<th>Due</th>
+				<th>Created</th>
+			  </tr>	
+			</thead>
+			<tbody>
+			  <tr ng-repeat="task in tasks | orderBy:['done','category','createDate']">
+				<td style="padding-right: 10px;"><input type="checkbox" ng-model="task.done" ng-change="tasks.$save(task)"></td>
+				<td style="padding-right: 10px;">{{task.category}}</td>
+				<td style="padding-right: 10px;">{{task.description}}</td>
+				<td style="padding-right: 10px;">{{task.dueDate}}</td>
+				<td>{{task.createDate | date}}</td>
+			  </tr>
+			</tbody>
+		  </table>
+		  -->
 	</div>
   </body>
 </html>

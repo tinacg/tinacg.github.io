@@ -16,11 +16,15 @@
       $scope.tasks = sync.$asArray();
 
       $scope.addTask = function(taskDone, taskDescription, taskCategory, taskDueDate) {
+        taskDescription = taskDescription || "My Task";
+        taskCategory = taskCategory || "not categorized";
+        taskDueDate = taskDueDate || "asap";
+        
         $scope.tasks.$add({ done: taskDone,
                             description: taskDescription,
                             category: taskCategory,
                             createDate: (new Date()).getTime(),
-                            dueDate = taskDueDate,
+                            dueDate: taskDueDate,
                           });
         $scope.taskDone = false;
         $scope.taskDescription = "";
@@ -35,6 +39,11 @@
       $scope.loginStatus = "Please log in";
       $scope.tasks = [];
       $scope.loggedIn = false;
+    }
+
+    $scope.logout = function() {
+      ref.unauth();
+      document.location.href = "login.html";
     }
     
     var authData = ref.getAuth();
