@@ -17,7 +17,7 @@
 
       $scope.addTask = function(taskDone, taskDescription, taskCategory, taskDueDate) {
         taskDescription = taskDescription || "My Task";
-        taskCategory = taskCategory || "not categorized";
+        taskCategory = taskCategory || "~uncategorized";
         taskDueDate = taskDueDate || "asap";
         
         $scope.tasks.$add({ done: taskDone,
