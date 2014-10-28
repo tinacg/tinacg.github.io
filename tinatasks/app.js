@@ -4,7 +4,7 @@
   
   app.controller('TaskController', ['$scope', '$firebase', function($scope, $firebase) {
     function init(authData) {
-      $scope.loginStatus = "Welcome back!";
+      $scope.loginStatus = "Welcome back " + authData.password.email + "!";
       $scope.loggedIn = true;
 
       var tasksRef = ref.child(authData.uid);
