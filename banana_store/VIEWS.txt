@@ -1,0 +1,8 @@
+Tabs
+----
+
+LineItems: main view
+Clientes
+Produtos
+Chegando
+

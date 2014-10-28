@@ -1,0 +1,48 @@
+tinacg
+|
++- banana_store
+   |
+   +- clientes
+   |  |
+   |  +- "2180"
+   |  |  |
+   |  |  +- name: "Redd"
+   |  |
+   |  +- "2742"
+   |     |
+   |     +- name: "XBZ"
+   |
+   +- produtos
+   |  |
+   |  +- "137350B"
+   |  |  |
+   |  |  +- name: "Chaveiro de metal"
+   |  |
+   |  +- "143036"
+   |     |
+   |     +- name: "Kit churrasco c/ 4 pcs"
+   |
+   +- chegando
+   |  |
+   |  +- ---firebase-timestamp
+   |     |
+   |     +- codigo: "143036"
+   |     +- quantidade: 10000  (INTEGER)
+   |     +- container: "S/N"
+   |  
+   +- lineItems
+      |
+      +- --- firebase-timestamp
+         |
+         +- timeCreated: SEE DOCS Firebase.ServerValue.TIMESTAMP
+         +- timeModified: SEE DOCS
+         +- status: one of "1: reserva", "2: desistencia", "3: container",
+         |    "4: faturado", or "5: cancelado". Numbers are added for sorting.
+         |    "Reservado" are the line items from which to request
+         +- codigo: "143036"
+         +- cliente: "2180"
+         +- vendedor: "Celia"
+         +- quantidade: 200  (total, INTEGER)
+         +- jaReservado: 20  (INTEGER)
+         +- observacoes: "Com Joao"
+         

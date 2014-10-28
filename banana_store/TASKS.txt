@@ -1,0 +1,40 @@
+------------------------------
+See also MODELS.txt, VIEWS.txt
+------------------------------
+
+Tasks
+=====
+
+if Desistencia, then do not subtract from container totals (Chegando)
+
+Does callback to child_modified provide previous values?
+
+Count total number of line items per container, to verify against physical
+paper copies
+
+nesting line items as children of pedidos complicates aggregating data, beyond
+my experience level right now
+
+find a way to store container number, when changing status to Reserva (add
+callback to child_modified?)
+
+Editing a line item should change totals
+
+autocomplete when entering codigo and clientes name. Entering a number also
+fills in the string, and entering a string fills in the number
+
+clicking on an edit button, icon, or link opens a modal with edit form (and x)
+"On submit" it becomes gray and callback closes it
+
+aggregate by cliente, produto, vendedor, container
+
+checkbox to decide if "inactive" line items are included in aggregate lists,
+simply use a ng-show on each element
+
+how to handle multiple chegandos on same item? could tally by codigo and
+concatenate the multiple containers into a string
+
+line item's container label should be auto-computed
+
+for testing, create child from firebaseRef based on user id.
+the test branch is a sibling of banana_store

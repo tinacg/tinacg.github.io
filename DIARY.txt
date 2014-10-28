@@ -1,0 +1,6 @@
+24 oct 2014 host aguardando.firebaseapp.com
+25 oct 2014 begin codeschool Shaping up with angular flatlander gem store
+26 oct 2014 end codeschool gem store
+27 oct 2014 move from aguardando to tinacg firebase account, name development
+  apps after fruits. First, apple store, then pear store
+
