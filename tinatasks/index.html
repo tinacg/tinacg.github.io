@@ -21,32 +21,44 @@
 	  <form ng-submit="addTask(false, taskDescription, taskCategory, taskDueDate)">
 		<table>
 		  <thead>
-			<th>Done?</th>
-			<th>Category</th>
-			<th>Task</th>
-			<th>Due date</th>
-			<th>Created</th>
-		  </thead>
-		  <tbody>
+			<tr>
+			  <th>Done?</th>
+			  <th>Category</th>
+			  <th>Task</th>
+			  <th>Due date</th>
+			  <th>Created</th>
+			</tr>
 			<tr>
 			  <td>&nbsp;</td>
-			  <td><input ng-model="taskCategory" focus-on="newTaskAdded" /></td>
+			  <td><input ng-model="taskCategory" focus-on="newTaskAdded" size="12" /></td>
 			  <td><input ng-model="taskDescription" size="35" /></td>
-			  <td><input ng-model="taskDueDate" /></td>
+			  <td><input ng-model="taskDueDate" size="12" /></td>
 			  <td><input type="submit" value="Add Task" /></td>
 			</tr>
-			<tr ng-repeat="task in tasks | orderBy:['done','category','createDate']">
+
+		  </thead>
+		  <tbody ng-repeat="task in tasks | orderBy:['done','category','createDate']">
+			<!-- <tr ng-repeat="task in tasks | orderBy:['done','category','createDate']"> -->
+			<tr>
 			  <td style="padding-right: 10px;"><input type="checkbox" ng-model="task.done" ng-change="tasks.$save(task)"></td>
 			  <td style="padding-right: 10px;">{{task.category}}</td>
 			  <td style="padding-right: 10px;">
 				{{task.description}}
+				<a href ng-click="task.editing=true"><b>(edit)</b></a>
 				<span ng-show="task.done">
 				  <a href ng-click="tasks.$remove(task)"><b>(delete)</b></a>
 				</span>
 			  </td>
 			  <td style="padding-right: 10px;">{{task.dueDate}}</td>
 			  <td>{{task.createDate | date}}</td>
-			</tr>			
+			</tr>
+			<tr ng-show="task.editing">
+			  <td style="padding-right: 10px;">&nbsp;</td>
+			  <td style="padding-right: 10px;"><input ng-model="task.category" size="12" /></td>
+			  <td style="padding-right: 10px;"><input ng-model="task.description" size="35" /></td>
+			  <td style="padding-right: 10px;"><input ng-model="task.dueDate" size="12" /></td>
+			  <td><a href ng-click="task.editing = !task.editing"><b>(done editing)</b></a></td>
+			</tr>
 		  </tbody>
 		</table>
 	  </form>
