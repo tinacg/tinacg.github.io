@@ -44,12 +44,12 @@
 			  <td style="padding-right: 10px;">{{task.category}}</td>
 			  <td style="padding-right: 10px;">
 				{{task.description}}
-				<!-- 
-				<a href ng-click="task.editing=true"><b>(edit)</b></a>
+					<!-- 
+					 <a href ng-click="task.editing=true"><b>(edit)</b></a>
+					 -->
 				<span ng-show="task.done">
 				  <a href ng-click="tasks.$remove(task)"><b>(delete)</b></a>
 				</span>
-				-->
 			  </td>
 			  <td style="padding-right: 10px;">{{task.dueDate}}</td>
 			  <td>{{task.createDate | date}}</td>
