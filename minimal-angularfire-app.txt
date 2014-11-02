@@ -1,0 +1,6 @@
+app/index.html
+> references scripts/app.js
+             bower_components/angular/angular.js
+             bower_components/firebase/firebase.js
+             bower_components/angularfire/angularfire.js
+			 
