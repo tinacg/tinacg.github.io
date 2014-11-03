@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html ng-app="aguardando">
+  <head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	<script src="js/firebase.js"></script>
+	<script src="js/angular.min.js"></script>
+	<script src="js/angularfire.min.js"></script>
+	<script src="components.js"></script>
+	<script src="app.js"></script>
+  </head>
+
+  <body ng-controller="OrganizationController">
+	<div ng-hide="loggedIn">
+	  <a href="login.html">Clique aqui para fazer login</a>
+	</div>
+
+	<div ng-show="loggedIn">
+	  {{loginStatus}}<br>
+	  <a href ng-click="logout()">Logout</a>
+
+	  <!-- tabs for Cliente, Produto-->
+	  <tabs>
+		<pane title="Pedidos">
+		  <!-- divs as table rows,
+			   http://stackoverflow.com/questions/4035966/create-a-html-table-where-each-tr-is-a-form
+
+			   <style>
+				 DIV.table 
+				 {
+				 display:table;
+				 }
+				 FORM.tr, DIV.tr
+				 {
+				 display:table-row;
+				 }
+				 SPAN.td
+				 {
+				 display:table-cell;
+				 }
+			   </style>
+			   ...
+			   <div class="table">
+				 <form class="tr" method="post" action="blah.html">
+				   <span class="td"><input type="text"/></span>
+				   <span class="td"><input type="text"/></span>
+				 </form>
+				 <div class="tr">
+				   <span class="td">(cell data)</span>
+				   <span class="td">(cell data)</span>
+				 </div>
+				 ...
+			   </div>
+			   
+			   -->
+		</pane>
+		
+		<pane title="Chegando">
+		  Lista chegando
+		</pane>
+		
+		<pane title="Clientes">
+		  (+)<br>
+		  Lista de clientes
+		  <br>
+		  2180
+		  <br>
+		  3210
+		</pane>
+		<pane title="Produtos">
+		  (+)
+		  Lista de produtos
+		</pane>
+	  </tabs>
+	</div>
+	
+  </body>
+</html>
+

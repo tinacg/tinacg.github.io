@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-app="LoginApp">
+  <head>
+	<meta charset="utf-8">
+	<script src="js/firebase.js"></script>
+	<script src="js/angular.min.js"></script>
+	<script src="js/angularfire.min.js"></script>
+	<script src="loginapp.js"></script>
+  </head>
+  <body ng-controller="LoginController">
+	<form ng-submit="firebaseLogin(userEmail, userPassword)" id="loginForm">
+	  Email: <input ng-model="userEmail" /><br>
+	  Password: <input type="password" ng-model="userPassword" /><br>
+	  <input type="submit" value="Log in" />
+	</form>
+	
+	<div id="status"></div>
+  </body>
+</html>
