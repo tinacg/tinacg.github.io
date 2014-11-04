@@ -4,8 +4,31 @@
 
   app.controller("OrganizationController", ['$scope', '$firebase', function($scope, $firebase) {
     function init(authData) {
-      $scope.loginStatus = "Welcome back " + authData.password.email + "! Your token expires " + (new Date(authData.expires * 1000));
+      $scope.loginStatus = "Login: " + authData.password.email + "! Vencimento " + (new Date(authData.expires * 1000));
       $scope.loggedIn = true;
+
+      $scope.notify = function(message) {
+        $scope.notification = message;
+      };
+
+      var clientesRef = ref.child("clientes");
+      $scope.clientesSync = $firebase(clientesRef);
+      $scope.clienteObj = $scope.clientesSync.$asObject();
+      $scope.clientes = $scope.clientesSync.$asArray();
+
+      $scope.setCliente = function(codigo, nome) {
+        $scope.clientesSync.$set(codigo, { codigo: codigo, nome: nome });
+      };
+
+      var pedidosRef = ref.child("pedidos");
+      $scope.pedidosSync = $firebase(pedidosRef);
+      $scope.pedidos = $scope.pedidosSync.$asArray();
+
+      $scope.addPedido = function(pedido_codigoCliente, quantidade) {
+        $scope.pedidos.$add({ codigoCliente: pedido_codigoCliente,
+                              quantidade: quantidade })
+          .then($scope.notify("Adicionado pedido " + pedido_codigoCliente + " " + quantidade + "pçs"));
+      };
     }
 
     function clean() {

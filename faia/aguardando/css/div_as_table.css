@@ -1,0 +1,11 @@
+div.table {
+	display:table;
+    white-space: nowrap;
+    width: 1%;
+}
+form.tr, div.tr {
+	display:table-row;
+}
+span.td {
+	display:table-cell;
+}

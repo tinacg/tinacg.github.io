@@ -1,32 +1,22 @@
 FAIA
 |
 >aguardando
- |
- + organizacoes
-  |
-  + pontual 
-   |
-   +- operadores
+   |  
+   +- administradores (DITCH USERS/OPERATORS)
    |  |
-   |  +- simplelogin:1: "heitorpontual@gmail.com"
-   |  |
-   |  +- simplelogin:2: "marlenepontual@gmail.com"
-   | 
-   +- administradores 
-   |  |
-   |  +- simplelogin:1: "heitorpontual@gmail.com"
+   |  +- simplelogin:1: 1
    |
    +- clientes
    |  |
-   |  +- "2180": "Redd"
+   |  +- "2180": { codigo: "2180", nome: "Redd" }
    |  |
-   |  +- "2742": "XBZ"
+   |  +- "2742": { codigo: "2742", nome: "XBZ" }
    |
    +- produtos
    |  |
-   |  +- "137350B": "Chaveiro de metal"
+   |  +- "137350B": { codigo: "137350B", nome: "Chaveiro de metal" }
    |  |
-   |  +- "143036": "Kit churrasco c/ 4 pcs"
+   |  +- "143036": { codigo: "143036", nome: "Kit churrasco c/ 4 pcs" }
    |
    +- chegando
    |  |
@@ -36,23 +26,23 @@ FAIA
    |     +- quantidade: 10000  (INTEGER)
    |     +- container: "S/N"
    |  
-   +- lineItems
+   +- linha
       |
       +- --- firebase-timestamp
          |
+		 +- criador: simplelogin:1
          +- dataCriada: SEE DOCS Firebase.ServerValue.TIMESTAMP
          +- dataModificada: SEE DOCS
          +- status: one of "1: Reserva", "2: Desistencia", "3: Container",
          |    "4: Desistencia do container", "5: Faturado", or "6: Cancelado"
          |    Numbers are added for sorting.
          |    "1: Reserva" are the line items from which to request
-         +- codigo: "143036"
          +- cliente: "2180"
-         +- vendedor: "Celia"
+         +- vendedor: "Celia"  (USE DROPDOWN)
+         +- codigo: "143036"
          +- quantidade: 200  (total, INTEGER)
          +- jaReservado: 20  (INTEGER)
          +- observacoes: "Com Joao"
-		 +- criador: simplelogin:1
 ```         
 
 # Views
