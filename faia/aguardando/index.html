@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="css/div_as_table.css" />
+	<link rel="stylesheet" type="text/css" href="css/fields.css" />
 	<script src="js/firebase.js"></script>
 	<script src="js/angular.min.js"></script>
 	<script src="js/angularfire.min.js"></script>
@@ -30,37 +31,62 @@
 
 	  <tabs>
 		<pane title="Pedidos">
+		  Total: {{computed.pedidosTotal}}
 		  <div class="table">
+			<div class="tr">
+			  <span class="td">Codigo do cliente</span>
+			  <span class="td">Nome do cliente</span>
+			  <span class="td">Vendedor(a)</span>
+			  <span class="td">Qtde</span>
+			</div>
 
 			<form class="tr" ng-submit="addPedido(pedido_codigoCliente, quantidade)">
-			  <span class="td">Código do cliente: <input ng-model="pedido_codigoCliente" /></span>
-			  <span class="td">Nome: {{clienteObj[pedido_codigoCliente].nome}}</span>
-			  <span class="td">Quantidade: <input ng-model="quantidade" /></span>
+			  <span class="td"><input type="text" class="number" ng-model="pedido_codigoCliente" /></span>
+			  <span class="td">{{clientesObj[pedido_codigoCliente].nome}}</span>
+			  <span class="td">{{vendedoresObj[clientesObj[pedido_codigoCliente].idVendedor].nome}}</span>
+			  <span class="td"><input type="text" class="number" ng-model="quantidade" /></span>
 			  <span class="td"><input type="submit" value="Adicionar pedido" /></span>
 			</form>
 
 			<div class="tr" ng-repeat-start="pedido in pedidos">
 			  <span class="td">{{pedido.codigoCliente}}</span>
-			  <span class="td">{{clienteObj[pedido.codigoCliente].nome}}</span>
-			  <span class="td">Qtde: {{pedido.quantidade}}</span>
+			  <span class="td">{{clientesObj[pedido.codigoCliente].nome}}</span>
+			  <span class="td">{{vendedoresObj[clientesObj[pedido.codigoCliente].idVendedor].nome}}</span>
+			  <span class="td">{{pedido.quantidade}}</span>
 			</div>
 
-			<form class="tr" ng-repeat-end>
-			  <span class="td"><input ng-model="pedido.codigoCliente" ng-change="pedidos.$save(pedido).then(notify('Código do cliente alterado no pedido'))" /></span>
-			  <span class="td">{{clienteObj[pedido.codigoCliente].nome}}</span>
-			  <span class="td">Nome <input ng-model="pedido.quantidade" ng-change="pedidos.$save(pedido)" /></span>
+			<form class="tr" ng-repeat-end ng-show="DEBUG">
+			  <span class="td"><input type="text" class="number" ng-model="pedido.codigoCliente" ng-change="pedidos.$save(pedido).then(notify('Código do cliente alterado no pedido'))" /></span>
+			  <span class="td">{{clientesObj[pedido.codigoCliente].nome}}</span>
+			  <span class="td">{{vendedoresObj[clientesObj[pedido.codigoCliente].idVendedor].nome}}</span>
+			  <span class="td"><input type="text" class="number" ng-model="pedido.quantidade" ng-change="pedidos.$save(pedido).then(computePedidosTotal(pedidos))" /></span>
 			</form>
 
 		  </div>
+		</pane>
+
+		<pane title="Chegando">
+		  Lista chegando
 		</pane>
 
 		<pane title="Clientes">
 
 		  <div class="table">
 
-			<form class="tr" ng-submit="setCliente(codigoCliente, clienteNome)">
-			  <span class="td">Codigo <input ng-model="codigoCliente" /></span>
-			  <span class="td">Nome <input ng-model="clienteNome" /></span>
+			<div class="tr">
+			  <span class="td">Código</span>
+			  <span class="td">Nome</span>
+			  <span class="td">Vendedor(a)</span>
+			</div>
+			
+			<form class="tr" ng-submit="setCliente(codigoCliente, nomeCliente, vendedorCliente)">
+			  <span class="td"><input type="text" class="number" ng-model="codigoCliente" /></span>
+			  <span class="td"><input type="text" class="string" ng-model="nomeCliente" /></span>
+			  <span class="td">
+				<select ng-model="vendedorCliente">
+				  <option ng-repeat="vendedor in vendedores" value="{{vendedor.id}}">{{vendedor.nome}}</option>
+				</select>
+			  </span>		  
 			  <span class="td"><input type="submit" value="Adicionar cliente" /></span>
 			</form>
 
@@ -70,22 +96,51 @@
 			</div>
 
 			<form class="tr" ng-repeat-end>
-			  <span class="td">Codigo <input ng-model="cliente.codigo" ng-change="clientes.$save(cliente)" /></span>
-			  <span class="td">Nome <input ng-model="cliente.nome" ng-change="clientes.$save(cliente)" /></span>
+			  <span class="td">{{cliente.codigo}}</span>
+			  <span class="td"><input type="text" class="string" ng-model="cliente.nome" ng-change="clientes.$save(cliente)" /></span>
+			  <span class="td">
+				<select ng-model="cliente.idVendedor" ng-change="clientes.$save(cliente)">
+				  <option ng-repeat="vendedor in vendedores" value="{{vendedor.id}}" ng-selected="vendedor.id==cliente.idVendedor">{{vendedor.nome}}</option>
+				</select>
+			  </span>
 			</form>
 
 		  </div>
 		</pane>
-	
-		<pane title="Chegando">
-		  Lista chegando
-		</pane>
-
+		
 		<pane title="Produtos">
 		  (+)
 		  Lista de produtos
 		</pane>
 		
+		<pane title="Vendedores">
+
+		  <div class="table">
+
+			<div class="tr">
+			  <span class="td">ID</span>
+			  <span class="td">Nome</span>
+			</div>
+			
+			<form class="tr" ng-submit="setVendedor(idVendedor, nomeVendedor)">
+			  <span class="td"><input ng-model="idVendedor" /></span>
+			  <span class="td"><input ng-model="nomeVendedor" /></span>
+			  <span class="td"><input type="submit" value="Adicionar vendedor" /></span>
+			</form>
+
+			<div class="tr" ng-repeat-start="vendedor in vendedores">
+			  <span class="td">{{vendedor.id}}</span>
+			  <span class="td">{{vendedor.nome}}</span>
+			</div>
+
+			<form class="tr" ng-repeat-end>
+			  <span class="td">{{vendedor.id}}</span>
+			  <span class="td"><input ng-model="vendedor.nome" ng-change="vendedores.$save(cliente)" /></span>
+			</form>
+
+		  </div>
+		</pane>
+
 	  </tabs>
 	</div>
 	

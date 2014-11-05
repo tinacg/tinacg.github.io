@@ -8,9 +8,9 @@ FAIA
    |
    +- clientes
    |  |
-   |  +- "2180": { codigo: "2180", nome: "Redd" }
+   |  +- "2180": { codigo: "2180", nome: "Redd", vendedor: "Rodrigo" }
    |  |
-   |  +- "2742": { codigo: "2742", nome: "XBZ" }
+   |  +- "2742": { codigo: "2742", nome: "XBZ", vendedor: "Dona Sonia" }
    |
    +- produtos
    |  |

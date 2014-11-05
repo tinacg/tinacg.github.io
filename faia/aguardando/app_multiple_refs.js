@@ -13,37 +13,22 @@
 
       $scope.DEBUG = true;
 
-      // CALCULACOES
       var computedRef = ref.child("computed");
       $scope.computedSync = $firebase(computedRef);
-      $scope.computed = $scope.computedSync.$asObject();
-
-
-      // CLIENTES
+      $scope.computedObj = $scope.computedSync.$asObject();
+      
       var clientesRef = ref.child("clientes");
       $scope.clientesSync = $firebase(clientesRef);
-      $scope.clientesObj = $scope.clientesSync.$asObject();
+      $scope.clienteObj = $scope.clientesSync.$asObject();
       $scope.clientes = $scope.clientesSync.$asArray();
 
-      $scope.setCliente = function(codigo, nome, vendedor) {
-        $scope.clientesSync.$set(codigo, { codigo: codigo, nome: nome, idVendedor: vendedor });
+      $scope.setCliente = function(codigo, nome) {
+        $scope.clientesSync.$set(codigo, { codigo: codigo, nome: nome });
       };
 
-      // VENDEDORES
-      var vendedoresRef = ref.child("vendedores");
-      $scope.vendedoresSync = $firebase(vendedoresRef);
-      $scope.vendedoresObj = $scope.vendedoresSync.$asObject();
-      $scope.vendedores = $scope.vendedoresSync.$asArray();
-
-      $scope.setVendedor = function(id, nome) {
-        $scope.vendedoresSync.$set(id, { id: id, nome: nome });
-      };
-      
-      
-      // PEDIDOS
       var pedidosRef = ref.child("pedidos");
       $scope.pedidosSync = $firebase(pedidosRef);
-      $scope.pedidos = $scope.pedidosSync.$asArray();
+      $scope.pedidos = $scope.pedidosSync.$asObject();
 
       $scope.computePedidosTotal = function(pedidosArray) {
         var total = 0;
@@ -53,8 +38,8 @@
         if (isNaN(total)) {
           total = "";
         }
-        $scope.computed.pedidosTotal = total;
-        $scope.computed.$save();
+        $scope.computedObj.pedidosTotal = total;
+        $scope.computedObj.$save();
       };
 
       $scope.pedidos.$loaded().then(function () {
