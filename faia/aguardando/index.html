@@ -42,8 +42,14 @@
 
 			<form class="tr" ng-submit="addPedido(pedido_codigoCliente, quantidade)">
 			  <span class="td"><input type="text" class="number" ng-model="pedido_codigoCliente" /></span>
-			  <span class="td">{{clientesObj[pedido_codigoCliente].nome}}</span>
-			  <span class="td">{{vendedoresObj[clientesObj[pedido_codigoCliente].idVendedor].nome}}</span>
+			  <span class="td"><input type="text" class="string" ng-model="clientesObj[pedido_codigoCliente].nome" ng-change="setCliente(pedido_codigoCliente, clientesObj[pedido_codigoCliente].nome, vendedoresObj[clientesObj[pedido_codigoCliente].idVendedor].id)" /></span>
+			  <span class="td">
+				<select ng-model="clientesObj[pedido_codigoCliente].idVendedor" ng-change="setCliente(pedido_codigoCliente, clientesObj[pedido_codigoCliente].nome, clientesObj[pedido_codigoCliente].idVendedor)">
+				  <option ng-repeat="vendedor in vendedores" value="{{vendedor.id}}" ng-selected="vendedor.id==clientesObj[pedido_codigoCliente].idVendedor">{{vendedor.nome}}</option>
+				</select>
+			  </span>
+			  
+			  <!-- <span class="td">{{vendedoresObj[clientesObj[pedido_codigoCliente].idVendedor].nome}}</span> -->
 			  <span class="td"><input type="text" class="number" ng-model="quantidade" /></span>
 			  <span class="td"><input type="submit" value="Adicionar pedido" /></span>
 			</form>

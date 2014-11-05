@@ -26,6 +26,9 @@
       $scope.clientes = $scope.clientesSync.$asArray();
 
       $scope.setCliente = function(codigo, nome, vendedor) {
+        if (vendedor === undefined) {
+          vendedor = "";
+        }
         $scope.clientesSync.$set(codigo, { codigo: codigo, nome: nome, idVendedor: vendedor });
       };
 
