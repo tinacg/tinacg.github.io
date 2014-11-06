@@ -8,22 +8,24 @@ pedidos because it is unknown which completes first
 ### Pedido
 
 Operador digita:
-1. Cod. produto
-2. Qtde. desejada
-3. Qtde. ja reservada
-4. Cod. cliente
+1. Cod. produto (A)
+2. Qtde. desejada (E)
+3. Qtde. ja reservada (F)
+4. Cod. cliente (n/a)
 5. Reserva, Desistencia, Container, Desistencia do Container, Faturado,
-ou Cancelado
-6. Observaçoes
+ou Cancelado (D)
+6. Observaçoes (H)
 
 Computador calcula:
-1. Nome do produto
-2. Nome do cliente
-3. Nome do vendedor
-4. Ver se é possivel calcular Desistencia do Container automaticamente
-5. Data criada
-6. Data atualizada
-7. Sobrando
+1. Nome do produto (L)
+2. Qtde. por caixa (n/a)
+3. Sobrando (J)
+4. Nome do cliente (B)
+5. Nome do vendedor (C)
+6. Ver se é possivel calcular Desistencia do Container automaticamente (n/a)
+7. Data criada (I)
+8. Data atualizada (n/a)
+
 
 ### Clientes
 
