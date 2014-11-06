@@ -8,6 +8,7 @@
 	<script src="js/firebase.js"></script>
 	<script src="js/angular.min.js"></script>
 	<script src="js/angularfire.min.js"></script>
+	<script src="js/ui-bootstrap-tpls-0.11.2.min.js"></script>
 	<script src="components.js"></script>
 	<script src="app.js"></script>
   </head>
@@ -18,6 +19,7 @@
 	</div>
 
 	<div ng-show="loggedIn">
+	  <span ng-show="isAdmin"><b>[Admin]</b></span>
 	  {{loginStatus}}<br>
 	  {{notification}}<br>
 	  
@@ -30,14 +32,16 @@
 		-->
 
 	  <tabs>
+		
+		<!-- PEDIDOS -->
 		<pane title="Pedidos">
 		  Total: {{computed.pedidosTotal}}
 		  <div class="table">
 			<div class="tr">
-			  <span class="td">Codigo do cliente</span>
-			  <span class="td">Nome do cliente</span>
-			  <span class="td">Vendedor(a)</span>
-			  <span class="td">Qtde</span>
+			  <span class="td">Cód. cliente</span>
+			  <span class="td">Nome cliente</span>
+			  <span class="td">Vend.</span>
+			  <span class="td">Qtde.</span>
 			</div>
 
 			<form class="tr" ng-submit="addPedido(pedido_codigoCliente, quantidade)">
@@ -51,41 +55,99 @@
 			  
 			  <!-- <span class="td">{{vendedoresObj[clientesObj[pedido_codigoCliente].idVendedor].nome}}</span> -->
 			  <span class="td"><input type="text" class="number" ng-model="quantidade" /></span>
-			  <span class="td"><input type="submit" value="Adicionar pedido" /></span>
+			  <span class="td"><input type="submit" value="adicionar" /></span>
 			</form>
 
-			<div class="tr" ng-repeat-start="pedido in pedidos">
+			<div class="tr" ng-repeat="pedido in pedidos">  <!-- previously ng-repeat-start -->
 			  <span class="td">{{pedido.codigoCliente}}</span>
 			  <span class="td">{{clientesObj[pedido.codigoCliente].nome}}</span>
 			  <span class="td">{{vendedoresObj[clientesObj[pedido.codigoCliente].idVendedor].nome}}</span>
 			  <span class="td">{{pedido.quantidade}}</span>
 			</div>
 
-			<form class="tr" ng-repeat-end ng-show="DEBUG">
-			  <span class="td"><input type="text" class="number" ng-model="pedido.codigoCliente" ng-change="pedidos.$save(pedido).then(notify('Código do cliente alterado no pedido'))" /></span>
-			  <span class="td">{{clientesObj[pedido.codigoCliente].nome}}</span>
-			  <span class="td">{{vendedoresObj[clientesObj[pedido.codigoCliente].idVendedor].nome}}</span>
-			  <span class="td"><input type="text" class="number" ng-model="pedido.quantidade" ng-change="pedidos.$save(pedido).then(computePedidosTotal(pedidos))" /></span>
-			</form>
+			<!--
+				<form class="tr" ng-repeat-end ng-show="DEBUG">
+				  <span class="td"><input type="text" class="number" ng-model="pedido.codigoCliente" ng-change="pedidos.$save(pedido).then(notify('Código do cliente alterado no pedido'))" /></span>
+				  <span class="td">{{clientesObj[pedido.codigoCliente].nome}}</span>
+				  <span class="td">{{vendedoresObj[clientesObj[pedido.codigoCliente].idVendedor].nome}}</span>
+				  <span class="td"><input type="text" class="number" ng-model="pedido.quantidade" ng-change="pedidos.$save(pedido).then(computePedidosTotal(pedidos))" /></span>
+				</form>
+				-->
 
 		  </div>
 		</pane>
 
+		
+		<!-- CHEGANDO -->
 		<pane title="Chegando">
-		  Lista chegando
+		  <div class="table">
+			<div class="tr">
+			  <span class="td">Cód. prod.</span>
+			  <span class="td">Nome do produto</span>
+			  <span class="td">Qtde. cx.</span>
+			  <span class="td">Qtde. chegando</span>
+			  <span class="td">Container</span>
+			</div>
+
+			<form class="tr" ng-submit="addChegando(chegando_codigoProduto.toUpperCase(), chegando_quantidade, chegando_container); chegando_codigoProduto=''; chegando_quantidade=''; chegando_container=''; ">
+			  <span class="td"><input type="text" class="number" id="addChegandoCodigoProduto" ng-model="chegando_codigoProduto" style="text-transform: uppercase" focus-on="newChegandoAdded" /></span>
+			  <span class="td"><input type="text" class="string" ng-model="produtosObj[chegando_codigoProduto.toUpperCase()].nome" ng-change="setProduto(chegando_codigoProduto.toUpperCase(), produtosObj[chegando_codigoProduto.toUpperCase()].nome, produtosObj[chegando_codigoProduto.toUpperCase()].qtdePorCaixa)" /></span>
+			  <span class="td"><input type="text" class="number" ng-model="produtosObj[chegando_codigoProduto.toUpperCase()].qtdePorCaixa" ng-change="setProduto(chegando_codigoProduto.toUpperCase(), produtosObj[chegando_codigoProduto.toUpperCase()].nome, produtosObj[chegando_codigoProduto.toUpperCase()].qtdePorCaixa)" /></span>
+			  <span class="td"><input type="text" class="number" ng-model="chegando_quantidade" /></span>
+			  <span class="td"><input type="text" class="number" ng-model="chegando_container" /></span>
+			  <span class="td"><input type="submit" value="adicionar" /></span>
+			</form>
+
+			<div class="tr" ng-repeat="chegando in chegandos">
+			  <span class="td">{{chegando.codigoProduto}}</span>
+			  <span class="td">{{produtosObj[chegando.codigoProduto].nome}}</span>
+			  <span class="td">{{produtosObj[chegando.codigoProduto].qtdePorCaixa}}</span>
+			  <span class="td">{{chegando.quantidade}}</span>
+			  <span class="td">{{chegando.container}}</span>
+			</div>
+		  </div>
 		</pane>
 
+		<!-- CLIENTES -->
 		<pane title="Clientes">
 
-		  <div class="table">
-
-			<div class="tr">
-			  <span class="td">Código</span>
-			  <span class="td">Nome</span>
-			  <span class="td">Vendedor(a)</span>
-			</div>
+		  <script type="text/ng-template" id="myClienteModalContent.html">
+			<form>
+			  <div class="modal-body">
+				{{selected.codigo}}
+				<input type="text" class="string" ng-model="selected.nome" />
+				<!--
+					<ul>
+					  <li ng-repeat="item in items">
+						<a ng-click="selected.item = item">{{item}}</a>
+					  </li>
+					</ul>
+					Selected: {{selected.item}}
+					-->
+				<select ng-model="selected.idVendedor">
+				  <option ng-repeat="vendedor in vendedores" value="{{vendedor.id}}" ng-selected="selected.idVendedor==vendedor.id">{{vendedor.nome}}</option>
+				</select>
+			  </div>
+			  <div class="modal-footer">
+				<input type="submit" ng-click="ok()" value="OK" />
+				<button type="button" ng-click="cancel()">cancelar</button>
+			  </div>
+			</form>
 			
-			<form class="tr" ng-submit="setCliente(codigoCliente, nomeCliente, vendedorCliente)">
+		  </script>
+		  
+
+		  <div class="table">
+			<div class="tr">
+			  <span	class="td" ng-show="isAdmin">&nbsp;</span>
+			  <span class="td"><a href ng-click="clienteOrder='codigo'">Código</a></span>
+			  <span class="td"><a href ng-click="clienteOrder='nome'">Nome</a></span>
+			  <span class="td"><a href ng-click="clienteOrder='idVendedor'">Vendedor(a)</a></span>
+			</div>
+
+			<!-- Adicionar Cliente -->
+			<form class="tr" ng-show="isAdmin" ng-submit="setCliente(codigoCliente, nomeCliente, vendedorCliente); codigoCliente=''; nomeCliente=''; vendedorCliente='';">
+			  <span class="td">&nbsp;</span>
 			  <span class="td"><input type="text" class="number" ng-model="codigoCliente" /></span>
 			  <span class="td"><input type="text" class="string" ng-model="nomeCliente" /></span>
 			  <span class="td">
@@ -93,60 +155,97 @@
 				  <option ng-repeat="vendedor in vendedores" value="{{vendedor.id}}">{{vendedor.nome}}</option>
 				</select>
 			  </span>		  
-			  <span class="td"><input type="submit" value="Adicionar cliente" /></span>
+			  <span class="td"><input type="image" src="img/file_add.png" alt="adicionar" /></span>
 			</form>
 
-			<div class="tr" ng-repeat-start="cliente in clientes">
-			  <span class="td">Codigo: {{cliente.codigo}}</span>
-			  <span class="td">Nome: {{cliente.nome}}</span>
-			</div>
-
-			<form class="tr" ng-repeat-end>
+			<!-- Display Cliente -->
+			<div class="tr" ng-repeat="cliente in clientes | orderBy:[clienteOrder]">
+			  <span class="td" ng-show="isAdmin"><img src="img/file_edit.png" ng-click="editClienteOpen(cliente)" /></span>
 			  <span class="td">{{cliente.codigo}}</span>
-			  <span class="td"><input type="text" class="string" ng-model="cliente.nome" ng-change="clientes.$save(cliente)" /></span>
-			  <span class="td">
-				<select ng-model="cliente.idVendedor" ng-change="clientes.$save(cliente)">
-				  <option ng-repeat="vendedor in vendedores" value="{{vendedor.id}}" ng-selected="vendedor.id==cliente.idVendedor">{{vendedor.nome}}</option>
-				</select>
-			  </span>
-			</form>
+			  <span class="td">{{cliente.nome}}</span>
+			  <span class="td">{{vendedoresObj[cliente.idVendedor].nome}}</span>
+			</div>
 
 		  </div>
 		</pane>
-		
+
+		<!-- PRODUTOS -->
 		<pane title="Produtos">
-		  (+)
-		  Lista de produtos
-		</pane>
-		
-		<pane title="Vendedores">
+		  <script type="text/ng-template" id="myProdutoModalContent.html">
+			<form>
+			  <div class="modal-body">
+				{{selected.codigo}}
+				<input type="text" class="string" ng-model="selected.nome" />
+				<input type="text" class="number" ng-model="selected.qtdePorCaixa" />
+			  </div>
+			  <div class="modal-footer">
+				<input type="submit" ng-click="ok()" value="OK" />
+				<button type="button" ng-click="cancel()">cancelar</button>
+			  </div>
+			</form>
+		  </script>
 
 		  <div class="table">
-
 			<div class="tr">
-			  <span class="td">ID</span>
-			  <span class="td">Nome</span>
-			</div>
-			
-			<form class="tr" ng-submit="setVendedor(idVendedor, nomeVendedor)">
-			  <span class="td"><input ng-model="idVendedor" /></span>
-			  <span class="td"><input ng-model="nomeVendedor" /></span>
-			  <span class="td"><input type="submit" value="Adicionar vendedor" /></span>
-			</form>
-
-			<div class="tr" ng-repeat-start="vendedor in vendedores">
-			  <span class="td">{{vendedor.id}}</span>
-			  <span class="td">{{vendedor.nome}}</span>
+			  <span	class="td" ng-show="isAdmin">&nbsp;</span>
+			  <span class="td"><a href ng-click="produtoOrder='codigo'">Código</a></span>
+			  <span class="td"><a href ng-click="produtoOrder='nome'">Nome</a></span>
+			  <span class="td"><a href ng-click="produtoOrder='qtdePorCaixa'">Qtde. caixa</a></span>
 			</div>
 
-			<form class="tr" ng-repeat-end>
-			  <span class="td">{{vendedor.id}}</span>
-			  <span class="td"><input ng-model="vendedor.nome" ng-change="vendedores.$save(cliente)" /></span>
+			<!-- Adicionar Produto -->
+			<form class="tr" ng-show="isAdmin" ng-submit="setProduto(codigoProduto, nomeProduto, qtdePorCaixaProduto); codigoProduto=''; nomeProduto=''; qtdePorCaixaProduto='';">
+			  <span class="td" ng-show="isAdmin">&nbsp;</span>
+			  <span class="td"><input type="text" class="number" ng-model="codigoProduto" /></span>
+			  <span class="td"><input type="text" class="string" ng-model="nomeProduto" /></span>
+			  <span class="td"><input type="text" class="number" ng-model="qtdePorCaixaProduto" /></span>
+			  <span class="td" ng-show="isAdmin"><input type="image" src="img/file_add.png" alt="adicionar" /></span>
+			  <!-- <span class="td"><input type="submit" value="adicionar" /></span> -->
 			</form>
+
+			<!-- Display Produto -->
+			<div class="tr" ng-repeat="produto in produtos | orderBy:[produtoOrder]">
+			  <span class="td" ng-show="isAdmin"><img src="img/file_edit.png" ng-click="editProdutoOpen(produto)" /></span>
+			  <span class="td">{{produto.codigo}}</span>
+			  <span class="td">{{produto.nome}}</span>
+			  <span class="td">{{produto.qtdePorCaixa}}</span>
+			</div>
 
 		  </div>
 		</pane>
 
+
+		<!-- VENDEDORES -->
+		<!--		
+					<pane title="Vendedores">
+
+					  <div class="table">
+
+						<div class="tr">
+						  <span class="td">ID</span>
+						  <span class="td">Nome</span>
+						</div>
+						
+						<form class="tr" ng-submit="setVendedor(idVendedor, nomeVendedor)">
+						  <span class="td"><input ng-model="idVendedor" /></span>
+						  <span class="td"><input ng-model="nomeVendedor" /></span>
+						  <span class="td"><input type="submit" value="adicionar" /></span>
+						</form>
+
+						<div class="tr" ng-repeat-start="vendedor in vendedores">
+						  <span class="td">{{vendedor.id}}</span>
+						  <span class="td">{{vendedor.nome}}</span>
+						</div>
+
+						<form class="tr" ng-repeat-end>
+						  <span class="td">{{vendedor.id}}</span>
+						  <span class="td"><input ng-model="vendedor.nome" ng-change="vendedores.$save(cliente)" /></span>
+						</form>
+
+					  </div>
+					</pane>
+					-->
+		
 	  </tabs>
 	</div>
 	

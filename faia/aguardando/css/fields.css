@@ -3,7 +3,7 @@ body {
 }
 
 input[type="text"].number {
-    width: 65px;
+    width: 70px;
 }
 
 input[type="text"].string {

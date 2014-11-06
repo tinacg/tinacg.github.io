@@ -31,11 +31,19 @@ Computador calcula:
 2. Nome
 3. Vendedor
 
+### Produtos
+
+1. Codigo
+2. Nome
+3. Quantidade por caixa
+
+
 ### Chegando
 
 1. Codigo Produto
 2. Qtde. chegando
 3. Container
+
 
 # Temporary calculations
 
