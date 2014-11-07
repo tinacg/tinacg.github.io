@@ -2,14 +2,31 @@
   var app = angular.module('aguardando', ['components', 'firebase', 'ui.bootstrap']);
   var ref = new Firebase("https://faia.firebaseio.com/aguardando");
 
+  function formSetEditable(formId, state) {
+    var form = document.getElementById(formId);
+    var elements = form.elements;
+    for (var i = 0, len = elements.length; i < len; i++) {
+      elements[i].disabled = !state;
+    }
+  }
+  
   app.controller("OrganizationController", ['$scope', '$firebase', '$modal', function($scope, $firebase, $modal) {
     function init(authData) {
-      $scope.loginStatus = authData.password.email + " Vencimento " + (new Date(authData.expires * 1000));
+      $scope.loginStatus = "Login válido até " + (new Date(authData.expires * 1000));
       $scope.loggedIn = true;
+      $scope.operatorEmail = authData.password.email;
 
       $scope.notify = function(message) {
         $scope.notification = message;
+        $scope.$apply();
       };
+
+      $scope.alertarResultado = function(message) {
+        $scope.alterarSenhaResultado = message;
+        $scope.$apply();
+      };
+
+      $scope.notification = " ";
 
       $scope.DEBUG = true;
       $scope.isAdmin = false;
@@ -122,7 +139,7 @@
           $scope.notify('Alteração de produto cancelada.');
         });
       };  // END PRODUTOS
-                               
+      
 
       // PEDIDOS
       var pedidosRef = ref.child("pedidos");
@@ -146,7 +163,7 @@
       });
 
       $scope.addPedido = function(pedido_codigoCliente, quantidade) {
-        $scope.pedidos.$add({ codigoCliente: pedido_codigoCliente,
+        $scope.pedidos.$add({ codigoCliente: parseInt(pedido_codigoCliente),
                               quantidade: parseInt(quantidade) })
           .then($scope.notify("Adicionado pedido " + pedido_codigoCliente + " " + quantidade + "pçs"))
           .then(function() { $scope.computePedidosTotal($scope.pedidos); })
@@ -180,12 +197,29 @@
       $scope.setVendedor = function(id, nome) {
         $scope.vendedoresSync.$set(id, { id: id, nome: nome });
       };  // END VENDEDORES
+
+      // MINHA CONTA
+      $scope.alterarSenha = function(oldPassword, newPassword) {
+        formSetEditable("senhaForm", false);
+        ref.changePassword({
+          email: $scope.operatorEmail,
+          oldPassword: oldPassword,
+          newPassword: newPassword,
+        }, function(error) {
+          if (error === null) {
+            $scope.alertarResultado("Senha alterada com sucesso.");
+            formSetEditable("senhaForm", true);
+          } else {
+            $scope.alertarResultado("Houve um erro na ateração de senha: " + error);
+            formSetEditable("senhaForm", true);
+          }
+        });
+      };
       
     }  // END init()
 
     function clean() {
-      $scope.loginStatus = "Please log in";
-      $scope.tasks = [];
+      $scope.loginStatus = "Por favor fazer login";
       $scope.loggedIn = false;
     }
 

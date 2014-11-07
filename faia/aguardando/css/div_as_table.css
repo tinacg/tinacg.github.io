@@ -1,7 +1,7 @@
 div.table {
 	display:table;
-    white-space: nowrap;
     width: 1%;
+    white-space: nowrap;
     table-layout: initial;
 }
 form.tr, div.tr {
@@ -10,5 +10,6 @@ form.tr, div.tr {
 span.td {
 	display:table-cell;
     padding: 0px 10px 0px 10px;
-    /* min-width: 150px; */
+/* min-width: 150px; */
+    border-bottom: 1px dotted #CCCCCC;
 }
