@@ -17,15 +17,33 @@ ou Cancelado (D)
 6. Observaçoes (H)
 
 Computador calcula:
-1. Nome do produto (L)
-2. Qtde. por caixa (n/a)
-3. Sobrando (J)
-4. Nome do cliente (B)
-5. Nome do vendedor (C)
-6. Ver se é possivel calcular Desistencia do Container automaticamente (n/a)
-7. Data criada (I)
-8. Data atualizada (n/a)
+7. Nome do produto (L)
+8. Qtde. por caixa (n/a)
+9. Sobrando (J)
+10. Nome do cliente (B)
+11. Nome do vendedor (C)
+12. Ver se é possivel calcular Desistencia do Container automaticamente (n/a)
+13. Data criada (I)
+14. Data atualizada (n/a)
 
+
+##### Pedido display
+
+1. Cod. Prod (1)
+2. Qtde desejada (2)
+3. Nome cliente (10)
+4. Nome vend. (11)
+5. Resv. Desist (5)
+6. Obs. (6)
+7. Sobrando (9)
+8. Data criada (13)
+
+Mostrar em tooltip ou clicando num toggle link
+(3) Qtde ja reservada
+(4) Cod Cliente
+(7) Nome prod.
+(8) Qtde caixa
+(14) Data atualiz.
 
 ### Clientes
 

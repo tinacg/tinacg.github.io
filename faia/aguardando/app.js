@@ -146,6 +146,19 @@
       $scope.pedidosSync = $firebase(pedidosRef);
       $scope.pedidos = $scope.pedidosSync.$asArray();
 
+      $scope.pedidoEstadoOrder = function(pedido) {
+        switch (pedido.estado) {
+        case 'Reserva': return 1;
+        case 'Desistencia': return 2;
+        case 'Container': return 3;
+        case 'Desistencia do Container': return 4;
+        case 'Faturado': return 5;
+        case 'Cancelado': return 6;
+        default: return 99;
+        }
+      };
+      
+      
       $scope.computePedidosTotal = function(pedidosArray) {
         var total = 0;
         angular.forEach(pedidosArray, function(value, key) {
@@ -162,9 +175,9 @@
         $scope.computePedidosTotal($scope.pedidos);
       });
 
-      $scope.addPedido = function(pedido_codigoCliente, quantidade) {
+      $scope.addPedido = function(pedido_codigoCliente, quantidade, estado) {
         $scope.pedidos.$add({ codigoCliente: parseInt(pedido_codigoCliente),
-                              quantidade: parseInt(quantidade) })
+                              quantidade: parseInt(quantidade), estado: estado, })
           .then($scope.notify("Adicionado pedido " + pedido_codigoCliente + " " + quantidade + "pçs"))
           .then(function() { $scope.computePedidosTotal($scope.pedidos); })
           .then($scope.$broadcast("newPedidoAdded"));

@@ -29,7 +29,73 @@
 		-->
 
 	  <tabs>
-		
+
+		<!-- PEDIDOS -->
+		<pane title="Pedidos Template">
+		  <div class="table">
+			<div class="tr">
+			  <span class="td">&nbsp;</span>
+			  <span class="td">Cód.prod</span>
+			  <span class="td">Qtde</span>
+			  <span class="td">Cliente</span>
+			  <span class="td">Vend.</span>
+			  <span class="td">Estado</span>
+			  <span class="td">Obs.</span>
+			  <span class="td">Sobrando</span>
+			  <span class="td">Data</span>
+			</div>
+
+			<div class="tr">
+			  <span class="td"><img src="img/file_edit.png" alt="+" /></span>
+			  <span class="td">143137</span>
+			  <span class="td">25000</span>
+			  <span class="td">Redd Marketing</span>
+			  <span class="td">Rodrigo</span>
+			  <span class="td">Desistencia</span>
+			  <span class="td">Zelia</span>
+			  <span class="td">120000</span>
+			  <span class="td">ter 7 out</span>
+			</div>
+			
+		  </div>
+		</pane>
+
+		<!-- PEDIDOS -->
+		<pane title="Pedidos Full">
+		  <div class="table">
+			<div class="tr">
+			  <span class="td">&nbsp;</span>
+			  <span class="td">Cód.prod</span>
+			  <span class="td">Nome prod</span>
+			  <span class="td">Qtde.</span>
+			  <span class="td">Já sep.</span>
+			  <span class="td">Cliente</span>
+			  <span class="td">Vend.</span>
+			  <span class="td">Estado</span>
+			  <span class="td">Obs.</span>
+			  <span class="td">Sobrando</span>
+			  <span class="td">Data</span>
+			  <span class="td">Data atualiz.</span>
+			</div>
+
+			<div class="tr">
+			  <span class="td"><img src="img/file_edit.png" alt="+" /></span>
+			  <span class="td">143137</span>
+			  <span class="td">Espanador de po com penas de avestruz</span>
+			  <span class="td">25000</span>
+			  <span class="td">3000</span>
+			  <span class="td">Redd Marketing</span>
+			  <span class="td">Rodrigo</span>
+			  <span class="td">Desistencia</span>
+			  <span class="td">Zelia pediu</span>
+			  <span class="td">120000</span>
+			  <span class="td">ter 7 out</span>
+			  <span class="td">qui 9 out</span>
+			</div>
+			
+		  </div>
+		</pane>
+
 		<!-- PEDIDOS -->
 		<pane title="Pedidos">
 		  Total: {{computed.pedidosTotal}}
@@ -39,9 +105,10 @@
 			  <span class="td">Nome cliente</span>
 			  <span class="td">Vend.</span>
 			  <span class="td">Qtde.</span>
+			  <span class="td">Estado</span>
 			</div>
 
-			<form class="tr" ng-submit="addPedido(pedido_codigoCliente, quantidade)">
+			<form class="tr" ng-submit="addPedido(pedido_codigoCliente, quantidade, estado)">
 			  <span class="td"><input type="text" class="number" ng-model="pedido_codigoCliente" /></span>
 			  <!--
 				  <span class="td"><input type="text" class="string" ng-model="clientesObj[pedido_codigoCliente].nome" ng-change="setCliente(pedido_codigoCliente, clientesObj[pedido_codigoCliente].nome, vendedoresObj[clientesObj[pedido_codigoCliente].idVendedor].id)" /></span>
@@ -61,14 +128,16 @@
 			  </span>
 			  <span class="td">{{vendedoresObj[clientesObj[pedido_codigoCliente].idVendedor].nome}}</span>
 			  <span class="td"><input type="text" class="number" ng-model="quantidade" /></span>
+			  <span class="td"><input type="text" class="string" ng-model="estado" /></span>
 			  <span class="td"><input type="submit" value="adicionar" /></span>
 			</form>
 
-			<div class="tr" ng-repeat="pedido in pedidos">  <!-- previously ng-repeat-start -->
+			<div class="tr" ng-repeat="pedido in pedidos | orderBy:pedidoEstadoOrder">  <!-- previously ng-repeat-start -->
 			  <span class="td">{{pedido.codigoCliente}}</span>
 			  <span class="td">{{clientesObj[pedido.codigoCliente].nome}}</span>
 			  <span class="td">{{vendedoresObj[clientesObj[pedido.codigoCliente].idVendedor].nome}}</span>
 			  <span class="td">{{pedido.quantidade}}</span>
+			  <span class="td">{{pedido.estado}}</span>
 			</div>
 
 			<!--
@@ -324,8 +393,8 @@
 		
 		
 	  </tabs>
-	  </div>
-	  
+	</div>
+	
   </body>
 </html>
 
