@@ -18,11 +18,6 @@
 
       $scope.notification = " ";
 
-      $scope.notify = function(message) {
-        $scope.notification = message;
-        //$scope.$apply();
-      };
-
       $scope.alertarResultado = function(message) {
         $scope.alterarSenhaResultado = message;
         $scope.$apply();
@@ -92,7 +87,7 @@
         modalInstance.result.then(function(selected) {
           $scope.setCliente(cliente.codigo, selected.nome, selected.idVendedor);
         }, function() {
-          // $scope.notify('Alteração de cliente cancelada.');
+          // do nothing
         });
       };  // END CLIENTES
       
@@ -105,11 +100,41 @@
       $scope.produtos = $scope.produtosSync.$asArray();
       $scope.produtoOrder = "nome";
 
-      $scope.setProduto = function(codigo, nome, qtdePorCaixa) {
+      $scope.setProduto = function(codigo, nome, qtdePorCaixa, sobrando, chegando, containers) {
         nome = nome || "";
         qtdePorCaixa = qtdePorCaixa || 0;
+        sobrando = sobrando || 0;
+        chegando = chegando || 0;
+        containers = containers || '';
         
-        $scope.produtosSync.$set(codigo.toUpperCase(), { codigo: codigo.toUpperCase(), nome: nome, qtdePorCaixa: parseInt(qtdePorCaixa) }).then($scope.$broadcast("newProdutoAdded"));
+        $scope.produtosSync.$set(codigo.toUpperCase(),
+                                 { codigo: codigo.toUpperCase(),
+                                   nome: nome,
+                                   qtdePorCaixa: parseInt(qtdePorCaixa),
+                                   sobrando: parseInt(sobrando),
+                                   chegando: parseInt(chegando),
+                                   containers: containers,
+                                 })                      
+          .then($scope.$broadcast("newProdutoAdded"))
+          .then(function() { $scope.computeSobrandoChegando(codigo.toUpperCase()); });
+      };
+
+      $scope.updateProduto = function(codigo, nome, qtdePorCaixa, sobrando, chegando, containers) {
+        nome = nome || "";
+        qtdePorCaixa = qtdePorCaixa || 0;
+        sobrando = sobrando || 0;
+        chegando = chegando || 0;
+        containers = containers || '';
+        
+        $scope.produtosSync.$set(codigo.toUpperCase(),
+                                 { codigo: codigo.toUpperCase(),
+                                   nome: nome,
+                                   qtdePorCaixa: parseInt(qtdePorCaixa),
+                                   sobrando: parseInt(sobrando),
+                                   chegando: parseInt(chegando),
+                                   containers: containers,
+                                 })                      
+          .then($scope.$broadcast("newProdutoAdded"))
       };
 
       $scope.editProdutoOpen = function(produto) {
@@ -136,7 +161,7 @@
         modalInstance.result.then(function(selected) {
           $scope.setProduto(produto.codigo, selected.nome, selected.qtdePorCaixa);
         }, function() {
-          // $scope.notify('Alteração de produto cancelada.');
+          // do nothing
         });
       };  // END PRODUTOS
       
@@ -157,18 +182,49 @@
         default: return 99;
         }
       };
-      
+
+      /*
+      $scope.pedidoEstadoOpcoes = [
+        { name: 'Desistencia',
+          value: 'Desistencia'
+        },
+        { name: 'Reserva',
+          value: 'Reserva'
+        },
+        { name: 'Container',
+          value: 'Container'
+        },
+        { name: 'Desistencia do Container',
+          value: 'Desistencia do Container'
+        },
+        { name: 'Faturado',
+          value: 'Faturado'
+        },
+        { name: 'Cancelado',
+          value: 'Cancelado'
+        },
+      ];
+      */
+
+      $scope.pedidoEstadoOpcoes = [
+        'Desistencia',
+        'Reserva',
+        'Container',
+        'Desistencia do Container',
+        'Faturado',
+        'Cancelado',
+      ];
       
       $scope.computePedidosTotal = function(pedidosArray) {
         var total = 0;
 
         /*
-        angular.forEach(pedidosArray, function(value, key) {
+          angular.forEach(pedidosArray, function(value, key) {
           total += parseInt(value.quantidade);
-        });
-        if (isNaN(total)) {
+          });
+          if (isNaN(total)) {
           total = "";
-        }
+          }
         */
         
         $scope.computed.pedidosTotal = total;
@@ -195,8 +251,8 @@
                               dataCriada: (new Date()).format("weekdayTime"),
                               dataAtualizada: (new Date()).format("weekdayTime"),
                             })
-          .then($scope.notify("Adicionado pedido " + pedido_codigoCliente + " " + pedido_qtdePedida + "pçs"))
-          .then(function() { $scope.computePedidosTotal($scope.pedidos); })
+          .then(function() { $scope.notification = "Adicionado pedido " + pedido_codigoCliente + " " + pedido_qtdePedida + "pçs"; })
+          .then(function() { $scope.computeSobrandoChegando(pedido_codigoProduto); })
           .then($scope.$broadcast("newPedidoAdded"));
       };  // END PEDIDOS
 
@@ -213,7 +269,8 @@
         $scope.chegandos.$add({ codigoProduto: chegando_codigoProduto,
                                 quantidade: parseInt(quantidade),
                                 container: container })
-          .then($scope.notify("Adicionado chegando " + chegando_codigoProduto + " " + quantidade + "pçs"))
+          .then(function() { $scope.notification = "Adicionado chegando " + chegando_codigoProduto + " " + quantidade + "pçs"; })
+          .then(function() { $scope.computeSobrandoChegando(chegando_codigoProduto); })
           .then($scope.$broadcast("newChegandoAdded"));
       };  // END CHEGANDO
       
@@ -245,6 +302,46 @@
           }
         });
       };
+
+      // CALCULACOES
+      $scope.computeSobrandoChegando = function(codigo) {
+        codigo = codigo.toUpperCase();
+        var chegandoTotal = 0;
+        var containers = [];
+        angular.forEach($scope.chegandos, function(chegando, pushId) {
+          if (chegando.codigoProduto === codigo) {
+            chegandoTotal += parseInt(chegando.quantidade);
+            if (containers.indexOf(chegando.container) === -1) {
+              containers.push(chegando.container);
+            }
+          }
+        });
+        if (isNaN(chegandoTotal)) {
+          chegandoTotal = 0;
+        }
+
+        containers = containers.sort().join(", ");
+
+        var sobrando = chegandoTotal;
+
+        angular.forEach($scope.pedidos, function(pedido, pushId) {
+          if (pedido.codigoProduto.toUpperCase() === codigo && pedido.estado === 'Container') {
+            sobrando -= (pedido.qtdePedida - pedido.qtdeJaSeparada);
+          }
+        });
+
+        if (sobrando < 0) {
+          sobrando = 0;
+        }
+        
+        $scope.updateProduto(codigo,
+                             $scope.produtosObj[codigo].nome,
+                             $scope.produtosObj[codigo].qtdePorCaixa,
+                             sobrando,
+                             chegandoTotal,
+                             containers);
+      };
+
       
     }  // END init()
 
