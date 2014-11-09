@@ -10,6 +10,7 @@
 	<script src="js/angular.min.js"></script>
 	<script src="js/angularfire.min.js"></script>
 	<script src="js/ui-bootstrap-tpls-0.11.2.min.js"></script>
+	<script src="js/dateformat.js"></script>
 	<script src="components.js"></script>
 	<script src="app.js"></script>
   </head>
@@ -30,73 +31,100 @@
 
 	  <tabs>
 
-		<!-- PEDIDOS -->
-		<pane title="Pedidos Template">
-		  <div class="table">
-			<div class="tr">
-			  <span class="td">&nbsp;</span>
-			  <span class="td">Cód.prod</span>
-			  <span class="td">Qtde</span>
-			  <span class="td">Cliente</span>
-			  <span class="td">Vend.</span>
-			  <span class="td">Estado</span>
-			  <span class="td">Obs.</span>
-			  <span class="td">Sobrando</span>
-			  <span class="td">Data</span>
-			</div>
-
-			<div class="tr">
-			  <span class="td"><img src="img/file_edit.png" alt="+" /></span>
-			  <span class="td">143137</span>
-			  <span class="td">25000</span>
-			  <span class="td">Redd Marketing</span>
-			  <span class="td">Rodrigo</span>
-			  <span class="td">Desistencia</span>
-			  <span class="td">Zelia</span>
-			  <span class="td">120000</span>
-			  <span class="td">ter 7 out</span>
-			</div>
-			
-		  </div>
-		</pane>
-
-		<!-- PEDIDOS -->
+		<!-- PEDIDOS TEMPLATES FULL -->
 		<pane title="Pedidos Full">
-		  <div class="table">
+
+		  <!-- ADD PEDIDO FORM -->
+		  <form class="table" ng-show="isAdmin" ng-submit="addPedido(pedido_codigoProduto, pedido_qtdePedida, pedido_qtdeJaSeparada, pedido_codigoCliente, pedido_estado, pedido_obs); pedido_codigoProduto=''; pedido_qtdePedida=''; pedido_qtdeJaSeparada=0; pedido_codigoCliente=''; pedido_obs='';">
 			<div class="tr">
-			  <span class="td">&nbsp;</span>
+			  <span class="td" style="border-bottom: none;">Cód.Prod</span>
+			  <span class="td" style="border-bottom: none;">Nome do Produto</span>
+			  <span class="td" style="border-bottom: none;">Qtde.cx</span>
+			  <span class="td" style="border-bottom: none;">Qtde.pedida</span>
+			  <span class="td" style="border-bottom: none;">Já sep.</span>
+			  <span class="td" style="border-bottom: none;">&nbsp;</span>
+			</div>
+			<div class="tr">
+			  <span class="td" style="border-bottom: none;"><input type="text" class="number" ng-model="pedido_codigoProduto" style="text-transform: uppercase" focus-on="newPedidoAdded" /></span>
+			  <span class="td" style="border-bottom: none;">
+				{{produtosObj[pedido_codigoProduto.toUpperCase()].nome}}
+				<span ng-show="pedido_codigoProduto.length > 0 && isAdmin && produtosObj[pedido_codigoProduto].nome === undefined">
+				  <a href ng-click="editProdutoOpen({ codigo: pedido_codigoProduto, produtoNome: '', qtdePorCaixa: '' })"><img src="img/file_add.png" alt="+" /> adicionar novo</a>
+				</span>
+			  </span>
+			  <span class="td" style="border-bottom: none;">{{produtosObj[pedido_codigoProduto.toUpperCase()].qtdePorCaixa}}</span>
+			  <span class="td" style="border-bottom: none;"><input type="text" class="number" ng-model="pedido_qtdePedida" /></span>
+			  <span class="td" style="border-bottom: none;"><input type="text" class="number" ng-model="pedido_qtdeJaSeparada" ng-init="pedido_qtdeJaSeparada=0" /></span>
+			</div>
+			<div class="tr">
+			  <span class="td" style="border-bottom: none;">Cód.Cliente</span>
+			  <span class="td" style="border-bottom: none;">Nome do Cliente</span>
+			  <span class="td" style="border-bottom: none;">Vend.</span>
+			  <span class="td" style="border-bottom: none;">Estado</span>
+			  <span class="td" style="border-bottom: none;">Obs.</span>
+			</div>
+			<div class="tr">
+			  <span class="td"><input type="text" class="number" ng-model="pedido_codigoCliente" /></span>
+			  <span class="td">
+				{{clientesObj[pedido_codigoCliente].nome}}			
+				<span ng-show="pedido_codigoCliente.length > 0 && isAdmin && clientesObj[pedido_codigoCliente].nome === undefined">
+				  <a href ng-click="editClienteOpen({ codigo: pedido_codigoCliente, nome: '', idVendedor: '' })"><img src="img/file_add.png" alt="+" /> adicionar novo</a>
+				</span>
+			  </span>
+			  <span class="td">{{vendedoresObj[clientesObj[pedido_codigoCliente].idVendedor].nome}}</span>
+			  <span class="td">
+				<select ng-model="pedido_estado">
+				  <option ng-selected="true">Desistencia</option>
+				  <option>Reserva</option>
+				  <option>Container</option>
+				  <option>Desistencia do Container</option>
+				  <option>Faturado</option>
+				  <option>Cancelado</option>
+				</select>
+			  </span>
+			  <span class="td"><input type="text" class="number" ng-model="pedido_obs" /></span>
+			  <span class="td" style="border-bottom: none;"><input type="image" src="img/file_add.png" alt="+" /></span>
+			</div>			
+		  </form>
+		  <!-- END ADD PEDIDO FORM -->
+
+		  <div class="table">
+			
+			<div class="tr">
+			  <span class="td" ng-show="isAdmin">&nbsp;</span>
 			  <span class="td">Cód.prod</span>
 			  <span class="td">Nome prod</span>
 			  <span class="td">Qtde.</span>
 			  <span class="td">Já sep.</span>
-			  <span class="td">Cliente</span>
-			  <span class="td">Vend.</span>
-			  <span class="td">Estado</span>
-			  <span class="td">Obs.</span>
 			  <span class="td">Sobrando</span>
-			  <span class="td">Data</span>
-			  <span class="td">Data atualiz.</span>
+			  <span	class="td">Data</span>
 			</div>
 
-			<div class="tr">
-			  <span class="td"><img src="img/file_edit.png" alt="+" /></span>
-			  <span class="td">143137</span>
-			  <span class="td">Espanador de po com penas de avestruz</span>
-			  <span class="td">25000</span>
-			  <span class="td">3000</span>
-			  <span class="td">Redd Marketing</span>
-			  <span class="td">Rodrigo</span>
-			  <span class="td">Desistencia</span>
-			  <span class="td">Zelia pediu</span>
-			  <span class="td">120000</span>
-			  <span class="td">ter 7 out</span>
-			  <span class="td">qui 9 out</span>
+			<div class="tr" ng-repeat-start="pedido in pedidos">
+			  <span class="td" ng-show="isAdmin" style="border-bottom: none;"><img src="img/file_edit.png" alt="editar" /></span>
+			  <span class="td" style="border-bottom: none;">{{pedido.codigoProduto}}</span>
+			  <span class="td" style="border-bottom: none;">{{produtosObj[pedido.codigoProduto].nome}}</span>
+			  <span class="td" style="border-bottom: none;">{{pedido.qtdePedida}}</span>
+			  <span class="td" style="border-bottom: none;">{{pedido.qtdeJaSeparada}}</span>
+			  <span class="td" style="border-bottom: none;">{{produtosObj[pedido.codigoProduto].sobrando}}</span>
+			  <span class="td" style="border-bottom: none;">{{produtosObj[pedido.codigoProduto].qtdePorCaixa}}</span>
+			</div>
+
+			<div class="tr" ng-repeat-end>
+			  <span class="td" ng-show="isAdmin">&nbsp;</span>
+			  <span class="td">{{pedido.estado}}</span>
+			  <span class="td">{{clientesObj[pedido.codigoCliente].nome}}</span>
+			  <span class="td">{{vendedoresObj[clientesObj[pedido.codigoCliente].idVendedor].nome}}</span>
+			  <span class="td">{{pedido.obs}}</span>
+			  <span class="td">{{pedido.dataCriada}}</span>
+			  <span class="td">qui 9 out 15:05</span>
 			</div>
 			
 		  </div>
 		</pane>
+		<!-- END PEDIDOS FULL -->
 
-		<!-- PEDIDOS -->
+		<!-- PEDIDOS
 		<pane title="Pedidos">
 		  Total: {{computed.pedidosTotal}}
 		  <div class="table">
@@ -110,6 +138,9 @@
 
 			<form class="tr" ng-submit="addPedido(pedido_codigoCliente, quantidade, estado)">
 			  <span class="td"><input type="text" class="number" ng-model="pedido_codigoCliente" /></span>
+
+			  
+			  PARTIAL COMMENT-->
 			  <!--
 				  <span class="td"><input type="text" class="string" ng-model="clientesObj[pedido_codigoCliente].nome" ng-change="setCliente(pedido_codigoCliente, clientesObj[pedido_codigoCliente].nome, vendedoresObj[clientesObj[pedido_codigoCliente].idVendedor].id)" /></span>
 				  <span class="td">
@@ -120,6 +151,7 @@
 				  -->
 			  <!-- <span class="td">{{vendedoresObj[clientesObj[pedido_codigoCliente].idVendedor].nome}}</span> -->
 
+			  <!-- PARTIAL COMMENT
 			  <span class="td">
 				{{clientesObj[pedido_codigoCliente].nome}}			
 				<span ng-show="pedido_codigoCliente.length > 0 && isAdmin && clientesObj[pedido_codigoCliente].nome === undefined">
@@ -132,40 +164,31 @@
 			  <span class="td"><input type="submit" value="adicionar" /></span>
 			</form>
 
-			<div class="tr" ng-repeat="pedido in pedidos | orderBy:pedidoEstadoOrder">  <!-- previously ng-repeat-start -->
+			<div class="tr" ng-repeat="pedido in pedidos | orderBy:pedidoEstadoOrder">
 			  <span class="td">{{pedido.codigoCliente}}</span>
 			  <span class="td">{{clientesObj[pedido.codigoCliente].nome}}</span>
 			  <span class="td">{{vendedoresObj[clientesObj[pedido.codigoCliente].idVendedor].nome}}</span>
 			  <span class="td">{{pedido.quantidade}}</span>
 			  <span class="td">{{pedido.estado}}</span>
 			</div>
-
-			<!--
-				<form class="tr" ng-repeat-end ng-show="DEBUG">
-				  <span class="td"><input type="text" class="number" ng-model="pedido.codigoCliente" ng-change="pedidos.$save(pedido).then(notify('Código do cliente alterado no pedido'))" /></span>
-				  <span class="td">{{clientesObj[pedido.codigoCliente].nome}}</span>
-				  <span class="td">{{vendedoresObj[clientesObj[pedido.codigoCliente].idVendedor].nome}}</span>
-				  <span class="td"><input type="text" class="number" ng-model="pedido.quantidade" ng-change="pedidos.$save(pedido).then(computePedidosTotal(pedidos))" /></span>
-				</form>
-				-->
-
 		  </div>
 		</pane>
-
+		
+	END PEDIDOS -->
 		
 		<!-- CHEGANDO -->
 		<pane title="Chegando">
 		  <div class="table">
 			<div class="tr">
-			  <span class="td">Cód. prod.</span>
-			  <span class="td">Nome do produto</span>
-			  <span class="td">Qtde. cx.</span>
-			  <span class="td">Qtde. chegando</span>
-			  <span class="td">Container</span>
+			  <span class="td" style="border-bottom: none;">Cód. prod.</span>
+			  <span class="td" style="border-bottom: none;">Nome do produto</span>
+			  <span class="td" style="border-bottom: none;">Qtde. cx.</span>
+			  <span class="td" style="border-bottom: none;">Qtde. chegando</span>
+			  <span class="td" style="border-bottom: none;">Container</span>
 			</div>
 
 			<form class="tr" ng-show="isAdmin" ng-submit="addChegando(chegando_codigoProduto.toUpperCase(), chegando_quantidade, chegando_container); chegando_codigoProduto=''; chegando_quantidade=''; chegando_container=''; ">
-			  <span class="td"><input type="text" class="number" id="addChegandoCodigoProduto" ng-model="chegando_codigoProduto" style="text-transform: uppercase" focus-on="newChegandoAdded" /></span>
+			  <span class="td"><input type="text" class="number" ng-model="chegando_codigoProduto" style="text-transform: uppercase" focus-on="newChegandoAdded" /></span>
 
 			  <!-- 
 				   <span class="td"><input type="text" class="string" ng-model="produtosObj[chegando_codigoProduto.toUpperCase()].nome" ng-change="setProduto(chegando_codigoProduto.toUpperCase(), produtosObj[chegando_codigoProduto.toUpperCase()].nome, produtosObj[chegando_codigoProduto.toUpperCase()].qtdePorCaixa)" /></span>
@@ -180,7 +203,7 @@
 			  <span class="td">{{produtosObj[chegando_codigoProduto.toUpperCase()].qtdePorCaixa}}</span>	  
 			  <span class="td"><input type="text" class="number" ng-model="chegando_quantidade" /></span>
 			  <span class="td"><input type="text" class="number" ng-model="chegando_container" /></span>
-			  <span class="td"><input type="submit" value="adicionar" /></span>
+			  <span class="td" style="border-bottom: none;"><input type="image" src="img/file_add.png" alt="adicionar" /></span>
 			</form>
 
 			<div class="tr" ng-repeat="chegando in chegandos">
@@ -196,6 +219,7 @@
 		<!-- CLIENTES -->
 		<pane title="Clientes">
 
+		  <!-- CLIENTE MODAL TEMPLATE -->
 		  <script type="text/ng-template" id="myClienteModalContent.html">
 			<form>
 			  <div class="modal-body table">
@@ -232,10 +256,9 @@
 				<input type="submit" ng-click="ok()" value="OK" />
 				<button type="button" ng-click="cancel()">cancelar</button>
 			  </div>
-			</form>
-			
+			</form>			
 		  </script>
-		  
+		  <!-- END CLIENTE MODAL TEMPLATE -->
 
 		  <div class="table">
 			<div class="tr">
@@ -247,10 +270,10 @@
 
 			<!-- Adicionar Cliente -->
 			<form class="tr" ng-show="isAdmin" ng-submit="setCliente(codigoCliente, nomeCliente, vendedorCliente); codigoCliente=''; nomeCliente=''; vendedorCliente='';">
-			  <span class="td" style="border-bottom: none;">&nbsp;</span>
-			  <span class="td" style="border-bottom: none;"><input type="text" class="number" ng-model="codigoCliente" /></span>
-			  <span class="td" style="border-bottom: none;"><input type="text" class="string" ng-model="nomeCliente" /></span>
-			  <span class="td" style="border-bottom: none;">
+			  <span class="td">&nbsp;</span>
+			  <span class="td"><input type="text" class="number" ng-model="codigoCliente" focus-on="newClienteAdded" /></span>
+			  <span class="td"><input type="text" class="string" ng-model="nomeCliente" /></span>
+			  <span class="td">
 				<select ng-model="vendedorCliente">
 				  <option ng-repeat="vendedor in vendedores" value="{{vendedor.id}}">{{vendedor.nome}}</option>
 				</select>
@@ -271,6 +294,8 @@
 
 		<!-- PRODUTOS -->
 		<pane title="Produtos">
+
+		  <!-- MODAL TEMPLATE -->
 		  <script type="text/ng-template" id="myProdutoModalContent.html">
 			<form>
 			  <div class="modal-body table">
@@ -297,6 +322,7 @@
 			  </div>
 			</form>
 		  </script>
+		  <!-- END PRODUTOS MODAL TEMPLATE -->
 
 		  <div class="table">
 			<div class="tr">
@@ -304,14 +330,18 @@
 			  <span class="td" style="border-bottom: none;"><a href ng-click="produtoOrder='codigo'">Código</a></span>
 			  <span class="td" style="border-bottom: none;"><a href ng-click="produtoOrder='nome'">Nome</a></span>
 			  <span class="td" style="border-bottom: none;"><a href ng-click="produtoOrder='qtdePorCaixa'">Qtde. caixa</a></span>
+			  <span class="td" ng-show="isAdmin" style="border-bottom: none;">&nbsp;</span>
+			  <span class="td" style="border-bottom: none;"><a href ng-click="produtoOrder='sobrando'">Sobrando</a></span>
+			  <span class="td" style="border-bottom: none;"><a href ng-click="produtoOrder='chegando'">Chegando</a></span>
+			  <span class="td" style="border-bottom: none;"><a href ng-click="produtoOrder='containers'">Containers</a></span>
 			</div>
 
 			<!-- Adicionar Produto -->
 			<form class="tr" ng-show="isAdmin" ng-submit="setProduto(codigoProduto, nomeProduto, qtdePorCaixaProduto); codigoProduto=''; nomeProduto=''; qtdePorCaixaProduto='';">
-			  <span class="td" ng-show="isAdmin" style="border-bottom: none;">&nbsp;</span>
-			  <span class="td" style="border-bottom: none;"><input type="text" class="number" ng-model="codigoProduto" /></span>
-			  <span class="td" style="border-bottom: none;"><input type="text" class="string" ng-model="nomeProduto" /></span>
-			  <span class="td" style="border-bottom: none;"><input type="text" class="number" ng-model="qtdePorCaixaProduto" /></span>
+			  <span class="td" ng-show="isAdmin">&nbsp;</span>
+			  <span class="td"><input type="text" class="number" ng-model="codigoProduto" focus-on="newProdutoAdded" /></span>
+			  <span class="td"><input type="text" class="string" ng-model="nomeProduto" /></span>
+			  <span class="td"><input type="text" class="number" ng-model="qtdePorCaixaProduto" /></span>
 			  <span class="td" ng-show="isAdmin" style="border-bottom: none;"><input type="image" src="img/file_add.png" alt="adicionar" /></span>
 			  <!-- <span class="td"><input type="submit" value="adicionar" /></span> -->
 			</form>
@@ -322,6 +352,10 @@
 			  <span class="td">{{produto.codigo}}</span>
 			  <span class="td">{{produto.nome}}</span>
 			  <span class="td">{{produto.qtdePorCaixa}}</span>
+			  <span class="td" ng-show="isAdmin">&nbsp;</span>
+			  <span class="td">{{produto.sobrando}}</span>
+			  <span class="td">{{produto.chegando}}</span>
+			  <span class="td">{{produto.containers}}</span>
 			</div>
 
 		  </div>
@@ -382,7 +416,7 @@
 				<span class="td"><input type="password" ng-model="senhaNova" /></span>
 			  </div>
 			  <div class="tr">
-				<span class="td">
+				<span class="td" style="border-bottom: none;">
 				  <input type="submit" value="alterar senha" />
 				</span>
 			  </div>
@@ -390,11 +424,117 @@
 		  </form>
 		  {{alterarSenhaResultado}}
 		</pane>
+
+		<!-- PEDIDOS ADD TEMPLATE
+			 <pane title="Adicionar pedidos">
+			   <div class="table" ng-show="isAdmin">
+				 <div class="tr">
+				   <span class="td" style="border-bottom: none;">Cód.Prod</span>
+				   <span class="td" style="border-bottom: none;">Nome</span>
+				   <span class="td" style="border-bottom: none;">Qtde.cx</span>
+				   <span class="td" style="border-bottom: none;">Qtde.ped</span>
+				   <span class="td" style="border-bottom: none;">Já sep.</span>
+				   <span class="td" style="border-bottom: none;"><img src="img/file_add.png" alt="+"/></span>
+				 </div>
+				 <div class="tr">
+				   <span class="td" style="border-bottom: none;">input text</span>
+				   <span class="td" style="border-bottom: none;">produto.nome</span>
+				   <span class="td" style="border-bottom: none;">produto.qtdePorCaixa</span>
+				   <span class="td" style="border-bottom: none;">input</span>
+				   <span class="td" style="border-bottom: none;">input default=0</span>
+				 </div>
+				 <div class="tr">
+				   <span class="td" style="border-bottom: none;">Cód.Cli</span>
+				   <span class="td" style="border-bottom: none;">Nome</span>
+				   <span class="td" style="border-bottom: none;">Vend.</span>
+				   <span class="td" style="border-bottom: none;">Estado</span>
+				   <span class="td" style="border-bottom: none;">Obs.</span>
+				 </div>
+				 <div class="tr">
+				   <span class="td" style="border-bottom: none;">input text</span>
+				   <span class="td" style="border-bottom: none;">cliente.nome</span>
+				   <span class="td" style="border-bottom: none;">cliente.vend</span>
+				   <span class="td" style="border-bottom: none;">dropdown</span>
+				   <span class="td" style="border-bottom: none;">input text string</span>
+				 </div>			
+			   </div>
+			   
+			   <div class="table">
+				 <div class="tr">
+				   <span class="td">&nbsp;</span>
+				   <span class="td">Cód.prod</span>
+				   <span class="td">Qtde</span>
+				   <span class="td">Cliente</span>
+				   <span class="td">Vend.</span>
+				   <span class="td">Estado</span>
+				   <span class="td">Obs.</span>
+				   <span class="td">Sobrando</span>
+				   <span class="td">Data</span>
+				 </div>
+
+				 <div class="tr">
+				   <span class="td"><img src="img/file_edit.png" alt="+" /></span>
+				   <span class="td" title="kit queijo">143137</span>
+				   <span class="td">25000</span>
+				   <span class="td">Redd Marketing</span>
+				   <span class="td">Rodrigo</span>
+				   <span class="td">Desistencia</span>
+				   <span class="td">Zelia</span>
+				   <span class="td">120000</span>
+				   <span class="td">ter 7 out</span>
+				 </div>
+				 
+			   </div>
+			 </pane>
+			 -->
 		
+ 		<!-- PEDIDOS TEMPLATES -->
+			 <pane title="Pedidos Template">
+			   <div class="table">
+				 <div class="tr">
+				   <span class="td">&nbsp;</span>
+				   <span class="td">Cód.prod</span>
+				   <span class="td">Qtde</span>
+				   <span class="td">Cliente</span>
+				   <span class="td">Vend.</span>
+				   <span class="td">Estado</span>
+				   <span class="td">Obs.</span>
+				   <span class="td">Sobrando</span>
+				   <span class="td">Data</span>
+				 </div>
+
+				 <!--
+				 <div class="tr">
+				   <span class="td"><img src="img/file_edit.png" alt="+" /></span>
+				   <span class="td" title="kit queijo">143137</span>
+				   <span class="td">25000</span>
+				   <span class="td">Redd Marketing</span>
+				   <span class="td">Rodrigo</span>
+				   <span class="td">Desistencia</span>
+				   <span class="td">Zelia</span>
+				   <span class="td">120000</span>
+				   <span class="td">ter 7 out</span>
+				 </div>
+				 -->
+
+				 <div class="tr" ng-repeat="pedido in pedidos | orderBy:['codigoProduto']">
+				   <span class="td"><img src="img/file_edit.png" alt="edit" /></span>	
+				   <span class="td">{{pedido.codigoProduto}}</span>
+				   <span class="td">{{pedido.qtdePedida}}</span>
+				   <span class="td">{{clientesObj[pedido.codigoCliente].nome}}</span>
+				   <span class="td">{{vendedoresObj[clientesObj[pedido.codigoCliente].idVendedor].nome}}</span>
+				   <span class="td">{{pedido.estado}}</span>
+				   <span class="td">{{pedido.obs}}</span>
+				   <span class="td">{{produtosObj[pedido.codigoProduto].sobrando}}</span>
+				   <span class="td">{{pedido.dataCriada}}</span>
+				 </div>
+				 
+			   </div>
+			 </pane>
 		
 	  </tabs>
+	  
 	</div>
-	
   </body>
 </html>
 

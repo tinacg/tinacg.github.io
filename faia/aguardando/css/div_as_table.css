@@ -1,4 +1,4 @@
-div.table {
+form.table, div.table {
 	display:table;
     width: 1%;
     white-space: nowrap;

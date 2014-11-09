@@ -16,18 +16,18 @@
       $scope.loggedIn = true;
       $scope.operatorEmail = authData.password.email;
 
+      $scope.notification = " ";
+
       $scope.notify = function(message) {
         $scope.notification = message;
-        $scope.$apply();
+        //$scope.$apply();
       };
 
       $scope.alertarResultado = function(message) {
         $scope.alterarSenhaResultado = message;
         $scope.$apply();
       };
-
-      $scope.notification = " ";
-
+      
       $scope.DEBUG = true;
       $scope.isAdmin = false;
 
@@ -92,7 +92,7 @@
         modalInstance.result.then(function(selected) {
           $scope.setCliente(cliente.codigo, selected.nome, selected.idVendedor);
         }, function() {
-          $scope.notify('Alteração de cliente cancelada.');
+          // $scope.notify('Alteração de cliente cancelada.');
         });
       };  // END CLIENTES
       
@@ -136,7 +136,7 @@
         modalInstance.result.then(function(selected) {
           $scope.setProduto(produto.codigo, selected.nome, selected.qtdePorCaixa);
         }, function() {
-          $scope.notify('Alteração de produto cancelada.');
+          // $scope.notify('Alteração de produto cancelada.');
         });
       };  // END PRODUTOS
       
@@ -161,12 +161,16 @@
       
       $scope.computePedidosTotal = function(pedidosArray) {
         var total = 0;
+
+        /*
         angular.forEach(pedidosArray, function(value, key) {
           total += parseInt(value.quantidade);
         });
         if (isNaN(total)) {
           total = "";
         }
+        */
+        
         $scope.computed.pedidosTotal = total;
         $scope.computed.$save();
       };
@@ -175,10 +179,23 @@
         $scope.computePedidosTotal($scope.pedidos);
       });
 
-      $scope.addPedido = function(pedido_codigoCliente, quantidade, estado) {
-        $scope.pedidos.$add({ codigoCliente: parseInt(pedido_codigoCliente),
-                              quantidade: parseInt(quantidade), estado: estado, })
-          .then($scope.notify("Adicionado pedido " + pedido_codigoCliente + " " + quantidade + "pçs"))
+      $scope.addPedido = function(pedido_codigoProduto, pedido_qtdePedida, pedido_qtdeJaSeparada, pedido_codigoCliente, pedido_estado, pedido_obs) {
+        pedido_obs = pedido_obs || "";
+        pedido_qtdePedida = pedido_qtdePedida || 0;
+        pedido_qtdeJaSeparada = pedido_qtdeJaSeparada || 0;
+        pedido_estado = pedido_estado || "Reserva";
+        
+        $scope.pedidos.$add({ codigoProduto: pedido_codigoProduto,
+                              qtdePedida: parseInt(pedido_qtdePedida),
+                              qtdeJaSeparada: parseInt(pedido_qtdeJaSeparada),
+                              codigoCliente: parseInt(pedido_codigoCliente),
+                              estado: pedido_estado,
+                              obs: pedido_obs,
+                              dataCriadaNum: (new Date()).getTime(),
+                              dataCriada: (new Date()).format("weekdayTime"),
+                              dataAtualizada: (new Date()).format("weekdayTime"),
+                            })
+          .then($scope.notify("Adicionado pedido " + pedido_codigoCliente + " " + pedido_qtdePedida + "pçs"))
           .then(function() { $scope.computePedidosTotal($scope.pedidos); })
           .then($scope.$broadcast("newPedidoAdded"));
       };  // END PEDIDOS

@@ -1,7 +1,22 @@
 # Tasks
 
-Run the computation function twice, after loading chegando and after loading
-pedidos because it is unknown which completes first
+Run the computation function when adding, modifying, or removing Chegando and
+Pedido entries. The computation function's parameter is the cod. produto
+
+Function updates `produto.chegando`, `produto.containers`, `produto.sobrando`
+
+"Filter" search entry followed by dropdown choice of Produto cod, nome, or
+Cliente. Does a fuzzy search to match text entry.
+
+pedido has these fields:
+codigoProduto
+qtdePedida
+qtdeJaSeparada
+codigoCliente
+estado
+  (Reserva, Desistencia, Container, Desistencia do Container,
+  Faturado, Cancelado)
+obs
 
 # Interface
 
@@ -9,8 +24,8 @@ pedidos because it is unknown which completes first
 
 Operador digita:
 1. Cod. produto (A)
-2. Qtde. desejada (E)
-3. Qtde. ja reservada (F)
+2. Qtde. pedida (E)
+3. Qtde. ja separada (F)
 4. Cod. cliente (n/a)
 5. Reserva, Desistencia, Container, Desistencia do Container, Faturado,
 ou Cancelado (D)
