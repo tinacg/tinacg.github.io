@@ -115,8 +115,8 @@
                                    chegando: parseInt(chegando),
                                    containers: containers,
                                  })                      
-          .then($scope.$broadcast("newProdutoAdded"))
-          .then(function() { $scope.computeSobrandoChegando(codigo.toUpperCase()); });
+          .then(function() { $scope.computeSobrandoChegando(codigo.toUpperCase()); })
+          .then($scope.$broadcast("newProdutoAdded"));
       };
 
       $scope.updateProduto = function(codigo, nome, qtdePorCaixa, sobrando, chegando, containers) {
@@ -194,29 +194,6 @@
         'canceladoStyle',
       ];
 
-      /*
-      $scope.pedidoEstadoOpcoes = [
-        { name: 'Desistencia',
-          value: 'Desistencia'
-        },
-        { name: 'Reserva',
-          value: 'Reserva'
-        },
-        { name: 'Container',
-          value: 'Container'
-        },
-        { name: 'Desistencia do Container',
-          value: 'Desistencia do Container'
-        },
-        { name: 'Faturado',
-          value: 'Faturado'
-        },
-        { name: 'Cancelado',
-          value: 'Cancelado'
-        },
-      ];
-      */
-
       $scope.pedidoEstadoOpcoes = [
         'Desistencia',
         'Reserva',
@@ -262,10 +239,71 @@
                               dataCriada: (new Date()).format("weekdayTime"),
                               dataAtualizada: (new Date()).format("weekdayTime"),
                             })
+          .then(function() { $scope.computeSobrandoChegando(pedido_codigoProduto.toUpperCase()); })
           .then(function() { $scope.notification = "Adicionado pedido " + pedido_codigoCliente + " " + pedido_qtdePedida + "pçs " + pedido_codigoProduto; })
-          .then(function() { $scope.computeSobrandoChegando(pedido_codigoProduto); })
           .then($scope.$broadcast("newPedidoAdded"));
-      };  // END PEDIDOS
+      };
+
+      $scope.editPedidoOpen = function(pedido) {
+        var modalInstance = $modal.open({
+          templateUrl: 'myPedidoModalContent.html',
+          controller: 'EditPedidoModalCtrl',
+          size: 'lg',
+          resolve: {
+            codigoProduto: function() {
+              return pedido.codigoProduto;
+            },
+            qtdePedida: function() {
+              return pedido.qtdePedida;
+            },
+            qtdeJaSeparada: function() {
+              return pedido.qtdeJaSeparada;
+            },
+            codigoCliente: function() {
+              return pedido.codigoCliente;
+            },
+            estado: function() {
+              return pedido.estado;
+            },
+            obs: function() {
+              return pedido.obs;
+            },
+            pedidos: function() {
+              return $scope.pedidos;
+            },
+            vendedores: function() {
+              return $scope.vendedores;
+            },
+            clientesObj: function() {
+              return $scope.clientesObj;
+            },
+            produtosObj: function() {
+              return $scope.produtosObj;
+            },
+            editProdutoOpen: function() {
+              return $scope.editProdutoOpen;
+            },
+            editClienteOpen: function() {
+              return $scope.editClienteOpen;
+            },
+            pedidoEstadoOpcoes: function() {
+              return $scope.pedidoEstadoOpcoes;
+            },
+            pedido: function() {
+              return pedido;
+            }
+          }
+        });
+
+        modalInstance.result.then(function(selected) {
+          $scope.pedidos.$save(selected.pedido)
+            .then(function() { $scope.computeSobrandoChegando(selected.pedido.codigoProduto.toUpperCase()); })
+            .then(function() { $scope.notification = "Modificado pedido de " + selected.pedido.qtdePedida + " pçs. " + selected.pedido.codigoProduto + " " + $scope.clientesObj[selected.pedido.codigoCliente].nome;} );
+        }, function() {
+          // do nothing
+        });
+      };
+      // END PEDIDOS
 
 
       // CHEGANDO
@@ -280,10 +318,39 @@
         $scope.chegandos.$add({ codigoProduto: chegando_codigoProduto,
                                 quantidade: parseInt(quantidade),
                                 container: container })
-          .then(function() { $scope.notification = "Adicionado chegando " + quantidade + " pçs " + chegando_codigoProduto; })
           .then(function() { $scope.computeSobrandoChegando(chegando_codigoProduto); })
+          .then(function() { $scope.notification = "Adicionado chegando " + quantidade + " pçs " + chegando_codigoProduto; })
           .then($scope.$broadcast("newChegandoAdded"));
-      };  // END CHEGANDO
+      };
+
+      $scope.editChegandoOpen = function(chegando) {
+        var modalInstance = $modal.open({
+          templateUrl: 'myChegandoModalContent.html',
+          controller: 'EditChegandoModalCtrl',
+          size: 'lg',
+          resolve: {
+            produtosObj: function() {
+              return $scope.produtosObj;
+            },
+            chegando: function() {
+              return chegando;
+            },
+            editProdutoOpen: function() {
+              return $scope.editProdutoOpen;
+            },
+          }
+        });
+
+        modalInstance.result.then(function(selected) {
+          $scope.chegandos.$save(selected.chegando)
+            .then(function() { $scope.computeSobrandoChegando(selected.chegando.codigoProduto.toUpperCase()); })
+            .then(function() { $scope.notification = "Modificado chegando " + selected.chegando.codigoProduto + " " + selected.chegando.quantidade + " pçs."; });
+        }, function() {
+          
+        });
+      };
+      
+      // END CHEGANDO
       
       
       // VENDEDORES
@@ -406,6 +473,52 @@
       $modalInstance.dismiss('Cancelar');
     };
   });  // END EDIT PRODUTO MODAL
+
+  app.controller('EditPedidoModalCtrl', function($scope, $modalInstance, codigoProduto, qtdePedida, qtdeJaSeparada, codigoCliente, estado, obs, clientesObj, produtosObj, vendedores, pedidos, editClienteOpen, editProdutoOpen, pedidoEstadoOpcoes, pedido) {
+    $scope.clientesObj = clientesObj;
+    $scope.produtosObj = produtosObj;
+    $scope.vendedores = vendedores;
+    $scope.pedidos = pedidos;
+
+    $scope.editClienteOpen = editClienteOpen;
+    $scope.editProdutoOpen = editProdutoOpen;
+
+    $scope.pedidoEstadoOpcoes = pedidoEstadoOpcoes;
+
+    $scope.pedido = pedido;
+    
+    $scope.selected = {
+      codigoProduto: codigoProduto,
+      qtdePedida: qtdePedida,
+      qtdeJaSeparada: qtdeJaSeparada,
+      codigoCliente: codigoCliente,
+      estado: estado,
+      obs: obs,
+      pedido: pedido,
+    };
+    $scope.ok = function() {
+      $modalInstance.close($scope.selected);
+    };
+    $scope.cancel = function() {
+      $modalInstance.dismiss('Cancelar');
+    }
+  });  // END EDIT PEDIDO MODAL
+
+  app.controller('EditChegandoModalCtrl', function($scope, $modalInstance, chegando, produtosObj, editProdutoOpen) {
+    $scope.produtosObj = produtosObj;
+    $scope.editProdutoOpen = editProdutoOpen;
+    $scope.chegando = chegando;
+
+    $scope.selected = {
+      chegando: chegando,
+    };
+    $scope.ok = function() {
+      $modalInstance.close($scope.selected)
+    };
+    $scope.cancel = function() {
+      $modalInstance.dismiss('Cancelar');
+    }
+  });  // END EDIT CHEGANDO MODAL
 
   app.directive("focusOn", function() {
     return function(scope, elem, attr) {
