@@ -65,7 +65,7 @@
     }
 
     function clean() {
-      $scope.loginStatus = "Please log in";
+      $scope.notification = "Please log in";
       $scope.tabs = [];
       $scope.loggedIn = false;
     }
