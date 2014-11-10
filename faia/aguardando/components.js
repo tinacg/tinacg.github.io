@@ -26,7 +26,7 @@ angular.module('components', [])
         '<div class="tabbable">' +
           '<ul class="nav nav-tabs">' +
             '<li ng-repeat="pane in panes" ng-class="{active:pane.selected}">'+
-              '<a href="" ng-click="select(pane)">{{pane.title}}</a>' +
+              '<a href="" ng-click="select(pane)">{{pane.heading}}</a>' +
             '</li>' +
           '</ul>' +
           '<div class="tab-content" ng-transclude></div>' +
@@ -40,7 +40,7 @@ angular.module('components', [])
       require: '^tabs',
       restrict: 'E',
       transclude: true,
-      scope: { title: '@' },
+      scope: { heading: '@' },
       link: function(scope, element, attrs, tabsCtrl) {
         tabsCtrl.addPane(scope);
       },

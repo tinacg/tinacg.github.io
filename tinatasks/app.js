@@ -7,6 +7,8 @@
       $scope.loginStatus = "Welcome back " + authData.password.email + "! Your token expires " + (new Date(authData.expires * 1000));
       $scope.loggedIn = true;
 
+      $scope.notification = "Waiting for new task.";
+
       var tabsRef = ref.child(authData.uid).child("tabs");
       var sync = $firebase(tabsRef);
       $scope.tabs = sync.$asArray();
@@ -47,7 +49,8 @@
                                      category: taskCategory,
                                      createDate: (new Date()).getTime(),
                                      dueDate: taskDueDate,
-                                   });
+                                   })
+          .then(function() { $scope.notification = "Added " + tabName + "/" + taskDescription; });
         $scope.taskDone = false;
         $scope.taskDescription = "";
         $scope.taskCategory = "";

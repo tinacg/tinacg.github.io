@@ -171,17 +171,28 @@
       $scope.pedidosSync = $firebase(pedidosRef);
       $scope.pedidos = $scope.pedidosSync.$asArray();
 
+      $scope.showAddPedido = false;
+      
       $scope.pedidoEstadoOrder = function(pedido) {
         switch (pedido.estado) {
-        case 'Reserva': return 1;
-        case 'Desistencia': return 2;
-        case 'Container': return 3;
-        case 'Desistencia do Container': return 4;
-        case 'Faturado': return 5;
-        case 'Cancelado': return 6;
-        default: return 99;
+        case 'Reserva': return 0;
+        case 'Desistencia': return 1;
+        case 'Container': return 2;
+        case 'Desistencia do Container': return 3;
+        case 'Faturado': return 4;
+        case 'Cancelado': return 5;
+        default: return 6;
         }
       };
+
+      $scope.pedidoClass = [
+        'reservaStyle',
+        'desistenciaStyle',
+        'containerStyle',
+        'desistenciaDoContainerStyle',
+        'faturadoStyle',
+        'canceladoStyle',
+      ];
 
       /*
       $scope.pedidoEstadoOpcoes = [
@@ -251,7 +262,7 @@
                               dataCriada: (new Date()).format("weekdayTime"),
                               dataAtualizada: (new Date()).format("weekdayTime"),
                             })
-          .then(function() { $scope.notification = "Adicionado pedido " + pedido_codigoCliente + " " + pedido_qtdePedida + "pçs"; })
+          .then(function() { $scope.notification = "Adicionado pedido " + pedido_codigoCliente + " " + pedido_qtdePedida + "pçs " + pedido_codigoProduto; })
           .then(function() { $scope.computeSobrandoChegando(pedido_codigoProduto); })
           .then($scope.$broadcast("newPedidoAdded"));
       };  // END PEDIDOS
@@ -269,7 +280,7 @@
         $scope.chegandos.$add({ codigoProduto: chegando_codigoProduto,
                                 quantidade: parseInt(quantidade),
                                 container: container })
-          .then(function() { $scope.notification = "Adicionado chegando " + chegando_codigoProduto + " " + quantidade + "pçs"; })
+          .then(function() { $scope.notification = "Adicionado chegando " + quantidade + " pçs " + chegando_codigoProduto; })
           .then(function() { $scope.computeSobrandoChegando(chegando_codigoProduto); })
           .then($scope.$broadcast("newChegandoAdded"));
       };  // END CHEGANDO
