@@ -155,13 +155,15 @@
 					</span>
 				  </span>
 
+				  <!--
 				  <span class="td">
 					<select ng-model="clientesObj[pedido_codigoCliente].idVendedor" ng-change="setCliente(pedido_codigoCliente, clientesObj[pedido_codigoCliente].nome, clientesObj[pedido_codigoCliente].idVendedor)">
 					  <option ng-repeat="vendedor in vendedores" value="{{vendedor.id}}" ng-selected="vendedor.id==clientesObj[pedido_codigoCliente].idVendedor">{{vendedor.nome}}</option>
 					</select>
 				  </span>
-
-				  <!--  <span class="td" style="border-bottom: none;">{{vendedoresObj[clientesObj[pedido_codigoCliente].idVendedor].nome}}</span> -->
+				  -->
+				  
+				  <span class="td" style="border-bottom: none;">{{vendedoresObj[clientesObj[pedido_codigoCliente].idVendedor].nome}}</span>
 				  <span class="td" style="border-bottom: none;">
 					<select ng-init="pedido_estado=pedidoEstadoOpcoes[0]" ng-model="pedido_estado" ng-options="pedidoEstadoOpcao for pedidoEstadoOpcao in pedidoEstadoOpcoes">
 					</select>
@@ -178,13 +180,29 @@
 		  <div class="table">
 			<div class="tr">
 			  <span class="td" ng-show="isAdmin" style="border-bottom: none;">&nbsp;</span>
-			  <span class="td" style="border-bottom: none;">Cód. prod</span>
+			  <span class="td" style="border-bottom: none;">
+				<a href ng-click="pedidoTableOrder=['codigoProduto', pedidoEstadoOrder, 'dataCriada']">
+				  Cód. prod
+				</a>
+			  </span>
 			  <span class="td" style="border-bottom: none;">Qtde</span>
 			  <span class="td" style="border-bottom: none;">Já sep.</span>
-			  <span class="td" style="border-bottom: none;">Cliente</span>
-			  <span class="td" style="border-bottom: none;">Estado</span>
+			  <span class="td" style="border-bottom: none;">
+				<a href ng-click="pedidoTableOrder=[pedidoClienteOrder, 'codigoProduto', pedidoEstadoOrder, 'dataCriada']">
+				  Cliente
+				</a>
+			  </span>
+			  <span class="td" style="border-bottom: none;">
+				<a href ng-click="pedidoTableOrder=[pedidoEstadoOrder, 'codigoProduto', pedidoClienteOrder, 'dataCriada']">
+				  Estado
+				</a>
+			  </span>
 			  <span class="td" style="border-bottom: none;">Obs.</span>
-			  <span class="td" style="border-bottom: none;">Data</span>
+			  <span class="td" style="border-bottom: none;">
+				<a href ng-click="pedidoTableOrder=['dataCriada']">
+				  Data
+				</a>
+			  </span>
 			</div>
 
 			<!--
@@ -201,7 +219,7 @@
 				</div>
 				-->
 
-			<div ng-repeat="pedido in pedidos | orderBy:['codigoProduto', pedidoEstadoOrder]" ng-class="['tr', pedidoClass[pedidoEstadoOrder(pedido)], 'data']">
+			<div ng-repeat="pedido in pedidos | orderBy:pedidoTableOrder" ng-class="['tr', pedidoClass[pedidoEstadoOrder(pedido)], 'data']">
 			  <span class="td" ng-show="isAdmin"><img src="img/file_edit.png" alt="edit" ng-click="editPedidoOpen(pedido)" /></span>	
 			  <span class="td hint--no-animate" data-hint="{{produtosObj[pedido.codigoProduto.toUpperCase()].nome}}">{{pedido.codigoProduto}}</span>
 			  <span class="td hint--no-animate" data-hint="Sobram {{produtosObj[pedido.codigoProduto].sobrando}}">{{pedido.qtdePedida}}</span>
@@ -302,13 +320,13 @@ END PEDIDOS -->
 				<div class="tr">
 				  <span class="td" style="border-bottom: none;">Qtde.chegando</span>
 				  <span class="td" style="border-bottom: none;">Container</span>
-				  <span class="td" style="border-bottom: none;">&nbsp;</span>
+				  <span class="td" style="border-bottom: none;">Chegou?</span>
 				</div>
 
 				<div class="tr">
 				  <span class="td"><input type="text" class="number" ng-model="selected.chegando.quantidade" /></span>
 				  <span class="td"><input type="text" class="number" ng-model="selected.chegando.container" /></span>
-				  <span class="td">&nbsp;</span>
+				  <span class="td"><input type="checkbox" ng-model="selected.chegando.chegou" /></span>
 				</div>
 
 			  </div> <!-- END MODAL BODY -->
@@ -323,11 +341,12 @@ END PEDIDOS -->
 		  <div class="table">
 			<div class="tr">
 			  <span class="td" style="border-bottom: none;" ng-show="isAdmin">&nbsp;</span>
-			  <span class="td" style="border-bottom: none;">Cód. prod.</span>
+			  <span class="td" style="border-bottom: none;"><a href ng-click="chegandoTableOrder=['codigoProduto', 'container']">Cód. prod.</a></span>
 			  <span class="td" style="border-bottom: none;">Nome do produto</span>
 			  <span class="td" style="border-bottom: none;">Qtde. cx.</span>
 			  <span class="td" style="border-bottom: none;">Qtde. chegando</span>
-			  <span class="td" style="border-bottom: none;">Container</span>
+			  <span class="td" style="border-bottom: none;"><a href ng-click="chegandoTableOrder=['container','codigoProduto']">Container</a></span>
+			  <span class="td" style="border-bottom: none;">Chegou?</span>
 			</div>
 
 			<form class="tr" ng-show="isAdmin" ng-submit="addChegando(chegando_codigoProduto.toUpperCase(), chegando_quantidade, chegando_container); chegando_codigoProduto=''; chegando_quantidade=''; chegando_container=''; ">
@@ -347,16 +366,18 @@ END PEDIDOS -->
 			  <span class="td" style="border-bottom: none;">{{produtosObj[chegando_codigoProduto.toUpperCase()].qtdePorCaixa}}</span>
 			  <span class="td" style="border-bottom: none;"><input type="text" class="number" ng-model="chegando_quantidade" /></span>
 			  <span class="td" style="border-bottom: none;"><input type="text" class="number" ng-model="chegando_container" /></span>
+			  <span class="td" style="border-bottom: none;">&nbsp;</span>
 			  <span class="td" style="border-bottom: none;"><input type="image" src="img/file_add.png" alt="adicionar" /></span>
 			</form>
 
-			<div class="tr" ng-repeat="chegando in chegandos">
+			<div class="tr" ng-repeat="chegando in chegandos | orderBy:chegandoTableOrder">
 			  <span class="td" ng-show="isAdmin"><img src="img/file_edit.png" alt="edit" ng-click="editChegandoOpen(chegando)" /></span>	
 			  <span class="td">{{chegando.codigoProduto}}</span>
 			  <span class="td">{{produtosObj[chegando.codigoProduto].nome}}</span>
 			  <span class="td">{{produtosObj[chegando.codigoProduto].qtdePorCaixa}}</span>
 			  <span class="td">{{chegando.quantidade}}</span>
 			  <span class="td">{{chegando.container}}</span>
+			  <span class="td"><span ng-show="chegando.chegou">Sim</span></span>
 			</div>
 		  </div>
 		</pane>
@@ -735,7 +756,13 @@ END PEDIDOS -->
 
 -->  
 		<!-- END PEDIDOS FULL -->
-		
+		<pane heading="Adicionar Produto em Lotes">
+		  <form ng-submit="processarLoteProdutos(loteProdutos); loteProdutos='';">
+			<textarea cols="80" rows="10" ng-model="loteProdutos"></textarea>
+			<br>
+			<input type="submit" />
+		  </form>
+		</pane>
 	  </tabs>
 	  
 	</div>

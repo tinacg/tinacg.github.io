@@ -78,6 +78,20 @@
 
 
 		</pane>
+		
+		<pane title="all tasks">
+		  <table>
+			<tbody ng-repeat="(name, tab) in tasksRoot">
+			  <tr ng-repeat="task in tab">
+				<td style="padding: 0px 10px 0px 0px;"><b>{{name}}</b></td>
+				<td style="padding: 0px 10px 0px 0px;"><i>{{task.category}}</i></td>
+				<td style="padding: 0px 10px 0px 0px;">{{task.description}}</td>
+				<td>{{task.dueDate}}</td>
+			  </tr>
+			</tbody>
+		  </table>
+		</pane>
+		
 		<pane title="tab management">
 		  <br>
 		  <form ng-submit="addTab(tabName); tabName='';">
@@ -125,6 +139,6 @@
 			</tbody>
 		  </table>
 		  -->
-	</div>
+	  </div>
   </body>
 </html>

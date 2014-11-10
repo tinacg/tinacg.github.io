@@ -57,7 +57,7 @@
         if (vendedor === undefined) {
           vendedor = "";
         }
-        $scope.clientesSync.$set(codigo, { codigo: parseInt(codigo), nome: nome, idVendedor: vendedor }).then($scope.$broadcast("newClienteAdded"));
+        $scope.clientesSync.$set(codigo, { codigo: parseInt(codigo), nome: nome, idVendedor: vendedor }).then(function() { $scope.$broadcast("newClienteAdded"); });
       };
 
       $scope.editClienteOpen = function(cliente) {
@@ -98,7 +98,7 @@
       $scope.produtosSync = $firebase(produtosRef);
       $scope.produtosObj = $scope.produtosSync.$asObject();
       $scope.produtos = $scope.produtosSync.$asArray();
-      $scope.produtoOrder = "nome";
+      $scope.produtoOrder = "codigo";
 
       $scope.setProduto = function(codigo, nome, qtdePorCaixa, sobrando, chegando, containers) {
         nome = nome || "";
@@ -116,7 +116,8 @@
                                    containers: containers,
                                  })                      
           .then(function() { $scope.computeSobrandoChegando(codigo.toUpperCase()); })
-          .then($scope.$broadcast("newProdutoAdded"));
+          .then(function() { $scope.$broadcast("newProdutoAdded"); })
+          .then(function() { $scope.notification = "Assinalado " + codigo + " " + nome; });
       };
 
       $scope.updateProduto = function(codigo, nome, qtdePorCaixa, sobrando, chegando, containers) {
@@ -134,7 +135,7 @@
                                    chegando: parseInt(chegando),
                                    containers: containers,
                                  })                      
-          .then($scope.$broadcast("newProdutoAdded"))
+          .then(function() { $scope.$broadcast("newProdutoAdded"); })
       };
 
       $scope.editProdutoOpen = function(produto) {
@@ -171,8 +172,13 @@
       $scope.pedidosSync = $firebase(pedidosRef);
       $scope.pedidos = $scope.pedidosSync.$asArray();
 
+      // for time range
+      // new Firebase(".../pedidos")
+      //  .startAt(startTime)
+      //  .endAt(endTime)
+
       $scope.showAddPedido = false;
-      
+
       $scope.pedidoEstadoOrder = function(pedido) {
         switch (pedido.estado) {
         case 'Reserva': return 0;
@@ -184,6 +190,12 @@
         default: return 6;
         }
       };
+
+      $scope.pedidoClienteOrder = function(pedido) {
+        return $scope.clientesObj[pedido.codigoCliente].nome;
+      };
+
+      $scope.pedidoTableOrder = ['codigoProduto', $scope.pedidoEstadoOrder, 'dataCriada'];
 
       $scope.pedidoClass = [
         'reservaStyle',
@@ -241,7 +253,7 @@
                             })
           .then(function() { $scope.computeSobrandoChegando(pedido_codigoProduto.toUpperCase()); })
           .then(function() { $scope.notification = "Adicionado pedido " + pedido_codigoCliente + " " + pedido_qtdePedida + "pçs " + pedido_codigoProduto; })
-          .then($scope.$broadcast("newPedidoAdded"));
+          .then(function() { $scope.$broadcast("newPedidoAdded"); });
       };
 
       $scope.editPedidoOpen = function(pedido) {
@@ -311,16 +323,20 @@
       $scope.chegandosSync = $firebase(chegandosRef);
       $scope.chegandos = $scope.chegandosSync.$asArray();
 
+      $scope.chegandoTableOrder = ['codigoProduto', 'container'];
+      
       $scope.addChegando = function(chegando_codigoProduto, quantidade, container) {
         quantidade = quantidade || 0;
         container = container || "";
         
         $scope.chegandos.$add({ codigoProduto: chegando_codigoProduto,
                                 quantidade: parseInt(quantidade),
-                                container: container })
+                                container: container,
+                                chegou: false,
+                              })
           .then(function() { $scope.computeSobrandoChegando(chegando_codigoProduto); })
           .then(function() { $scope.notification = "Adicionado chegando " + quantidade + " pçs " + chegando_codigoProduto; })
-          .then($scope.$broadcast("newChegandoAdded"));
+          .then(function() { $scope.$broadcast("newChegandoAdded"); });
       };
 
       $scope.editChegandoOpen = function(chegando) {
@@ -387,7 +403,7 @@
         var chegandoTotal = 0;
         var containers = [];
         angular.forEach($scope.chegandos, function(chegando, pushId) {
-          if (chegando.codigoProduto === codigo) {
+          if (chegando.codigoProduto === codigo && !chegando.chegou) {
             chegandoTotal += parseInt(chegando.quantidade);
             if (containers.indexOf(chegando.container) === -1) {
               containers.push(chegando.container);
@@ -420,6 +436,15 @@
                              containers);
       };
 
+      // ADICIONAR PRODUTOS EM LOTES
+
+      $scope.processarLoteProdutos = function(lote) {
+        var lines = lote.split("\n");
+        angular.forEach(lines, function(line) {
+          var lineElems = line.split(",");
+          $scope.setProduto(lineElems[0], lineElems[1], parseInt(lineElems[2]), 0, 0, "");
+        });        
+      };
       
     }  // END init()
 
