@@ -4,10 +4,10 @@
   
   app.controller('TaskController', ['$rootScope', '$scope', '$firebase', function($rootScope, $scope, $firebase) {
     function init(authData) {
-      $scope.loginStatus = "Welcome back " + authData.password.email + "! Your token expires " + (new Date(authData.expires * 1000));
+      // $scope.loginStatus = "Welcome back " + authData.password.email + "! Your token expires " + (new Date(authData.expires * 1000));
       $scope.loggedIn = true;
 
-      $scope.notification = loginStatus;
+      $scope.notification = "Welcome back " + authData.password.email + "! Your token expires " + (new Date(authData.expires * 1000));
 
       var tabsRef = ref.child(authData.uid).child("tabs");
       var sync = $firebase(tabsRef);
