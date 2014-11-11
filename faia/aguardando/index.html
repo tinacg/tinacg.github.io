@@ -18,7 +18,7 @@
 
   <body ng-controller="OrganizationController">
 	<div ng-hide="loggedIn">
-	  <a href="login.html">Clique aqui para fazer login</a>
+	  <iframe src="login.html" frameborder="0" width="800" height="600"></iframe> 
 	</div>
 
 	<div ng-show="loggedIn">
@@ -114,6 +114,20 @@
 		  </script>
 		  <!-- END PEDIDOS MODAL -->
 
+		  <!-- PEDIDOS FILTRO -->
+		  <div class="table">
+			<div class="tr">
+			  <span class="td" style="border-bottom: none;">Filtro de produto:</span>
+			  <span class="td" style="border-bottom: none;"><input type="text" ng-model="pedidoFiltroProduto" /></span>
+			</div>
+			<div class="tr">
+			  <span class="td" style="border-bottom: none;">Filtro de cliente:</span>
+			  <span class="td" style="border-bottom: none;"><input type="text" ng-model="pedidoFiltroCliente" /></span>
+			  <span class="td"><button ng-click="pedidoFiltroProduto=''; pedidoFiltroCliente='';">limpar</button></span>
+			</div>
+		  </div>
+		  <!-- END PEDIDOS FILTRO -->
+		  
 		  <!-- ADD PEDIDO FORM -->
 		  <div ng-show="isAdmin">
 			<a href ng-hide="showAddPedido" ng-click="showAddPedido=true">Adicionar pedidos <img src="img/file_add.png" alt="+" /></a>
@@ -156,12 +170,12 @@
 				  </span>
 
 				  <!--
-				  <span class="td">
-					<select ng-model="clientesObj[pedido_codigoCliente].idVendedor" ng-change="setCliente(pedido_codigoCliente, clientesObj[pedido_codigoCliente].nome, clientesObj[pedido_codigoCliente].idVendedor)">
-					  <option ng-repeat="vendedor in vendedores" value="{{vendedor.id}}" ng-selected="vendedor.id==clientesObj[pedido_codigoCliente].idVendedor">{{vendedor.nome}}</option>
-					</select>
-				  </span>
-				  -->
+					  <span class="td">
+						<select ng-model="clientesObj[pedido_codigoCliente].idVendedor" ng-change="setCliente(pedido_codigoCliente, clientesObj[pedido_codigoCliente].nome, clientesObj[pedido_codigoCliente].idVendedor)">
+						  <option ng-repeat="vendedor in vendedores" value="{{vendedor.id}}" ng-selected="vendedor.id==clientesObj[pedido_codigoCliente].idVendedor">{{vendedor.nome}}</option>
+						</select>
+					  </span>
+					  -->
 				  
 				  <span class="td" style="border-bottom: none;">{{vendedoresObj[clientesObj[pedido_codigoCliente].idVendedor].nome}}</span>
 				  <span class="td" style="border-bottom: none;">
@@ -219,7 +233,7 @@
 				</div>
 				-->
 
-			<div ng-repeat="pedido in pedidos | orderBy:pedidoTableOrder" ng-class="['tr', pedidoClass[pedidoEstadoOrder(pedido)], 'data']">
+			<div ng-repeat="pedido in pedidos | orderBy:pedidoTableOrder" ng-class="['tr', pedidoClass[pedidoEstadoOrder(pedido)], 'data']" ng-show="pedidoFiltroCorresponde(pedido.codigoProduto, clientesObj[pedido.codigoCliente].nome, pedidoFiltroProduto, pedidoFiltroCliente)">
 			  <span class="td" ng-show="isAdmin"><img src="img/file_edit.png" alt="edit" ng-click="editPedidoOpen(pedido)" /></span>	
 			  <span class="td hint--no-animate" data-hint="{{produtosObj[pedido.codigoProduto.toUpperCase()].nome}}">{{pedido.codigoProduto}}</span>
 			  <span class="td hint--no-animate" data-hint="Sobram {{produtosObj[pedido.codigoProduto].sobrando}}">{{pedido.qtdePedida}}</span>
@@ -756,9 +770,19 @@ END PEDIDOS -->
 
 -->  
 		<!-- END PEDIDOS FULL -->
-		<pane heading="Adicionar Produto em Lotes">
+
+		<!-- ADICIONAR EM LOTES -->
+		<pane heading="Adic. Prod. Lotes">
 		  <form ng-submit="processarLoteProdutos(loteProdutos); loteProdutos='';">
 			<textarea cols="80" rows="10" ng-model="loteProdutos"></textarea>
+			<br>
+			<input type="submit" />
+		  </form>
+		</pane>
+
+		<pane heading="Adic. Cheg. Lotes">
+		  <form ng-submit="processarLoteChegandos(loteChegandos); loteChegandos='';">
+			<textarea cols="80" rows="10" ng-model="loteChegandos"></textarea>
 			<br>
 			<input type="submit" />
 		  </form>

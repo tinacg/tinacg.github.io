@@ -214,6 +214,25 @@
         'Faturado',
         'Cancelado',
       ];
+
+      $scope.pedidoFiltroProduto = "";
+      $scope.pedidoFiltroCliente = "";
+
+      $scope.pedidoFiltroCorresponde = function(pedidoCodigoProduto, pedidoNomeCliente, buscaCodigoProduto, buscaCodigoCliente) {
+        produtoCorresponde = pedidoCodigoProduto.indexOf(buscaCodigoProduto.toUpperCase()) > -1;
+
+        clienteCorresponde = (pedidoNomeCliente.toLowerCase()).indexOf(buscaCodigoCliente.toLowerCase()) > -1;
+
+        if (buscaCodigoProduto === '') {
+          produtoCorresponde = true;
+        }
+
+        if (buscaCodigoCliente === '') {
+          clienteCorresponde = true;
+        }
+        
+        return produtoCorresponde && clienteCorresponde;
+      };
       
       $scope.computePedidosTotal = function(pedidosArray) {
         var total = 0;
@@ -437,12 +456,20 @@
       };
 
       // ADICIONAR PRODUTOS EM LOTES
-
       $scope.processarLoteProdutos = function(lote) {
         var lines = lote.split("\n");
         angular.forEach(lines, function(line) {
           var lineElems = line.split(",");
           $scope.setProduto(lineElems[0], lineElems[1], parseInt(lineElems[2]), 0, 0, "");
+        });        
+      };
+
+      // ADICIONAR CHEGANDOS EM LOTES
+      $scope.processarLoteChegandos = function(lote) {
+        var lines = lote.split("\n");
+        angular.forEach(lines, function(line) {
+          var lineElems = line.split(",");
+          $scope.addChegando(lineElems[0], parseInt(lineElems[1]), lineElems[2]);
         });        
       };
       
