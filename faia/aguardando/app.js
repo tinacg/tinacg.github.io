@@ -76,7 +76,7 @@
               return cliente.nome;
             },
             idVendedor: function() {
-              return cliente.idVendedor;
+              return cliente.idVendedor || 'pontual';
             },
             vendedores: function() {
               return $scope.vendedores;
@@ -494,6 +494,7 @@
   }]);
 
   app.controller('EditClienteModalCtrl', function($scope, $modalInstance, items, clienteNome, idVendedor, codigo, vendedores) {
+    $scope.$broadcast("openedClienteModal");
     $scope.items = items;
     $scope.vendedores = vendedores;
     $scope.selected = {
