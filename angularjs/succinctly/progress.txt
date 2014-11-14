@@ -1,0 +1,3 @@
+AngularJS succinctly Frederik Dietz
+
+13 nov 2014 p. 23
