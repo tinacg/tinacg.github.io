@@ -48,7 +48,7 @@
 				  <tbody ng-repeat="task in tasks[tab.name] | orderBy:['done','category','createDate']">
 					<!-- <tr ng-repeat="task in tasks | orderBy:['done','category','createDate']"> -->
 					<tr>
-					  <td style="padding-right: 10px;"><input type="checkbox" ng-model="task.done" ng-change="tasks.$save(task)"></td>
+					  <td style="padding-right: 10px;"><input type="checkbox" ng-model="task.done" ng-change="updateTask(tasks[tab.name], task)" /></td>
 					  <td style="padding-right: 10px;">{{task.category}}</td>
 					  <td style="padding-right: 10px;">
 						{{task.description}}
@@ -56,7 +56,7 @@
 							 <a href ng-click="task.editing=true"><b>(edit)</b></a>
 							 -->
 						<span ng-show="task.done">
-						  <a href ng-click="tasks[tab.name].$remove(task)"><b>(delete)</b></a>
+						  <a href ng-click="removeTask(tasks[tab.name], task)"><b>(delete)</b></a>
 						</span>
 					  </td>
 					  <td style="padding-right: 10px;">{{task.dueDate}}</td>
@@ -103,7 +103,7 @@
 		  <hr>
 
 		  <div ng-repeat="tab in tabs">
-			{{tab.name}} <a href ng-click="deleteTabTasks(tab.name)">(clear tasks)</a> <a href ng-click="deleteTabTasks(tab.name); tabs.$remove(tab)">(remove tab)</a>
+			{{tab.name}} <a href ng-click="deleteTabTasks(tab.name)">(clear tasks)</a> <a href ng-click="removeTab(tab);">(remove tab)</a>
 		  </div>
 		  
 		</pane>

@@ -15,7 +15,8 @@
       
       $scope.addTab = function(tabName) {
         $scope.tabs.$add({ name: tabName })
-          .then(function() { $scope.refreshTaskRefs(); });
+          .then(function() { $scope.refreshTaskRefs(); })
+          .then(function() { $scope.notification = "Added tab " + tabName; });
       };
 
       var tasksRef = [];
@@ -38,6 +39,11 @@
         $scope.refreshTaskRefs();
         //$rootScope.panes[1].select();
       });
+
+      $scope.updateTask = function(tasks, task) {
+        tasks.$save(task)
+          .then(function() { $scope.notification = "Changed task " + task.description; });
+      }
       
       $scope.addTask = function(tabName, taskDone, taskDescription, taskCategory, taskDueDate) {
         taskDescription = taskDescription || "My Task";
@@ -59,9 +65,23 @@
         $scope.$broadcast("newTaskAdded");
       };
 
-      $scope.deleteTabTasks = function(tabName) {
-        tasksRootSync.$remove(tabName);
+      // tasks[tab.name].$remove(task)
+      $scope.removeTask = function(tasks, task) {
+        tasks.$remove(task)
+          .then(function() { $scope.notification = "Removed task " + task.description; });
       };
+      
+      $scope.deleteTabTasks = function(tabName) {
+        tasksRootSync.$remove(tabName)
+          .then(function() { $scope.notification = "Deleted tab tasks for " + tabName; });
+      };
+
+      $scope.removeTab = function(tab) {
+        tasksRootSync.$remove(tab.name)
+          .then(function() { $scope.tabs.$remove(tab)
+                             .then(function() { $scope.notification = "Removed tab " + tab.name; }); });
+      };
+      
     }
 
     function clean() {
