@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-app="anonymousFunctionApp">
+  <body>
+	<script src="../../js/angular.min.js"></script>
+	<script src="app.js"></script>
+
+	<div ng-controller="AnonymousFunctionController">
+<pre>
+	  <input ng-model="input" ng-change="f(input)" />
+	  <input ng-model="input" ng-change="g(input)" />
+	  Parse Error <input ng-model="input" ng-change="(function(arg) { alert(arg.toLowerCase()); })('input');" />
+
+	  {{result}}
+</pre>
+
+	</div>
+	
+  </body>
+</html>
