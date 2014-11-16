@@ -1,0 +1,4 @@
+In Angular templates, {{ }} is called a BINDING.
+Inside the binding, there can be a simple expression "hello" + "!"
+https://docs.angularjs.org/tutorial/step_00
+
