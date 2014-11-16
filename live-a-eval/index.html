@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-app="liveAEvalApp">
+  <head>
+	<link rel="stylesheet" href="codemirror.css">
+	<script src="../js/angular.min.js"></script>
+	<script src="../js/firebase.js"></script>
+	<script src="../js/angularfire.min.js"></script>
+	<script src="codemirror.js"></script>
+	<script src="javascript.js"></script>
+  </head>
+  <body ng-controller="evalController">
+	<textarea ng-model="code" rows="10" cols="60" id="myCodeId"></textarea>
+	
+	<button ng-click="myEval(code)">run</button>
+	
+	<textarea ng-model="result" rows="10" cols="60" disabled></textarea>
+	<script src="app.js"></script>
+  </body>
+</html>
