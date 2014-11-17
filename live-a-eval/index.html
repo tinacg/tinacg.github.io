@@ -22,9 +22,28 @@
 	</style>
   </head>
   <body ng-controller="evalController">
+	{{infoMessage}}
+	<a href ng-click="logout()" ng-show="loggedIn">Logout</a>
+	
+	<form ng-hide="loggedIn" ng-submit="tryLogin(loginEmail, loginPassword)">
+	  email: <input ng-model="loginEmail">
+	  password: <input type="password" ng-model="loginPassword">
+	  <input type="submit">
+	</form>
+
+	{{currentEntry}} {{currentEntryTitle}}<br>
+	Load: 
+	<select ng-model="currentEntry" ng-change="loadEntry(currentEntry)">
+	  <option value="new" ng-selected="true">New</option>
+	  <option ng-repeat="savedDef in savedDefs" value="{{savedDef.$id}}">{{savedDef.title}}</option>
+	</select>
+
+	<button ng-click="saveCurrent(currentEntry)">Save current</button>
+	
 	<table width="100%">
 	  <tr>
 		<td width="50%" valign="top">
+		  Title: <input ng-model="saveTitle"><button ng-click="addEntry(saveTitle)">Add new</button><br>
 		  Variable definitions and functions<br>
 		  <textarea id="demotext" ng-model="code"></textarea>
 		</td>
@@ -32,11 +51,12 @@
 		  Commands (one per line)<br>
 		  <textarea id="commands" ng-model="ngCommands" rows="5" cols="55"></textarea>
 		  <br>
-		  <button ng-click="myEval(code)">run</button> (or Ctrl-Enter)
+		  <button ng-click="myEval(code)">run</button> (or Ctrl-Enter)<br>
 		  <textarea ng-model="result" id="resulttext" rows="10" cols="55" disabled></textarea>
 		</td>
 	  </tr>
 	</table>
+
 
 	<script src="app.js"></script>
 
