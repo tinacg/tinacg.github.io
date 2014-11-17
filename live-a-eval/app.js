@@ -55,7 +55,9 @@
                               defs: defs,
                               commands: commands,
                             })
-        .then(function() { $scope.infoMessage = "Saved " + title; });
+        .then(function() { $scope.infoMessage = "Saved " + title; })
+        .then(function() { $scope.currentEntryTitle = title; $scope.saveTitle = ''; })
+        .then(function() { $scope.currentEntry = $scope.savedDefs[$scope.savedDefs.length-1].$id });
     };
 
     $scope.loadEntry = function(id) {
