@@ -6,6 +6,7 @@
 	<script src="../js/firebase.js"></script>
 	<script src="../js/angular.min.js"></script>
 	<script src="../js/angularfire.min.js"></script>
+	<script src="../js/moment-with-locales.min.js"></script>
 	<script src="components.js"></script>
 	<script src="app.js"></script>
   </head>
@@ -34,18 +35,19 @@
 					  <th>Category</th>
 					  <th>Task</th>
 					  <th>Due date</th>
-					  <th>Created</th>
+					  <th>{{getShortDate(now)}}</th>
 					</tr>
 					<tr>
 					  <td>&nbsp;</td>
 					  <td><input ng-model="taskCategory" focus-on="newTaskAdded" size="12" /></td>
 					  <td><input ng-model="taskDescription" size="35" /></td>
 					  <td><input ng-model="taskDueDate" size="12" /></td>
+					  <td><input type="button" value="refresh" ng-click="now = momentNow()" /></td>
 					  <td><input type="submit" value="Add Task" /></td>
 					</tr>
 
 				  </thead>
-				  <tbody ng-repeat="task in tasks[tab.name] | orderBy:['done','category','createDate']">
+				  <tbody ng-repeat="task in tasks[tab.name] | orderBy:['done','category',dueDateOrder,'createDate']">
 					<!-- <tr ng-repeat="task in tasks | orderBy:['done','category','createDate']"> -->
 					<tr>
 					  <td style="padding-right: 10px;"><input type="checkbox" ng-model="task.done" ng-change="updateTask(tasks[tab.name], task)" /></td>
@@ -60,7 +62,8 @@
 						</span>
 					  </td>
 					  <td style="padding-right: 10px;">{{task.dueDate}}</td>
-					  <td>{{task.createDate | date}}</td>
+					  <!-- <td>{{task.createDate | date}}</td> -->
+					  <td>{{millisToString(parseDate(task.dueDate) - now)}}</td>
 					</tr>
 					<tr ng-show="task.editing">
 					  <td style="padding-right: 10px;">&nbsp;</td>

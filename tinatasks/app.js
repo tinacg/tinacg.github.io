@@ -81,7 +81,82 @@
           .then(function() { $scope.tabs.$remove(tab)
                              .then(function() { $scope.notification = "Removed tab " + tab.name; }); });
       };
+
+      // TIME AND MOMENT.JS
       
+      $scope.getms = function(s) {
+        var m = moment(s, "D/M/YY H:mm:ss");
+        var result = m.valueOf();
+        if (isNaN(result)) {
+          result = 0;
+        }
+        return result;
+      };
+
+      $scope.getFormattedDate = function(ms) {
+        var result = moment(ms).locale('pt-BR').format('ddd D-MMM-YY H:mm:ss');
+        if (result === 'Invalid date') {
+          result = 'data invalida';
+        }
+        if (ms === undefined) {
+          result = "";
+        }
+        return result;
+      };
+
+      $scope.getShortDate = function(ms) {
+        var result = moment(ms).locale('pt-BR').format('D-MMM H:mm');
+        return result;
+      };
+
+      $scope.parseDate = function(s) {
+        if (s === 'soon') {
+          return 9999999999000;
+        }
+        return moment(s, "D/M/YY H:mm:ss").valueOf();
+      };
+
+      $scope.millisToString = function(ms)
+      {
+        if (ms < 0 || ms > 3159999999000) {
+          return "∞";
+        }
+        var seconds = Math.floor(ms / 1000);
+        var numyears = Math.floor(seconds / 31536000);
+        var numdays = Math.floor((seconds % 31536000) / 86400); 
+        var numhours = Math.floor(((seconds % 31536000) % 86400) / 3600);
+        var numminutes = Math.floor((((seconds % 31536000) % 86400) % 3600) / 60);
+        var numseconds = (((seconds % 31536000) % 86400) % 3600) % 60;
+
+        var result = "";
+
+        if (numyears > 0) {
+          result += numyears + "y ";
+        }
+        if (numdays > 0) {
+          result += numdays + "d ";
+        }
+        if (numhours > 0) {
+          result += numhours + "h ";
+        }
+        if (numminutes > 0) {
+          result += numminutes + "m ";
+        }
+        if (numseconds > 0) {
+          result += numseconds + "s";
+        }
+        return result;
+      }
+
+      $scope.momentNow = function() {
+        return moment().valueOf();
+      };
+
+      $scope.now = $scope.momentNow();
+
+      $scope.dueDateOrder = function(task) {
+        return $scope.parseDate(task.dueDate);
+      }
     }
 
     function clean() {
