@@ -105,7 +105,8 @@
       };
 
       $scope.getShortDate = function(ms) {
-        var result = moment(ms).locale('pt-BR').format('D-MMM H:mm:ss');
+        // var result = moment(ms).locale('pt-BR').format('D-MMM H:mm:ss');
+        var result = moment(ms).locale('pt-BR').format('D-MMM');
         return result;
       };
 
