@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="tinatasks">
   <head>
+	<title>TiNAtasks</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
 	<script src="../js/firebase.js"></script>
@@ -14,10 +15,12 @@
   <body ng-controller="TaskController" style="padding: 10px;">
 	<!-- if not logged in -->
 	<div ng-hide="loggedIn">
+	  <a href="/index.html">home</a> | 
 	  <a href="login.html">Click here to log in</a>
 	</div>
 	
 	<div ng-show="loggedIn">
+	  <a href="/index.html">home</a> | 
 	  <a href ng-click="logout()">log out</a><br>
 	  {{notification}}
 
@@ -142,6 +145,6 @@
 			</tbody>
 		  </table>
 		  -->
-	  </div>
+	</div>
   </body>
 </html>
