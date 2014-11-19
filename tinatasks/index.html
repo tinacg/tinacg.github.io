@@ -21,7 +21,9 @@
 	
 	<div ng-show="loggedIn">
 	  <a href="/index.html">home</a> | 
-	  <a href ng-click="logout()">log out</a><br>
+	  <a href ng-click="logout()">log out</a>
+	  (it is now {{nowFull}})
+	  <br>
 	  {{notification}}
 
 	  <tabs>
@@ -66,7 +68,8 @@
 					  </td>
 					  <td style="padding-right: 10px;">{{task.dueDate}}</td>
 					  <!-- <td>{{task.createDate | date}}</td> -->
-					  <td>{{millisToString(parseDate(task.dueDate) - now)}}</td>
+					  <!-- <td>{{millisToString(parseDate(task.dueDate) - now)}}</td> -->
+					  <td>{{daysDiff(task.dueDate, now)}}</td>
 					</tr>
 					<tr ng-show="task.editing">
 					  <td style="padding-right: 10px;">&nbsp;</td>

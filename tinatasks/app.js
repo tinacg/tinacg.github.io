@@ -153,10 +153,57 @@
       };
 
       $scope.now = $scope.momentNow();
+      $scope.nowFull = moment().locale('pt-BR').format();
 
       $scope.dueDateOrder = function(task) {
         return $scope.parseDate(task.dueDate);
       }
+
+      function numdays(ms) {
+        var seconds = Math.floor(ms / 1000);
+        var days = Math.floor(seconds / 86400);
+
+        return days;
+      }
+
+      function daysSince01(dmyStr) {
+        var dmyParts = dmyStr.split("/");
+        var day = Number(dmyParts[0]);
+        var month = Number(dmyParts[1]);
+        var year = Number(dmyParts[2]);
+
+        var leapYearsPassed = Math.floor(year / 4);
+
+        if (year % 4 === 0 && month > 2) {
+          leapYearsPassed -= 1;
+        }
+        
+        return leapYearsPassed + (year * 365) + moment(dmyStr, "D/M/YY").dayOfYear();
+      }
+
+      // pass moment() now to a function that returns D/M/Y
+      
+      $scope.daysDiff = function(then, now) {
+        // var nineteenseventy = moment("1/1/1970 0:00:00", "D/M/YYYY H:mm:ss");
+        // var then_since1970 = numdays(moment(then, "D/M/YY H:mm:ss").valueOf());
+        // var now_since1970 = numdays(moment().valueOf());
+        // return Math.max(0, then_since1970 - now_since1970);
+        var result = daysSince01(then.split(" ")[0]) - daysSince01(moment().locale('pt-BR').format("D/M/YY"))
+
+        if (isNaN(result) || result < 0) {
+          result = "";
+        }
+
+        else {
+          if (result === 1) {
+            return "in " + result + " day";
+          } else if (result === 0) {
+            return "today";
+          } else {
+            return "in " + result + " days";
+          }
+        }
+      };
     }
 
     function clean() {
