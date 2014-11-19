@@ -1,9 +1,4 @@
-Experimental zone to build up to Pontual Aguardando
-===================================================
+TiNAcg.com
+==========
 
-See: STORES.txt
-
-banana_store/MODELS.txt
-
-DIARY.txt
-
+Currently experimenting with AngularFire basics
