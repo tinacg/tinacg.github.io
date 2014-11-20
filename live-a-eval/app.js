@@ -31,8 +31,8 @@
   app.controller('evalController', ['$scope', '$firebase', function($scope, $firebase) {
     $scope.myEval = function(code) {
       (1, eval)(editor.getValue());
-      $scope.result = getCommandsResult($scope.ngCommands);
-      
+      // $scope.result = getCommandsResult($scope.ngCommands);
+      $("#resulttext").val(getCommandsResult($("#commands").val()));
     };
 
     var savedDefsRef = null;
