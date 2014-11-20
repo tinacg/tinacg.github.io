@@ -189,7 +189,8 @@
         // var then_since1970 = numdays(moment(then, "D/M/YY H:mm:ss").valueOf());
         // var now_since1970 = numdays(moment().valueOf());
         // return Math.max(0, then_since1970 - now_since1970);
-        var result = daysSince01(then.split(" ")[0]) - daysSince01(moment().locale('pt-BR').format("D/M/YY"))
+        // var result = daysSince01(then.split(" ")[0]) - daysSince01(moment().locale('pt-BR').format("D/M/YY"))
+        var result = Math.floor((moment(then.split(" ")[0], "D/M/YY").startOf("day") - moment().startOf("day")) / 86400000);
 
         if (isNaN(result) || result < 0) {
           result = "";
