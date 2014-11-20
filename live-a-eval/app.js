@@ -96,6 +96,18 @@
       }
     };
 
+    $scope.removeCurrent = function(id) {
+      if (id === 'new') {
+        return 0;
+      }
+      var entryRef = savedDefsRef.child(id);
+      var entrySync = $firebase(entryRef);
+      entrySync.$remove();
+      $scope.ngCommands = "";
+      editor.setValue("");
+      $scope.currentEntry = "new";
+    }
+
     // USER MANAGEMENT    
     function checkLogin() {
       var authData = ref.getAuth();

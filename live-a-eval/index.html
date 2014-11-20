@@ -39,7 +39,9 @@
 	  <option ng-repeat="savedDef in savedDefs" value="{{savedDef.$id}}">{{savedDef.title}}</option>
 	</select>
 
-	<button ng-click="saveCurrent(currentEntry)">Save current</button>
+	<input type="button" ng-click="saveCurrent(currentEntry)" value="Save current">
+	<input type="button" ng-click="removeCurrent(currentEntry)" value="remove">
+
 	
 	<table width="100%">
 	  <tr>
