@@ -8,7 +8,19 @@
 	</style>
   </head>
   <body>
-	<canvas id="piano" width="600" height="300"></canvas>
+	<canvas id="piano" width="590" height="160"></canvas>
+	<pre>
+	  Controls:
+	   2 3   5 6 7   9 0   black keys
+	  q w e r t y u i o p  white keys
+	  
+	   s d   g h j   l ;   black keys
+	  z x c v b n m , . /  white keys
+
+	  a  transpose down
+	  f  transpose up
+
+	  1  clear selection
 	<script>
           //
 
@@ -17,14 +29,14 @@
         var pianoOffsetTop = pianoElem.offsetTop;
         var context = pianoElem.getContext('2d');
         var keys = [];
-        var plainWidth = 20;
-        var plainHeight = 120;
-        var sharpWidth = 14;
-        var sharpHeight = 75;
-        var sharpWidthOffset = 2;
+        var whiteWidth = 20;
+        var whiteHeight = 120;
+        var blackWidth = 14;
+        var blackHeight = 75;
+        var blackWidthOffset = 2;
 
         function Key(i) {
-          var sharps = [1, 3, 6, 8, 10];
+          var blacks = [1, 3, 6, 8, 10];
           var names = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
           var offsets = [0, 0.5, 1, 1.5, 2, 3, 3.5, 4, 4.5, 5, 5.5, 6];
           var leftMargin = 15;
@@ -34,41 +46,41 @@
           this.name = names[i % 12];
           this.selected = false;
           
-          this.isSharp = sharps.indexOf(this.index % 12) > -1;
+          this.isBlack = blacks.indexOf(this.index % 12) > -1;
 
-          this.left = leftMargin + (offsets[i % 12] * plainWidth) + (Math.floor(i / 12) * 7 * plainWidth);
+          this.left = leftMargin + (offsets[i % 12] * whiteWidth) + (Math.floor(i / 12) * 7 * whiteWidth);
           this.top = topMargin;
 
-          if (this.isSharp) {
-            this.left += sharpWidthOffset;
-            this.width = sharpWidth;
-            this.height = sharpHeight;
+          if (this.isBlack) {
+            this.left += blackWidthOffset;
+            this.width = blackWidth;
+            this.height = blackHeight;
           } else {
-            this.width = plainWidth;
-            this.height = plainHeight;
+            this.width = whiteWidth;
+            this.height = whiteHeight;
           }
         }
 
         Key.prototype.draw = function() {
-          var plainColor = "#FFFFFF";
-          var plainSelectedColor = "#AAEE99";
-          var sharpColor = "#000000";
-          var sharpSelectedColor = "#116600";
+          var whiteColor = "#FFFFFF";
+          var whiteSelectedColor = "#AAEE99";
+          var blackColor = "#000000";
+          var blackSelectedColor = "#229911";
 
           var strokeColor = "#CCCCCC";
           var fillColor = "#FFFFFF";
 
-          if (this.isSharp) {
+          if (this.isBlack) {
             if (this.selected) {
-              fillColor = sharpSelectedColor;
+              fillColor = blackSelectedColor;
             } else {
-              fillColor = sharpColor;
+              fillColor = blackColor;
             }
           } else {
             if (this.selected) {
-              fillColor = plainSelectedColor;
+              fillColor = whiteSelectedColor;
             } else {
-              fillColor = plainColor;
+              fillColor = whiteColor;
             }
           }
 
@@ -81,20 +93,20 @@
           context.stroke();
         }
 
-        for (var i = 0; i < 24; i++) {
+        for (var i = 0; i < 48; i++) {
           keys.push(new Key(i));
         }
         
         function redraw() {
-          // draw plain keys first, then sharps
+          // draw white keys first, then blacks
           keys.forEach(function(key) {
-            if (!key.isSharp) {
+            if (!key.isBlack) {
               key.draw();
             }
           });
 
           keys.forEach(function(key) {
-            if (key.isSharp) {
+            if (key.isBlack) {
               key.draw();
             }
           });
@@ -106,22 +118,66 @@
           var x = e.pageX - pianoOffsetLeft;
           var y = e.pageY - pianoOffsetTop;
 
-          console.log(x);
-          
           keys.forEach(function(key) {
-            // sharps
-            if (y > key.top && y < key.top + sharpHeight && key.isSharp && 
+            // blacks
+            if (y > key.top && y < key.top + blackHeight && key.isBlack && 
                 x > key.left && x < key.left + key.width) {
-              console.log("clicked on sharp " + key.name);
               key.selected = !key.selected;
-            } else if (y > key.top + sharpHeight && y < key.top + key.height && x > key.left && x < key.left + key.width) {
-              console.log("clicked on plain " + key.name);
+            } else if (y > key.top + blackHeight && y < key.top + key.height && x > key.left && x < key.left + key.width) {
               key.selected = !key.selected;
             }
           });
 
           redraw();
         }, false);
+
+        function transpose(steps) {
+          var newSelected = [];
+          for (var i = 0; i < keys.length; i++) {
+            newSelected[i+steps] = keys[i].selected;
+            keys[i].selected = false;
+          }
+          for (var i = 0; i < keys.length; i++) {
+            keys[i].selected = newSelected[i];
+          }
+          redraw();
+        }
+
+        function clearSelection() {
+          keys.forEach(function(key) {
+            key.selected = false;
+          });
+        }
+        
+        function select(keyIndicesString) {
+          var keyIndices = keyIndicesString.split(",");
+          clearSelection();
+          keyIndices.forEach(function(i) {
+            keys[i].selected = true;
+          });
+          redraw();
+        }
+        
+        window.onkeypress = function(e) {
+          var bottomRow = [122,115,120,100,99,118,103,98,104,110,106,109,44,108,46,59,47];
+          var topRow = [113,50,119,51,101,114,53,116,54,121,55,117,105,57,111,48,112];
+          if (bottomRow.indexOf(e.keyCode) > -1) {
+            keys[bottomRow.indexOf(e.keyCode) + 12].selected ^= 1;
+          }
+          if (topRow.indexOf(e.keyCode) > -1) {
+            keys[topRow.indexOf(e.keyCode) + 24].selected ^= 1;
+          }
+          if (e.keyCode === 97) {
+            transpose(-1);
+          }
+          if (e.keyCode === 102) {
+            transpose(1);
+          }
+          if (e.keyCode === 49) {
+            clearSelection();
+          }
+          redraw();
+        };
 	    
 	</script>
   </body>
