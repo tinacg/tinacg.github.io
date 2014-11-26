@@ -212,9 +212,14 @@
         var songLineInput = document.getElementById("songLineInput");
 
         songLineInput.onkeyup = function(e) {
-          readSongLine(parseInt(this.value));
+          currentChord.value = readSongLine(song.value, parseInt(this.value));
+          parseChord(currentChord.value);
         };
 
+        function readSongLine(songText, line) {
+          var songLines = songText.split('\n');
+          return songLines[line-1];
+        }
         
         var keyboardHighlight = function(e) {
           var bottomRow = [122,115,120,100,99,118,103,98,104,110,106,109,44,108,46,59,47];
@@ -270,6 +275,20 @@
           parseChord(currentChord.value);
         }
 
+        var previousLineButton = document.getElementById("previousLineButton");
+        var nextLineButton = document.getElementById("nextLineButton");
+        nextLineButton.onclick = function(e) {
+          songLineInput.value = parseInt(songLineInput.value) + 1;
+          currentChord.value = readSongLine(song.value, parseInt(songLineInput.value));
+          parseChord(currentChord.value);
+        }
+        previousLineButton.onclick = function(e) {
+          songLineInput.value = parseInt(songLineInput.value) - 1;
+          currentChord.value = readSongLine(song.value, parseInt(songLineInput.value));
+          parseChord(currentChord.value);
+        }
+
+        
         var addToSongButton = document.getElementById("addToSongButton");
         addToSongButton.onclick = function(e) {
           addToSong();
