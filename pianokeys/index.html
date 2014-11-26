@@ -9,16 +9,21 @@
   </head>
   <body>
 	<canvas id="piano" width="590" height="180"></canvas>
-	<textarea id="chords" rows="12"></textarea>
+	<textarea id="songText" rows="12"></textarea>
 	<br>
+	<input type="button" id="addToSongButton" value="Add highlighted chord to song"><br>
+	
 	<span id="keyboardStatus">(click inside piano area to activate keyboard controls)</span>
 	<p>
 	  <input type="text" size="3" id="songTransposeInput" value="0">
+	  <input type="text" size="3" id="songLineInput" value="0">
 	  <input type="text" id="currentChord">
 	</p>
 	<p>
 	  <input type="button" id="transposeDownButton" value="<">
 	  <input type="button" id="transposeUpButton" value=">">
+	  <input type="button" id="previousLineButton" value="<">
+	  <input type="button" id="nextLineButton" value=">">
 	</p>
 	
           
@@ -202,6 +207,15 @@
           parseChord(currentChord.value);
         };
 
+
+
+        var songLineInput = document.getElementById("songLineInput");
+
+        songLineInput.onkeyup = function(e) {
+          readSongLine(parseInt(this.value));
+        };
+
+        
         var keyboardHighlight = function(e) {
           var bottomRow = [122,115,120,100,99,118,103,98,104,110,106,109,44,108,46,59,47];
           var topRow = [113,50,119,51,101,114,53,116,54,121,55,117,105,57,111,48,112];
@@ -255,56 +269,104 @@
           songTransposeInput.value = songTranspose;
           parseChord(currentChord.value);
         }
+
+        var addToSongButton = document.getElementById("addToSongButton");
+        addToSongButton.onclick = function(e) {
+          addToSong();
+        }
+        
+        function highlightedToChordString() {
+          var indexToName = {
+            12: 'C',
+            13: 'C#',
+            14: 'D',
+            15: 'D#',
+            16: 'E',
+            17: 'F',
+            18: 'F#',
+            19: 'G',
+            20: 'G#',
+            21: 'A',
+            22: 'A#',
+            23: 'B',
+            24: 'c',
+            25: 'c#',
+            26: 'd',
+            27: 'd#',
+            28: 'e',
+            29: 'f',
+            30: 'f#',
+            31: 'g',
+            32: 'g#',
+            33: 'a',
+            34: 'a#',
+            35: 'b',
+          };            
+          var indices = "";
+          keys.forEach(function(key) {
+            if (key.selected) {
+              var name = indexToName[key.index] || "";
+              indices += name + " ";
+            }
+          });
+          return indices;
+        }
+
+        var song = document.getElementById("songText");
+        
+        function addToSong() {
+          song.value += highlightedToChordString() + "\n";
+        }
         
         function parseChord(s) {
           var nameToIndex = {
-            'c': 12,
-            'c#': 13,
-            'db': 13,
-            'd': 14,
-            'd#': 15,
-            'eb': 15,
-            'e': 16,
-            'f': 17,
-            'f#': 18,
-            'gb': 18,
-            'g': 19,
-            'g#': 20,
-            'ab': 20,
-            'a': 21,
-            'a#': 22,
-            'bb': 22,
-            'b': 23,
+            'C': 12,
+            'C#': 13,
+            'Db': 13,
+            'D': 14,
+            'D#': 15,
+            'Eb': 15,
+            'E': 16,
+            'F': 17,
+            'F#': 18,
+            'Gb': 18,
+            'G': 19,
+            'G#': 20,
+            'Ab': 20,
+            'A': 21,
+            'A#': 22,
+            'Bb': 22,
+            'B': 23,
 
-            'c+': 13,
-            'd+': 15,
-            'f+': 18,
-            'g+': 20,
-            'a+': 22,
+            'C+': 13,
+            'D+': 15,
+            'F+': 18,
+            'G+': 20,
+            'A+': 22,
            
-            'C': 24,
-            'C#': 25,
-            'Db': 25,
-            'D': 26,
-            'D#': 27,
-            'Eb': 27,
-            'E': 28,
-            'F': 29,
-            'F#': 30,
-            'Gb': 30,
-            'G': 31,
-            'G#': 32,
-            'Ab': 32,
-            'A': 33,
-            'A#': 34,
-            'Bb': 34,
-            'B': 35,
+            'c': 24,
+            'c#': 25,
+            'db': 25,
+            'd': 26,
+            'd#': 27,
+            'eb': 27,
+            'e': 28,
+            'f': 29,
+            'f#': 30,
+            'gb': 30,
+            'g': 31,
+            'g#': 32,
+            'ab': 32,
+            'a': 33,
+            'a#': 34,
+            'bb': 34,
+            'b': 35,
 
-            'C+': 25,
-            'D+': 27,
-            'F+': 30,
-            'G+': 32,
-            'A+': 34,
+            'c+': 25,
+            'd+': 27,
+            'f+': 30,
+            'g+': 32,
+            'a+': 34,
           }
           if (s === '') {
             clearSelection();
