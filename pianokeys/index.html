@@ -8,9 +8,23 @@
 	</style>
   </head>
   <body>
-	<canvas id="piano" width="590" height="160"></canvas>
+	<canvas id="piano" width="590" height="180"></canvas>
+	<textarea id="chords" rows="12"></textarea>
+	<br>
+	<span id="keyboardStatus">(click inside piano area to activate keyboard controls)</span>
+	<p>
+	  <input type="text" size="3" id="songTransposeInput" value="0">
+	  <input type="text" id="currentChord">
+	</p>
+	<p>
+	  <input type="button" id="transposeDownButton" value="<">
+	  <input type="button" id="transposeUpButton" value=">">
+	</p>
+	
+          
 	<pre>
-	  Controls:
+      Controls (first click inside piano area):
+        
 	   2 3   5 6 7   9 0   black keys
 	  q w e r t y u i o p  white keys
 	  
@@ -21,6 +35,9 @@
 	  f  transpose up
 
 	  1  clear selection
+	</pre>
+
+	
 	<script>
           //
 
@@ -34,6 +51,8 @@
         var blackWidth = 14;
         var blackHeight = 75;
         var blackWidthOffset = 2;
+
+        var songTranspose = 0;
 
         function Key(i) {
           var blacks = [1, 3, 6, 8, 10];
@@ -149,16 +168,41 @@
           });
         }
         
-        function select(keyIndicesString) {
+        function selectFromIndices(keyIndicesString) {
           var keyIndices = keyIndicesString.split(",");
           clearSelection();
-          keyIndices.forEach(function(i) {
-            keys[i].selected = true;
+          keyIndices.forEach(function(val) {
+            var i = Number(val);
+            // keys[i].selected = true;
+            if (i+songTranspose >= 0 && i+songTranspose < keys.length) {
+              keys[i+songTranspose].selected = true;
+
+            }
           });
           redraw();
         }
+
+        var currentChord = document.getElementById("currentChord");
+
+        currentChord.onkeyup = function(e) {
+          parseChord(this.value);
+        };
+
+
+        var songTransposeInput = document.getElementById("songTransposeInput");
+
+        function setSongTranspose(offset) {
+          songTranspose = parseInt(songTransposeInput.value) + offset;
+          songTransposeInput.value = songTranspose;
+          redraw();
+        }
         
-        window.onkeypress = function(e) {
+        songTransposeInput.onkeyup = function(e) {
+          songTranspose = parseInt(this.value);
+          parseChord(currentChord.value);
+        };
+
+        var keyboardHighlight = function(e) {
           var bottomRow = [122,115,120,100,99,118,103,98,104,110,106,109,44,108,46,59,47];
           var topRow = [113,50,119,51,101,114,53,116,54,121,55,117,105,57,111,48,112];
           if (bottomRow.indexOf(e.keyCode) > -1) {
@@ -169,16 +213,110 @@
           }
           if (e.keyCode === 97) {
             transpose(-1);
+            // setSongTranspose(songTranspose-1);
           }
           if (e.keyCode === 102) {
             transpose(1);
+            // setSongTranspose(songTranspose+1);
           }
           if (e.keyCode === 49) {
             clearSelection();
           }
           redraw();
         };
-	    
+
+        // http://stackoverflow.com/questions/12886286/addeventlistener-for-keydown-on-canvas
+        var lastDownTarget;
+        document.addEventListener('mousedown', function(e) {
+          lastDownTarget = e.target;
+          displayKeyboardStatus();
+        }, false);
+
+        window.onkeypress = function(e) {
+          if (lastDownTarget == pianoElem) {
+            keyboardHighlight(e);
+          }
+        }
+
+        function displayKeyboardStatus() {
+          var keyboardStatus = document.getElementById('keyboardStatus');
+          keyboardStatus.innerHTML = (lastDownTarget == pianoElem) ? "Keyboard active" : "(click inside piano area to activate keyboard controls)";
+        }
+
+        var transposeUpButton = document.getElementById("transposeUpButton");
+        var transposeDownButton = document.getElementById("transposeDownButton");
+        transposeUpButton.onclick = function(e) {
+          songTranspose = songTranspose + 1;
+          songTransposeInput.value = songTranspose;
+          parseChord(currentChord.value);
+        }
+        transposeDownButton.onclick = function(e) {
+          songTranspose = songTranspose - 1;
+          songTransposeInput.value = songTranspose;
+          parseChord(currentChord.value);
+        }
+        
+        function parseChord(s) {
+          var nameToIndex = {
+            'c': 12,
+            'c#': 13,
+            'db': 13,
+            'd': 14,
+            'd#': 15,
+            'eb': 15,
+            'e': 16,
+            'f': 17,
+            'f#': 18,
+            'gb': 18,
+            'g': 19,
+            'g#': 20,
+            'ab': 20,
+            'a': 21,
+            'a#': 22,
+            'bb': 22,
+            'b': 23,
+
+            'c+': 13,
+            'd+': 15,
+            'f+': 18,
+            'g+': 20,
+            'a+': 22,
+           
+            'C': 24,
+            'C#': 25,
+            'Db': 25,
+            'D': 26,
+            'D#': 27,
+            'Eb': 27,
+            'E': 28,
+            'F': 29,
+            'F#': 30,
+            'Gb': 30,
+            'G': 31,
+            'G#': 32,
+            'Ab': 32,
+            'A': 33,
+            'A#': 34,
+            'Bb': 34,
+            'B': 35,
+
+            'C+': 25,
+            'D+': 27,
+            'F+': 30,
+            'G+': 32,
+            'A+': 34,
+          }
+          if (s === '') {
+            clearSelection();
+            redraw();
+            return 0;
+          }
+          var notes = s.trim().split(" ");
+          var indices = notes.map(function(note) {
+            return nameToIndex[note].toString();
+          }).join(",");
+          selectFromIndices(indices);
+        }
 	</script>
   </body>
 </html>
