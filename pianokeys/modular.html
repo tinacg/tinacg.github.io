@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="pianoKeys">
+  <head>
+	<style>
+	  canvas {
+	  width: 590px;
+	  height: 180px;
+	  border: 2px solid #CCCCCC;
+	  margin: 10px;
+	</style>
+	<script src="../js/angular-1.3.2.min.js"></script>
+	<script src="pianoModule.js"></script>
+  </head>
+  <body ng-controller="songController">
+	{{clickedOn}}
+	<div ng-repeat="chord in chords">
+	  {{notesSelected}}
+	  <input type="text" ng-model="notes" value="">
+	  <canvas piano notes="notes"></canvas>
+	</div>
+		
+	
+	<span id="keyboardStatus">(click inside piano area to activate keyboard controls)</span>
+	<p>
+	  <input type="text" size="3" id="songTransposeInput" value="0">
+	  <input type="text" size="3" id="songLineInput" value="0">
+	</p>
+	<p>
+	  <input type="button" id="transposeDownButton" value="<">
+	  <input type="button" id="transposeUpButton" value=">">
+	  <input type="button" id="previousLineButton" value="<">
+	  <input type="button" id="nextLineButton" value=">">
+	</p>
+	<script src="modularApp.js"></script>
+  </body>
+</html>
