@@ -5,11 +5,11 @@ function Key(i) {
   var leftMargin = 15;
   var topMargin = 15;
 
-  var whiteWidth = 20;
-  var whiteHeight = 70;
-  var blackWidth = 14;
-  var blackHeight = 38;
-  var blackWidthOffset = 2;
+  var whiteWidth = 28;
+  var whiteHeight = 110;
+  var blackWidth = 18;
+  var blackHeight = 62;
+  var blackWidthOffset = 4;
 
   this.blackHeight = blackHeight;
   

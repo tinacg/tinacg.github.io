@@ -16,12 +16,12 @@
 	</div>
 	{{chords}}
 	<div ng-repeat="chord in chords">
-	  <canvas piano width="590" height="100" notes="chord.notes"></canvas>
+	  <canvas piano width="815" height="145" notes="chord.notes"></canvas>
 
 	  <br>
 
 	  <input type="text" ng-model="chord.notes">
-	  <input type="button" ng-click="notes='';" value="clear">
+	  <input type="button" ng-click="chord.notes='';" value="clear">
 	  <input type="text" ng-model="chord.id">
 	</div>
 		

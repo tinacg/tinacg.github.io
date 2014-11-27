@@ -8,7 +8,7 @@ function Key(i) {
   var whiteWidth = 20;
   var whiteHeight = 70;
   var blackWidth = 14;
-  var blackHeight = 38;
+  var blackHeight = 38
   var blackWidthOffset = 2;
 
   this.blackHeight = blackHeight;
