@@ -2,14 +2,16 @@
   var app = angular.module('pianoKeys', [])
     .controller('songController', ['$scope', function($scope) {
       $scope.chords = [
-        {'id': 'a',
-         'names': 'c e g',
-         'notes': '1 3 5',
+        {
+          'notes': '1 3 5',
         },
 
-        {'id': 'b',
-         'names': 'f a d',
-         'notes': '2 8 5',
+        {
+          'notes': '2 8 5',
+        },
+
+        {
+          'notes': '12 18 20 23 24',
         },
       ];
       $scope.clickedOn = 0;
