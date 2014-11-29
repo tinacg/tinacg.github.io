@@ -5,6 +5,11 @@
 	  canvas {
 	  border: 2px solid #CCCCCC;
 	  margin: 10px;
+	  }
+	  div.staff {
+	  overflow-x: scroll;
+	  white-space: nowrap;
+	  }
 	</style>
 	<script src="../js/angular-1.3.2.min.js"></script>
 	<script src="pianoKnight.js"></script>
@@ -19,8 +24,9 @@
 	</div>
 	-->
 {{chords}}
-	<div> <!--  style="position: fixed;"> -->
-	  <canvas staff width="700" height="145" chords="chords" control="focusInControl"></canvas>
+	<div class="staff"> <!--  style="position: fixed;"> -->
+	  <canvas staff width="700" height="210" chords="chords" control="focusInControl"></canvas>
+	  <br>
 	  <input type="button" ng-click="focusInControl.extendCanvas(30);" value="extend canvas">
 	</div>
 	

@@ -11,9 +11,9 @@ function drawStaff(key, song, context) {
   var sectionWidth = 35;
   var leftMargin = 10;
   var rightMargin = 10;
-  var topMargin = 10;
+  var topMargin = 10 + (2 * lineSpacing);
   var trebleCorner = {x: leftMargin, y: topMargin};
-  var bassCornerY = (5 * lineSpacing) + staffSeparation;
+  var bassCornerY = trebleCorner.y + (5 * lineSpacing) + staffSeparation;
   var bassCorner = {x: leftMargin, y: bassCornerY};
 
   function drawLines(startPoint) {
