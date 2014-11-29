@@ -37,6 +37,12 @@
       };
 
       $scope.focusInControl = {};
+
+      $scope.selectedChord = 0;
+
+      $scope.selectChord = function(index) {
+        $scope.selectedChord = index;
+      };
     }])
 
   //http://stackoverflow.com/questions/16587961/is-there-already-a-canvas-drawing-directive-for-angularjs-out-there
@@ -115,6 +121,7 @@
       return {
         scope: {
           chords: '=',
+          selectedChord: '=',
           control: '='
         },
         restrict: "A",
@@ -129,6 +136,10 @@
             // redraw staff
           }, true);
 
+          scope.$watch('selectedChord', function() {
+            console.log("watching selected Chord " + scope.selectedChord);
+          }, true);
+
           drawStaff(currentKey, scope.chords, context);
 
           // http://stackoverflow.com/questions/16881478/how-to-call-a-method-defined-in-an-angularjs-directive
@@ -137,6 +148,19 @@
             context.canvas.width += width;
             drawStaff(currentKey, scope.chords, context);
           };
+
+          element.bind('click', function(e) {
+            var x = e.offsetX;
+            var y = e.offsetY;
+
+            console.log(x);
+            console.log(scope.chords[0]);
+            console.log("sel chord: " + scope.selectedChord);
+            
+            scope.chords[scope.selectedChord].notes += " " + x;
+            scope.chords[scope.selectedChord].notes = scope.chords[scope.selectedChord].notes.trim();
+            scope.$apply();
+          });
         }
       }
     });
