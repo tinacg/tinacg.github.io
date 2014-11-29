@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app="pianoKeys">
+  <head>
+	<style>
+	  canvas {
+	    border: 2px solid #CCCCCC;
+	    margin: 10px;
+      }
+	</style>
+  </head>
+  <body>
+	<canvas id="canvas" width="405" height="145"></canvas>
+	<input type="button" id="button" value="expand">
+	<script>
+  var button = document.getElementById("button");
+var canvas = document.getElementById("canvas");
+
+button.onclick = function() {
+  canvas.width += 30;
+}
+        
+	</script>
+  </body>
+</html>
