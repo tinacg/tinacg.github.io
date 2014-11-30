@@ -211,7 +211,7 @@ function drawStaff(key, songChordIndex, song, context) {
 function drawScaleSubtitle(context) {
   var staffConstants = new Staff();
   var topMargin = 18;
-  var leftOffset = 20;
+  var leftOffset = 21;
   context.font = "20px sans-serif";
   var noteName = ['C', '', 'D', '', 'E', 'F', '', 'G', '', 'A', '', 'B'];
   for (var i = 0; i < 12; i++) {
