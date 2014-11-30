@@ -192,8 +192,6 @@
         // var result = daysSince01(then.split(" ")[0]) - daysSince01(moment().locale('pt-BR').format("D/M/YY"))
         var result = Math.floor((moment(then.split(" ")[0], "D/M/YY").startOf("day") - moment().startOf("day")) / 86400000);
 
-        var secsDiff = moment(then.split(" ")[0]) - moment();
-        
         if (isNaN(result) || result < 0) {
           result = "";
         }
@@ -204,7 +202,7 @@
           } else if (result === 0) {
             return "today";
           } else {
-            return "in " + result + " days" + secsDiff;
+            return "in " + result + " days";
           }
         }
       };
