@@ -17,15 +17,15 @@
     .controller('songController', ['$scope', function($scope) {
       $scope.chords = [
         {
-          'notes': '5 17 21 24 27',
+          'notes': '',
         },
 
         {
-          'notes': '5 10 11 21 23',
+          'notes': '',
         },
 
         {
-          'notes': '12 16 19',
+          'notes': '',
         },
 
         { 'notes': '' }, 
@@ -266,5 +266,18 @@
           });
         }
       }
+    })
+  
+    .directive("scaleSubtitle", function() {
+      return {
+        restrict: "A",
+        replace: true,
+        link: function(scope, element, attrs) {
+          var context = element[0].getContext('2d');
+
+          drawScaleSubtitle(context);
+        }
+      }
     });
+
 })();

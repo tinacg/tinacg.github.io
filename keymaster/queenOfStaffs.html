@@ -4,7 +4,7 @@
 	<style>
 	  canvas {
 	  border: 2px solid #CCCCCC;
-	  margin: 10px;
+	  margin: 5px;
 	  }
 	  div.staff {
 	  overflow-x: scroll;
@@ -37,9 +37,10 @@
 	  
 	  <canvas staff width="920" height="200" selected-chord="selectedChord" chords="chords" control="focusInControl"></canvas>
 	  <br>
-	  <canvas scale width="920" height="200" notes="scale" chords="chords" selected-chord="selectedChord" current-scale-octave="currentScaleOctave"></canvas>
+	  <canvas scale width="920" height="200" notes="scale" chords="chords" selected-chord="selectedChord" current-scale-octave="currentScaleOctave"></canvas><br>
+	  <canvas scale-subtitle width="920" height="28"></canvas>
 	  <br>
-	  <input type="button" ng-click="focusInControl.extendCanvas(30);" value="extend canvas">
+	  <!-- <input type="button" ng-click="focusInControl.extendCanvas(30);" value="extend canvas"> -->
 
 	  
 	  <input type="button" ng-click="moveScaleOctave(-1)" value="Octave down">
@@ -47,16 +48,15 @@
 
 	</div>
 	
-	<br>
+	<br><br>
 	<div ng-repeat="chord in chords">
-	  <input type="button" ng-click="selectChord($index)" value="Select this chord">
+	<!-- <input type="button" ng-click="selectChord($index)" value="Select this chord"> -->
 	  <canvas piano width="815" height="145" notes="chord.notes" ng-click="selectChord($index)"></canvas>
 
 	  <br>
-	  <input type="text" ng-model="chord.notes" value="chord.notes">
+	  <!-- <input type="text" ng-model="chord.notes" value="chord.notes"> -->
 	  <input type="button" ng-click="chord.notes='';" value="clear">
-	  <input type="text" ng-model="chord.id">
-	  <input type="button" ng-click="addChord($index)" value="add chord below">
+	  <!-- <input type="button" ng-click="addChord($index)" value="add chord below"> -->
 	</div>
   </body>
 </html>

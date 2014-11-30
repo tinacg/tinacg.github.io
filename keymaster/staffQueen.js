@@ -132,6 +132,7 @@ function drawStaff(key, songChordIndex, song, context) {
                   0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0,
                   0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0,
                   0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0];
+
     var left = offset.x + 10;
     var top = offset.y;
 
@@ -156,6 +157,8 @@ function drawStaff(key, songChordIndex, song, context) {
       
       drawSharp(context, left - sharpLeftOffset, noteTop - sharpTopOffset, sharpWidth, sharpHeight );
     }
+
+    
   }
 
   function drawNotes(notesString, index) {
@@ -205,3 +208,13 @@ function drawStaff(key, songChordIndex, song, context) {
   //}
 }
 
+function drawScaleSubtitle(context) {
+  var staffConstants = new Staff();
+  var topMargin = 18;
+  var leftOffset = 20;
+  context.font = "20px sans-serif";
+  var noteName = ['C', '', 'D', '', 'E', 'F', '', 'G', '', 'A', '', 'B'];
+  for (var i = 0; i < 12; i++) {
+    context.fillText(noteName[i], staffConstants.leftMargin + leftOffset + (i * staffConstants.sectionWidth), topMargin);
+  }
+}
