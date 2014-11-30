@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="pianoKeys">
+  <head>
+	<style>
+	  canvas {
+	  border: 2px solid #CCCCCC;
+	  margin: 10px;
+	  }
+	  div.staff {
+	  overflow-x: scroll;
+	  white-space: nowrap;
+	  }
+	</style>
+	<script src="../js/angular-1.3.2.min.js"></script>
+	<script src="pianoKnight.js"></script>
+	<script src="staff.js"></script>
+	<script src="keyKnightApp.js"></script>
+  </head>
+  <body ng-controller="songController">
+
+	<!-- RESTORE LATER -->
+
+		<div id="controls" style="position: fixed; background: #99AAFF; padding: 10px;">
+		  Transpose:
+		  <input type="button" ng-click="transpose(-1)" value="<">
+		  <input type="button" ng-click="transpose(1)" value=">">
+		</div>
+
+	
+	{{chords}}
+	<div class="staff"> <!--  style="position: fixed;"> -->
+	  Selected chord: 
+	  <input type="text" ng-model="selectedChord"> {{chords[selectedChord]}}
+	  <br><br>
+	  <canvas staff width="700" height="210" selected-chord="selectedChord" chords="chords" control="focusInControl"></canvas>
+	  <br>
+	  <input type="button" ng-click="focusInControl.extendCanvas(30);" value="extend canvas">
+	</div>
+	
+	<br>
+	<div ng-repeat="chord in chords">
+	  <input type="button" ng-click="selectChord($index)" value="Select this chord">
+	  <canvas piano width="815" height="145" notes="chord.notes"></canvas>
+
+	  <br>
+	  <input type="text" ng-model="chord.notes" value="chord.notes">
+	  <input type="button" ng-click="chord.notes='';" value="clear">
+	  <input type="text" ng-model="chord.id">
+	  <input type="button" ng-click="addChord($index)" value="add chord below">
+	</div>
+  </body>
+</html>
