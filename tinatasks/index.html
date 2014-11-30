@@ -52,7 +52,7 @@
 					</tr>
 
 				  </thead>
-				  <tbody ng-repeat="task in tasks[tab.name] | orderBy:['done','category',dueDateOrder,'createDate']">
+				  <tbody ng-repeat="task in tasks[tab.name] | orderBy:['done',dueDateOrder,'category','createDate']">
 					<!-- <tr ng-repeat="task in tasks | orderBy:['done','category','createDate']"> -->
 					<tr>
 					  <td style="padding-right: 10px;"><input type="checkbox" ng-model="task.done" ng-change="updateTask(tasks[tab.name], task)" /></td>
