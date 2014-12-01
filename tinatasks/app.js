@@ -32,12 +32,21 @@
           tasksRef[tab.name] = ref.child(authData.uid).child("tasks").child(tab.name);
           tasksSync[tab.name] = $firebase(tasksRef[tab.name]);
           $scope.tasks[tab.name] = tasksSync[tab.name].$asArray();
+
+          $scope.tasks[tab.name].$loaded().then(function() {
+            $scope.refreshAllTasks();
+          });
+          
         });
       };
 
       $scope.tabs.$loaded().then(function () {
         $scope.refreshTaskRefs();
         //$rootScope.panes[1].select();
+        angular.forEach($scope.tabs, function(tab, tabId) {
+          console.log("populate " + tab.name);
+          $scope.populateAllTasks(tab.name);
+        });
       });
 
       $scope.updateTask = function(tasks, task) {
@@ -56,7 +65,9 @@
                                      createDate: (new Date()).getTime(),
                                      dueDate: taskDueDate,
                                    })
-          .then(function() { $scope.notification = "Added " + tabName + "/" + taskDescription; });
+          .then(function() { $scope.notification = "Added " + tabName + "/" + taskDescription; })
+          .then(function() { $scope.refreshAllTasks(); });
+        
         $scope.taskDone = false;
         $scope.taskDescription = "";
         $scope.taskCategory = "";
@@ -68,20 +79,45 @@
       // tasks[tab.name].$remove(task)
       $scope.removeTask = function(tasks, task) {
         tasks.$remove(task)
-          .then(function() { $scope.notification = "Removed task " + task.description; });
+          .then(function() { $scope.notification = "Removed task " + task.description; })
+          .then(function() { $scope.refreshAllTasks(); });
       };
       
       $scope.deleteTabTasks = function(tabName) {
         tasksRootSync.$remove(tabName)
-          .then(function() { $scope.notification = "Deleted tab tasks for " + tabName; });
+          .then(function() { $scope.notification = "Deleted tab tasks for " + tabName; })
+          .then(function() { $scope.refreshAllTasks(); });
       };
 
       $scope.removeTab = function(tab) {
         tasksRootSync.$remove(tab.name)
           .then(function() { $scope.tabs.$remove(tab)
-                             .then(function() { $scope.notification = "Removed tab " + tab.name; }); });
+                             .then(function() { $scope.notification = "Removed tab " + tab.name; }); })
+          .then(function() { $scope.refreshAllTasks(); });
       };
 
+      // ARRAY FOR ALL TASKS
+
+      $scope.allTasks = [];
+
+      $scope.cleanAllTasks = function() {
+        $scope.allTasks = [];
+      }
+      
+      $scope.populateAllTasks = function(tabName) {
+        angular.forEach($scope.tasks[tabName], function(task) {
+          $scope.allTasks.push(task);
+        });
+      };
+
+      $scope.refreshAllTasks = function() {
+        $scope.cleanAllTasks();
+        angular.forEach($scope.tabs, function(tab, tabId) {
+          $scope.populateAllTasks(tab.name);
+        });
+      };
+      
+      
       // TIME AND MOMENT.JS
       
       $scope.getms = function(s) {
