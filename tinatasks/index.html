@@ -91,11 +91,12 @@
 		<pane title="all tasks">
 		  <table>
 			<tbody ng-repeat="(name, tab) in tasksRoot">
-			  <tr ng-repeat="task in tab">
+			  <tr ng-repeat="task in tab | orderBy: [dueDateOrder]">
 				<td style="padding: 0px 10px 0px 0px;"><b>{{name}}</b></td>
 				<td style="padding: 0px 10px 0px 0px;"><i>{{task.category}}</i></td>
 				<td style="padding: 0px 10px 0px 0px;">{{task.description}}</td>
 				<td>{{task.dueDate}}</td>
+				<td>{{daysDiff(task.dueDate, now)}}</td>
 			  </tr>
 			</tbody>
 		  </table>
