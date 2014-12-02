@@ -111,7 +111,7 @@
 			<tbody>
 			  <tr ng-repeat="task in allTasks | orderBy:[dueDateOrder]">
 				<td style="padding: 0px 10px 0px 0px;"><i>{{task.category}}</i></td>
-				<td style="width: 500px; padding: 0px 10px 0px 0px;">{{task.description}}</td>
+				<td style="max-width: 500px; padding: 0px 10px 0px 0px;">{{task.description}}</td>
 				<td>{{task.dueDate}}</td>
 				<td style="padding: 0px 0px 0px 10px;">{{daysDiff(task.dueDate, now)}}</td>
 			  </tr>
