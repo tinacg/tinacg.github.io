@@ -7,7 +7,7 @@
       // $scope.loginStatus = "Welcome back " + authData.password.email + "! Your token expires " + (new Date(authData.expires * 1000));
       $scope.loggedIn = true;
 
-      $scope.notification = "Welcome back " + authData.password.email + "! Your token expires " + (new Date(authData.expires * 1000));
+      $scope.notification = authData.password.email + " token expires " + (new Date(authData.expires * 1000));
 
       var tabsRef = ref.child(authData.uid).child("tabs");
       var sync = $firebase(tabsRef);
