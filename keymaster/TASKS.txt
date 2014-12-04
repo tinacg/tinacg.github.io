@@ -1,1 +1,4 @@
+
+See README
+
 Add an argument (+/-1) to drawNote, so that it is drawn with a sharp or flat and shifts a line
