@@ -1,5 +1,7 @@
 # TASKS
 
+* distinguish between pianoKey, songKey, and keySignature
+
 Create a Module
 
 var sheet = (function() {
@@ -41,7 +43,7 @@ Each drawing function takes a 2d context as an argument
 * TrebleClef
 * BassClef
 * Staff (5 lines and a Clef)
-* GrandStaff (TrebleStaff and BassStaff with brace)
+* GrandStaff (TrebleStaff and BassStaff with brace, vertical line on left)
 * Scale (two TrebleStaffs and two BassStaffs with predefined scale notes)
 
 Navigation tabs for:
