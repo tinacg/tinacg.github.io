@@ -228,17 +228,24 @@
         // var result = daysSince01(then.split(" ")[0]) - daysSince01(moment().locale('pt-BR').format("D/M/YY"))
         var result = Math.floor((moment(then.split(" ")[0], "D/M/YY").startOf("day") - moment().startOf("day")) / 86400000);
 
+        var iso_weekday = moment(then.split(" ")[0], "D/M/YY").isoWeekday();
+        var diaDaSemana = ['', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab', 'dom'];
+
+        function parenthesize(s) {
+          return "(" + s + ")";
+        }
+        
         if (isNaN(result) || result < 0) {
           result = "";
         }
 
         else {
           if (result === 1) {
-            return "in " + result + " day";
+            return "in " + result + " day " + parenthesize(diaDaSemana[iso_weekday]);
           } else if (result === 0) {
-            return "today";
+            return "today " + parenthesize(diaDaSemana[iso_weekday]);
           } else {
-            return "in " + result + " days";
+            return "in " + result + " days " + parenthesize(diaDaSemana[iso_weekday]);
           }
         }
       };
