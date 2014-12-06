@@ -12,17 +12,18 @@
   </head>
   <body ng-controller="songController">
 
-	<canvas staff width="1090" height="200" selected-chord="selectedChord" chords="chords" control="focusInControl" style="position: fixed; margin: auto; background: white; z-index: 2;"></canvas>
+	<canvas staff width="1090" height="200" selected-chord="selectedChord" chords="chords" control="focusInControl" style="border: 5px solid #CCEEFF; margin: 5px; position: fixed; background: white; z-index: 2;"></canvas>
 
-	<div style="padding-top: 210px;">
+	<div style="padding-top: 215px;">
 	<tabs>
 	  <pane heading="Edit Sheet Music">
+
 		<div id="controls">
 		  Transpose:
 		  <input type="button" ng-click="transpose(-1)" value="<">
 		  <input type="button" ng-click="transpose(1)" value=">">
 		</div>
-		
+
 		<div class="staff">
 		  <!--
 		  <canvas sketch width="1090" height="200"></canvas>
@@ -33,7 +34,7 @@
 			   <canvas key-signature width="100" height="200" key="A"></canvas>
 			   -->
 		  
-		  <canvas scale width="1090" height="340" notes="scale" chords="chords" selected-chord="selectedChord" current-scale-octave="currentScaleOctave"></canvas><br>
+		  <canvas scale width="1090" height="480" notes="scale" chords="chords" selected-chord="selectedChord" current-scale-octave="currentScaleOctave"></canvas><br>
 		  
 		  <canvas scale-subtitle width="1090" height="28"></canvas>
 		  <br>

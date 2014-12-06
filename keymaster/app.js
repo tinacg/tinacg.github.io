@@ -17,25 +17,27 @@
     .controller('songController', ['$scope', function($scope) {
       $scope.chords = [
         {
-          'notes': '24',
+          'notes': '',
         },
 
         {
-          'notes': '28',
+          'notes': '',
         },
 
         {
-          'notes': '31',
+          'notes': '',
         },
       ];
 
+      /*
       $scope.scale = [
         {'notes': '24'}, {'notes': '25'}, {'notes': '26'},
         {'notes': '27'}, {'notes': '28'}, {'notes': '29'},
         {'notes': '30'}, {'notes': '31'}, {'notes': '32'},
         {'notes': '33'}, {'notes': '34'}, {'notes': '35'},
       ];
-
+      */
+      
       $scope.currentScaleOctave = 3;
       
       $scope.transpose = function(steps) {
@@ -192,7 +194,7 @@
             var x = e.offsetX;
             var y = e.offsetY;
 
-            console.log("global click " + x + ", " + y);
+            // console.log("global click " + x + ", " + y);
             
             var leftBuffer = -4;
 
@@ -231,14 +233,18 @@
             var x = e.offsetX;
             var y = e.offsetY;
 
-            // console.log("global click " + x + ", " + y);
+            var rowHeight = 120;
+
+            console.log("scale click " + x + ", " + y);
             
             var leftBuffer = -4;
 
-            var scaleNoteIndex = Math.floor(((x - staff.leftMargin - leftBuffer) / staff.sectionWidth));
+            var scaleNoteIndex = Math.floor(((x - staff.leftMargin - leftBuffer) / staff.sectionWidth)) + (12 * (3 - Math.floor(y / 120)));
 
-            // console.log("scale clicked " + scope.notes[scaleNoteIndex].notes);
-            scope.chords[scope.selectedChord].notes = toggleNote(scope.chords[scope.selectedChord].notes, scope.notes[scaleNoteIndex].notes);
+            console.log("scale clicked " + scaleNoteIndex);
+            
+            // scope.chords[scope.selectedChord].notes = toggleNote(scope.chords[scope.selectedChord].notes, scope.notes[scaleNoteIndex].notes);
+            scope.chords[scope.selectedChord].notes = toggleNote(scope.chords[scope.selectedChord].notes, scaleNoteIndex.toString());
             scope.$apply();
           });
         }

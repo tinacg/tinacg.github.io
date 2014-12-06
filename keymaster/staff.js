@@ -334,7 +334,7 @@ var staff = (function() {
     var cScaleModifiers = [0, -1, 0, -1, 0, 0, -1, 0, -1, 0, -1, 0];
     
     // IF OCTAVE > 1, A TREBLE CLEF IS DRAWN
-    var staffCorner = {x: trebleCorner.x, y: trebleCorner.y + (octave * staffSeparation) + (octave * 5 * lineSpacing)};
+    var staffCorner = {x: trebleCorner.x, y: trebleCorner.y + (octave * 5 * staffSeparation) + (octave * 5 * lineSpacing)};
     drawStaff(context, staffCorner);
 
     for (var i = 0; i < 12; i++) {
