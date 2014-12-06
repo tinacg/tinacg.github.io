@@ -16,8 +16,21 @@
 
 	<div style="padding-top: 215px;">
 	  <tabs>
-		<pane heading="Edit Sheet Music">
+		<pane heading="Piano Keys">
+		  <div id="controls">
+			Transpose:
+			<input type="button" ng-click="transpose(-1)" value="<">
+			<input type="button" ng-click="transpose(1)" value=">">
+		  </div>
 
+		  <div ng-repeat="chord in chords">
+			<canvas piano width="815" height="145" notes="chord.notes" ng-click="selectChord($index)"></canvas>
+
+			<input type="button" ng-click="chord.notes='';" value="clear">
+		  </div>
+		  <input type="button" ng-click="addChordAtEnd()" value="add chord">
+		</pane>
+		<pane heading="Edit Sheet Music">
 		  <div class="staff">
 			<!--
 				<canvas sketch width="1090" height="200"></canvas>
@@ -39,21 +52,6 @@
 
 			
 		  </div>
-
-		</pane>
-		<pane heading="Piano Keys">
-		  <div id="controls">
-			Transpose:
-			<input type="button" ng-click="transpose(-1)" value="<">
-			<input type="button" ng-click="transpose(1)" value=">">
-		  </div>
-
-		  <div ng-repeat="chord in chords">
-			<canvas piano width="815" height="145" notes="chord.notes" ng-click="selectChord($index)"></canvas>
-
-			<input type="button" ng-click="chord.notes='';" value="clear">
-		  </div>
-		  <input type="button" ng-click="addChordAtEnd()" value="add chord">
 		</pane>
 	  </tabs>
 	</div>

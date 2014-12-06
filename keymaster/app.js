@@ -17,7 +17,7 @@
     .controller('songController', ['$scope', function($scope) {
       $scope.chords = [
         {
-          'notes': '12 16 19 22',
+          'notes': '12 16 19 31 35 38',
         },
 
         {
