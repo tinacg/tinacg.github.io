@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="../css/pikaday.css">
+	<title>Time calculator</title>
+  </head>
+  <body>
+	Start date:
+	<input type="text" id="startDatepicker">
+
+	is <span id="dateDiff">0</span> days until:
+	<input type="text" id="endDatepicker">
+	<br>
+	
+	<input type="radio" name="operation" value="add" checked> Add
+	<br>
+	
+	<input type="radio" name="operation" value="subtract"> Subtract
+	<br>
+
+	<input type="text" id="numYears" value="" size="3"> years<br>
+	<input type="text" id="numMonths" value="" size="3"> months<br>
+	<input type="text" id="numWeeks" value="" size="3"> weeks<br>
+	<input type="text" id="numDays" value="" size="3"> days<br>
+	<br>
+	
+	<input type="text" id="numRepeat" value="5" size="3"> times repeated
+	<br><br>
+
+	<!--
+	<input type="button" id="runCalc" value="Calculate">
+	-->
+	<input type="button" id="clear" value="Clear">
+	<br><br>
+	<!--
+	<input type="text" id="resultFormat" value="DD MMM YYYY"> result format
+	-->
+	
+	<div id="result">
+
+	</div>
+	
+	<script src="../js/moment-with-locales.min.js"></script>
+	<script src="../js/pikaday.js"></script>
+	<script src="app.js"></script>
+  </body>
+</html>
