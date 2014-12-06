@@ -1,5 +1,11 @@
 # TASKS
 
+* Clicking on scale should automatically take current key into account and
+assign the flat or sharp (no need to compute the assignment by hand)
+
+* Scale should display a natural note that negates the current key's modifier
+
+* chord: D D# E (tone cluster), how to mark?
 * distinguish between pianoKey, songKey, and keySignature
 
 Create a Module

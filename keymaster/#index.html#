@@ -17,11 +17,13 @@
 	<div style="padding-top: 210px;">
 	<tabs>
 	  <pane heading="Edit Sheet Music">
+		<!--
 		<div id="controls">
 		  Transpose:
 		  <input type="button" ng-click="transpose(-1)" value="<">
 		  <input type="button" ng-click="transpose(1)" value=">">
 		</div>
+		-->
 		
 		<div class="staff">
 		  <!--
