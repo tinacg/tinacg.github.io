@@ -212,8 +212,9 @@ var staff = (function() {
     });
   }
 
-  function drawTrebleClef() {
-
+  function drawTrebleClef(context, key) {
+    var a = 1;
+    return 50;
   }
 
   function drawBassClef() {

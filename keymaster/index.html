@@ -15,48 +15,47 @@
 	<canvas staff width="1090" height="200" selected-chord="selectedChord" chords="chords" control="focusInControl" style="border: 5px solid #CCEEFF; margin: auto; position: fixed; background: white; z-index: 2;"></canvas>
 
 	<div style="padding-top: 215px;">
-	<tabs>
-	  <pane heading="Edit Sheet Music">
+	  <tabs>
+		<pane heading="Edit Sheet Music">
 
-		<div id="controls">
-		  Transpose:
-		  <input type="button" ng-click="transpose(-1)" value="<">
-		  <input type="button" ng-click="transpose(1)" value=">">
-		</div>
+		  <div class="staff">
+			<!--
+				<canvas sketch width="1090" height="200"></canvas>
 
-		<div class="staff">
-		  <!--
-		  <canvas sketch width="1090" height="200"></canvas>
+				<br>
+				-->
+			<!-- 
+				 <canvas key-signature width="100" height="200" key="A"></canvas>
+				 -->
+			
+			<canvas scale width="1090" height="480" notes="scale" chords="chords" selected-chord="selectedChord" current-scale-octave="currentScaleOctave"></canvas><br>
 
-		  <br>
--->
-		  <!-- 
-			   <canvas key-signature width="100" height="200" key="A"></canvas>
-			   -->
-		  
-		  <canvas scale width="1090" height="480" notes="scale" chords="chords" selected-chord="selectedChord" current-scale-octave="currentScaleOctave"></canvas><br>
-		  
-		  <canvas scale-subtitle width="1090" height="28"></canvas>
-		  <br>
-		  <!-- <input type="button" ng-click="focusInControl.extendCanvas(30);" value="extend canvas"> -->
+			<!--
+				<canvas scale-subtitle width="1090" height="28"></canvas>
+				<br>
+				-->
+			
+			<!-- <input type="button" ng-click="focusInControl.extendCanvas(30);" value="extend canvas"> -->
 
-		  
-		  <input type="button" ng-click="moveScaleOctave(-1)" value="Octave down">
-		  <input type="button" ng-click="moveScaleOctave(1)" value="Octave up">
+			
+		  </div>
 
-		</div>
+		</pane>
+		<pane heading="Piano Keys">
+		  <div id="controls">
+			Transpose:
+			<input type="button" ng-click="transpose(-1)" value="<">
+			<input type="button" ng-click="transpose(1)" value=">">
+		  </div>
 
-	  </pane>
-	  <pane heading="Piano Keys">
-		<div ng-repeat="chord in chords">
-		  <canvas piano width="815" height="145" notes="chord.notes" ng-click="selectChord($index)"></canvas>
+		  <div ng-repeat="chord in chords">
+			<canvas piano width="815" height="145" notes="chord.notes" ng-click="selectChord($index)"></canvas>
 
-		  <br>
-		  <input type="button" ng-click="chord.notes='';" value="clear">
-		</div>
-		<input type="button" ng-click="addChordAtEnd()" value="add chord">
-	  </pane>
-	</tabs>
+			<input type="button" ng-click="chord.notes='';" value="clear">
+		  </div>
+		  <input type="button" ng-click="addChordAtEnd()" value="add chord">
+		</pane>
+	  </tabs>
 	</div>
   </body>
 </html>

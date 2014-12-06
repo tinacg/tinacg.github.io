@@ -17,16 +17,27 @@
     .controller('songController', ['$scope', function($scope) {
       $scope.chords = [
         {
-          'notes': '',
+          'notes': '12 16 19 22',
         },
 
         {
-          'notes': '',
+          'notes': '21 24 29',
         },
 
         {
-          'notes': '',
+          'notes': '26 30 33 38',
         },
+
+        { 'notes': '' },
+        { 'notes': '' },
+        { 'notes': '' },
+        { 'notes': '' },
+        { 'notes': '' },
+        { 'notes': '' },
+        { 'notes': '' },
+        { 'notes': '' },
+        { 'notes': '' },
+        
       ];
 
       /*
@@ -53,6 +64,7 @@
         });
       };
 
+      /*
       $scope.moveScaleOctave = function(amount) {
         if ($scope.currentScaleOctave + amount > 0 && $scope.currentScaleOctave + amount < 5) {
           console.log("move scale " + amount);
@@ -63,7 +75,8 @@
           $scope.currentScaleOctave += amount;
         }
       };
-
+      */
+      
       $scope.addChord = function(index) {
         $scope.chords.splice(index + 1, 0, {'notes': ''});
       };
