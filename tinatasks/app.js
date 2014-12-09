@@ -149,8 +149,11 @@
       $scope.parseDate = function(s) {
         if (s === 'soon') {
           return 9999999999000;
+        } else if (s === 'now') {
+          return moment().valueOf();
+        } else {
+          return moment(s, "D/M/YY H:mm:ss").valueOf();
         }
-        return moment(s, "D/M/YY H:mm:ss").valueOf();
       };
 
       $scope.millisToString = function(ms)
