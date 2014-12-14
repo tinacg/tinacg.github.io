@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta charset="utf-8">
+	<title>Indent block</title>
+  </head>
+  <body>
+	<textarea id="block" rows="20" cols="80"></textarea>
+	<br>
+	<input type="button" id="indentButton" value="indent">
+	<!--
+	<br>
+	<input type="button" id="otherButton" value="do nothing">
+	-->
+	<script>
+	  function addSpace(s) {
+	    var newLine = s.replace('\t', '    ');
+		return " " + newLine;
+	  }
+	  
+	  var theButton = document.getElementById("indentButton");
+	  var theTextarea = document.getElementById("block");
+	  theButton.addEventListener('click', function() {
+	    var newText = theTextarea.value.split('\n').map(addSpace).join('\n');
+	    theTextarea.value = newText;
+	  });
+
+	  /*
+	  var otherButton = document.getElementById("otherButton");
+	  otherButton.onclick = function() {
+	  alert("clicked other");
+	  };
+	  */
+	</script>
+	
+  </body>
+</html>
+
+
+
+	  
