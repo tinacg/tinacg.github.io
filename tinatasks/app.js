@@ -44,7 +44,7 @@
         $scope.refreshTaskRefs();
         //$rootScope.panes[1].select();
         angular.forEach($scope.tabs, function(tab, tabId) {
-          console.log("populate " + tab.name);
+          // console.log("populate " + tab.name);
           $scope.populateAllTasks(tab.name);
         });
       });
@@ -234,15 +234,18 @@
         var iso_weekday = moment(then.split(" ")[0], "D/M/YY").isoWeekday();
         var diaDaSemana = ['', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab', 'dom'];
 
+        if (then === 'now') {
+          result = 0;
+          iso_weekday = moment().isoWeekday();
+        }
+
         function parenthesize(s) {
           return "(" + s + ")";
         }
-        
+
         if (isNaN(result) || result < 0) {
           result = "";
-        }
-
-        else {
+        } else {
           if (result === 1) {
             return "in " + result + " day " + parenthesize(diaDaSemana[iso_weekday]);
           } else if (result === 0) {
