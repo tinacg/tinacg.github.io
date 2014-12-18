@@ -1,3 +1,11 @@
+var out = function() {
+  var params = Array.prototype.slice.call(arguments);
+  var paramString = params.join(" ");
+  $("#resulttext").val($("#resulttext").val() + paramString + "\n");
+  console.log("OUT) " + paramString);
+  return "";
+};
+
 (function() {
   var app = angular.module('liveAEvalApp', ["firebase"]);
   var editor = CodeMirror.fromTextArea(document.getElementById("demotext"), {
@@ -5,20 +13,23 @@
     mode: "text/javascript",
     matchBrackets: true,
     extraKeys: {
-      "Ctrl-Enter": function() { (1, eval)(editor.getValue()); $("#resulttext").val(getCommandsResult($("#commands").val())); }
+      "Ctrl-Enter": function() { (1, eval)(editor.getValue()); $("#resulttext").val($("#resulttext").val() + getCommandsResult($("#commands").val())); }
     }
   });
 
   $("#commands").keydown(function (e) {
     if ((e.keyCode == 10 || e.keyCode == 13) && e.ctrlKey) {
       (1, eval)(editor.getValue());
-      $("#resulttext").val(getCommandsResult($("#commands").val()));
+      $("#resulttext").val($("#resulttext").val() + getCommandsResult($("#commands").val()));
     }
-  });                        
+  });
 
   var getCommandsResult = function(commands) {
+    if (!commands) {
+      return "";
+    }
     var result = "";
-    $("#resulttext").val("");
+    // $("#resulttext").val("");
     var commandsArray = commands.split('\n');
     for (var i = 0; i < commandsArray.length; i++) {
       result += (1, eval)(commandsArray[i]) + "\n";
@@ -32,7 +43,7 @@
     $scope.myEval = function(code) {
       (1, eval)(editor.getValue());
       // $scope.result = getCommandsResult($scope.ngCommands);
-      $("#resulttext").val(getCommandsResult($("#commands").val()));
+      $("#resulttext").val($("#resulttext").val() + getCommandsResult($("#commands").val()));
     };
 
     var savedDefsRef = null;

@@ -56,7 +56,10 @@
 		  Commands (one per line)<br>
 		  <textarea id="commands" ng-model="ngCommands" rows="5" cols="55"></textarea>
 		  <br>
-		  <button ng-click="myEval(code)">run</button> (or Ctrl-Enter)<br>
+		  <button ng-click="myEval(code)">run</button> (or Ctrl-Enter)
+		  <input type="button" onclick="$('#resulttext').val('');" value="clear">
+
+		  <br>
 		  <textarea ng-model="result" id="resulttext" rows="10" cols="55" disabled></textarea>
 		</td>
 	  </tr>
