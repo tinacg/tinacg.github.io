@@ -1,26 +1,35 @@
 var out = function() {
   var params = Array.prototype.slice.call(arguments);
   var paramString = params.join(" ");
-  $("#resulttext").val($("#resulttext").val() + paramString + "\n");
+  $("#resulttext").val($("#resulttext").val() + "OUT) " + paramString + "\n");
   console.log("OUT) " + paramString);
   return "";
 };
 
 (function() {
   var app = angular.module('liveAEvalApp', ["firebase"]);
+
+  function evaluate() {
+    (1, eval)(editor.getValue());
+    var commandsResult = getCommandsResult($("#commands").val());
+    $("#resulttext").val($("#resulttext").val() + commandsResult);
+  }
+  
   var editor = CodeMirror.fromTextArea(document.getElementById("demotext"), {
     lineNumbers: true,
     mode: "text/javascript",
     matchBrackets: true,
     extraKeys: {
-      "Ctrl-Enter": function() { (1, eval)(editor.getValue()); $("#resulttext").val($("#resulttext").val() + getCommandsResult($("#commands").val())); }
+      // "Ctrl-Enter": function() { (1, eval)(editor.getValue()); $("#resulttext").val($("#resulttext").val() + getCommandsResult($("#commands").val())); }
+      "Ctrl-Enter": evaluate
     }
   });
 
   $("#commands").keydown(function (e) {
     if ((e.keyCode == 10 || e.keyCode == 13) && e.ctrlKey) {
-      (1, eval)(editor.getValue());
-      $("#resulttext").val($("#resulttext").val() + getCommandsResult($("#commands").val()));
+      evaluate();
+      // (1, eval)(editor.getValue());
+      // $("#resulttext").val($("#resulttext").val() + getCommandsResult($("#commands").val()));
     }
   });
 
@@ -41,9 +50,10 @@ var out = function() {
 
   app.controller('evalController', ['$scope', '$firebase', function($scope, $firebase) {
     $scope.myEval = function(code) {
-      (1, eval)(editor.getValue());
+      evaluate();
+      // (1, eval)(editor.getValue());
       // $scope.result = getCommandsResult($scope.ngCommands);
-      $("#resulttext").val($("#resulttext").val() + getCommandsResult($("#commands").val()));
+      // $("#resulttext").val($("#resulttext").val() + getCommandsResult($("#commands").val()));
     };
 
     var savedDefsRef = null;
