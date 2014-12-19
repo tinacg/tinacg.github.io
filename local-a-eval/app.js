@@ -1,3 +1,5 @@
+// BUG: Saving an entry does not select it in the dropdown
+
 var out = function() {
   var params = Array.prototype.slice.call(arguments);
   var paramString = params.join(" ");
@@ -102,15 +104,19 @@ var out = function() {
         localStorage.setItem("lae_list", titleList.toString());
         setEntry(title, defs, commands);
         $scope.infoMessage = "Saved " + title;
+        // $scope.currentEntryTitle = title;
+        // $scope.saveTitle = title;
+        // $scope.$apply();
+        $scope.currentEntry = title;
       } else {
-        $scope.infoMessage = "Cannot save empty or New";
+        $scope.infoMessage = "Cannot overwrite, save empty or New";
       }
       //$scope.savedDefs.$add({ title: title,
         //                      defs: defs,
           //                    commands: commands,
             //                })
-        //.then(function() { $scope.currentEntryTitle = title; $scope.saveTitle = ''; })
-        //.then(function() { $scope.currentEntry = $scope.savedDefs[$scope.savedDefs.length-1].$id });
+      //.then(function() { $scope.currentEntryTitle = title; $scope.saveTitle = ''; })
+      //.then(function() { $scope.currentEntry = $scope.savedDefs[$scope.savedDefs.length-1].$id });
     };
 
     $scope.loadEntry = function(title) {
@@ -119,6 +125,7 @@ var out = function() {
         $scope.ngCommands = "";
         $scope.result = "";
         $scope.currentEntryTitle = "";
+        $scope.saveTitle = "";
         $scope.infoMessage = "Starting new entry";
       } else {
         //var entryRef = savedDefsRef.child(id);
@@ -133,6 +140,7 @@ var out = function() {
         editor.setValue(entryObj.defs);
         $scope.ngCommands = entryObj.commands;
         $scope.currentEntryTitle = entryObj.title;
+        $scope.saveTitle = "";
         $scope.infoMessage = "Loaded " + $scope.currentEntryTitle;
         //});
       }
@@ -140,7 +148,7 @@ var out = function() {
 
     $scope.saveCurrent = function(title) {
       if (title === 'new' || title.trim() === '') {
-        $scope.infoMessage = "Cannot save empty or New";
+        $scope.infoMessage = "Cannot overwrite, save empty or New";
       } else {
 //        var entryRef = savedDefsRef.child(id);
   //      var entrySync = $firebase(entryRef);
@@ -164,6 +172,7 @@ var out = function() {
       //  entrySync.$remove();
       var titleIndex = titleList.indexOf(title);
       titleList.splice(titleIndex, 1);
+      localStorage.setItem("lae_list", titleList);
       $scope.savedDefs.splice(titleIndex, 1);
 
       // remove from localStorage
