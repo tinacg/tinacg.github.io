@@ -1,0 +1,63 @@
+<!doctype html>
+<html ng-app="liveAEvalApp">
+  <head>
+	<title>Local-a-Eval</title>
+
+	<link rel=stylesheet href="lib/codemirror.css">
+
+	<script src="../js/jquery.min.js"></script>
+
+	<script src="../js/angular.min.js"></script>
+	<script src="../js/firebase.js"></script>
+	<script src="../js/angularfire.min.js"></script>
+
+	<script src="../js/moment-with-locales.min.js"></script>
+
+	<script src="lib/codemirror.js"></script>
+	<script src="mode/javascript/javascript.js"></script>
+	<script src="addon/edit/matchbrackets.js"></script>
+
+	<style>
+	  .CodeMirror { height: auto; border: 1px solid #ddd; }
+	  .CodeMirror-scroll { max-height: 270px; }
+	  .CodeMirror pre { padding-left: 7px; line-height: 1.25; }
+	</style>
+  </head>
+  <body ng-controller="evalController">
+	<a href="/index.html">home</a> | Local-a-Eval
+	{{infoMessage}} <br>
+	Load: 
+	<select ng-model="currentEntry" ng-change="loadEntry(currentEntry)">
+	  <option value="new" ng-selected="true">New</option>
+	  <option ng-repeat="savedDef in savedDefs" value="{{savedDef.title}}">{{savedDef.title}}</option>
+	</select>
+
+	<input type="button" ng-click="saveCurrent(currentEntry)" value="Save current">
+	<input type="button" ng-click="removeCurrent(currentEntry)" value="remove">
+
+	
+	<table width="100%">
+	  <tr>
+		<td width="50%" valign="top">
+		  Title: <input ng-model="saveTitle"><button ng-click="addEntry(saveTitle)">Add new</button><br>
+		  Variable definitions and functions<br>
+		  <textarea id="demotext" ng-model="code"></textarea>
+		</td>
+		<td width="50%" valign="top">
+		  Commands (one per line)<br>
+		  <textarea id="commands" ng-model="ngCommands" rows="5" cols="55"></textarea>
+		  <br>
+		  <button ng-click="myEval(code)">run</button> (or Ctrl-Enter)
+		  <input type="button" onclick="$('#resulttext').val('');" value="clear">
+
+		  <br>
+		  <textarea ng-model="result" id="resulttext" rows="10" cols="55" disabled></textarea>
+		</td>
+	  </tr>
+	</table>
+
+
+	<script src="app.js"></script>
+
+  </body>
+</html>
