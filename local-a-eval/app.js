@@ -109,11 +109,11 @@ var out = function() {
         // $scope.$apply();
           //$scope.currentEntry = title;
 	  
-	  setTimeout(function() {
+	    setTimeout(function() {
 	      // console.log($scope.savedDefs[$scope.savedDefs.length-1].title);
 	      $scope.currentEntry = $scope.savedDefs[$scope.savedDefs.length-1].title;
 	      $scope.$apply();
-	      }, 100);
+	    }, 100);
       } else {
         $scope.infoMessage = "Cannot overwrite, save empty or New";
       }
