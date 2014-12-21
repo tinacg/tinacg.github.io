@@ -5,6 +5,8 @@ produto:
 - tags (agua, molho, tomate, doce, biscoito)
 - marca
 - tamanho (peso ou volume)
+- quantidade
+- observacao
 
 grupo (store chain)
 - id
