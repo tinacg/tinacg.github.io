@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+  <head>
+	<meta charset="utf-8">
+	<title>Refactored</title>
+	<link rel="stylesheet" href="../../css/qunit-1.16.0.css">
+	<script src="../../js/qunit-1.16.0.js"></script>
+	<script src="prettydate2.js"></script>
+
+	<script>
+	  QUnit.test("prettydate.format", function(assert) {
+	    function date(then, expected) {
+          assert.equal(prettyDate.format("2008/01/28 22:25:00", then),
+                       expected);
+        }
+
+        date("2008/01/28 22:24:30", "just now");
+        date("2003/01/12 22:23:20", undefined);
+      });
+
+function domtest(name, now, first, second) {
+  QUnit.test(name, function(assert) {
+    var links = document.getElementById("qunit-fixture")
+      .getElementsByTagName("a");
+    assert.equal(links[0].innerHTML, "January 28th, 2008");
+    assert.equal(links[1].innerHTML, "January 27th, 2008");
+    prettyDate.update(now);
+    assert.equal(links[0].innerHTML, first);
+    assert.equal(links[1].innerHTML, second);
+  });
+}
+
+domtest("prettyDate.update", "2008-01-28T22:25:00Z",
+        "2 hours ago", "Yesterday");
+domtest("prettyDate.update one day later", "2008-01-29T22:25:00Z",
+        "Yesterday", "2 days ago");
+</script>
+  </head>
+  <body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture">
+  <ul>
+	<li>
+	  <a title="2008-01-28T20:24:12Z">January 28th, 2008</a>
+	</li>
+	<li>
+	  <a title="2008-01-27T22:24:12Z">January 27th, 2008</a>
+	</li>
+  </ul>
+  </div>
+  </body>
+</html>
