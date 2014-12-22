@@ -1,3 +1,6 @@
+
+# See separate ernestopaulista github repo
+
 # DATA
 
 produto:
@@ -7,6 +10,7 @@ produto:
 - tamanho (peso ou volume)
 - quantidade
 - observacao
+- votos
 
 grupo (store chain)
 - id
