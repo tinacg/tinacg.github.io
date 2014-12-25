@@ -13,6 +13,8 @@ var out = function() {
     (1, eval)(editor.getValue());
     var commandsResult = getCommandsResult($("#commands").val());
     $("#resulttext").val($("#resulttext").val() + commandsResult);
+    var resulttext = document.getElementById("resulttext");
+    resulttext.scrollTop = resulttext.scrollHeight;
   }
   
   var editor = CodeMirror.fromTextArea(document.getElementById("demotext"), {
