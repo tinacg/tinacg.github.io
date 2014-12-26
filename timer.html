@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-  <html>
+
+<html>
   <head>
 	<title>Timer</title>
 	<script src="js/jquery-1.11.0.min.js"></script>
   </head>
   <body>
+
+<!-- NOTE: setInterval is inaccurate. Should use a comparison between start
+	 time and (new Date()).milliseconds and update title with difference -->
+
 	<input type="text" id="mins">
 	<button id="start">Start</button>
   <script>
