@@ -10,23 +10,30 @@
 <!-- NOTE: setInterval is inaccurate. Should use a comparison between start
 	 time and (new Date()).milliseconds and update title with difference -->
 
-	<input type="text" id="mins">
-	<button id="start">Start</button>
+Minutes: <input type="text" id="mins" size="3">
+  <button id="start">Start</button>
+  
   <script>
   //
   var intv;
 
-  $("#start").click(function () {
-	var mins = parseInt($("#mins").val());
-	var secs = 60 * mins;
-	document.title = "Start...";
+$("#start").click(function () {
+  var startDate = (new Date()).getTime();
   
-	clearInterval(intv);
-		
-	intv = setInterval(function () {
-      document.title = secstomins(secs--);
-	}, 1000);
-  });
+  var mins = parseInt($("#mins").val());
+  var secs = 60 * mins;
+  document.title = "Start...";
+  
+  clearInterval(intv);
+  
+  intv = setInterval(function () {
+    document.title = secstomins(secs - secsDiff(startDate));
+  }, 1000);
+});
+
+function secsDiff(start) {
+  return Math.floor(((new Date()).getTime() - start) / 1000);
+}
 
 function secstomins(s) {
   var secsdisp = s % 60;
