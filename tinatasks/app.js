@@ -149,7 +149,7 @@
       $scope.parseDate = function(s) {
         if (s === 'soon') {
           return 9999999999000;
-        } else if (s === 'now') {
+        } else if (s.toLowerCase() === 'now') {
           return moment().valueOf();
         } else {
           return moment(s, "D/M/YY H:mm:ss").valueOf();
@@ -234,7 +234,7 @@
         var iso_weekday = moment(then.split(" ")[0], "D/M/YY").isoWeekday();
         var diaDaSemana = ['', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab', 'dom'];
 
-        if (then === 'now') {
+        if (then.toLowerCase() === 'now') {
           result = 0;
           iso_weekday = moment().isoWeekday();
         }
