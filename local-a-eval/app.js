@@ -13,7 +13,11 @@ var out = function() {
   var app = angular.module('liveAEvalApp', []);
 
   function evaluate() {
-    (1, eval)(editor.getValue());
+    try {
+      (1, eval)(editor.getValue());
+    } catch (e) {
+      $("#resulttext").val($("#resulttext").val() + e + "\n");
+    }
     var commandsResult = getCommandsResult($("#commands").val());
     $("#resulttext").val($("#resulttext").val() + commandsResult);
     var resulttext = document.getElementById("resulttext");
@@ -46,7 +50,11 @@ var out = function() {
     // $("#resulttext").val("");
     var commandsArray = commands.split('\n');
     for (var i = 0; i < commandsArray.length; i++) {
-      result += (1, eval)(commandsArray[i]) + "\n";
+      try {
+        result += (1, eval)(commandsArray[i]) + "\n";
+      } catch (e) {
+        $("#resulttext").val($("#resulttext").val() + e + "\n");
+      }
     }
     return result;
   };
