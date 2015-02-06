@@ -142,10 +142,13 @@
           });
 
           element.bind('click', function(e) {
-            var x = e.offsetX;
-            var y = e.offsetY;
+            // http://stackoverflow.com/questions/11334452/event-offsetx-in-firefox
+            var x = (e.offsetX || e.clientX - $(e.target).offset().left + window.pageXOffset);
+            var y = (e.offsetY || e.clientY - $(e.target).offset().top + window.pageYOffset);
 
             var keysSelected = "";
+
+            console.log(x + " " + y);
             
             keys.forEach(function(key) {
               // blacks
@@ -204,8 +207,8 @@
           };
 
           element.bind('click', function(e) {
-            var x = e.offsetX;
-            var y = e.offsetY;
+            var x = (e.offsetX || e.clientX - $(e.target).offset().left + window.pageXOffset);
+            var y = (e.offsetY || e.clientY - $(e.target).offset().top + window.pageYOffset);
 
             // console.log("global click " + x + ", " + y);
             
@@ -243,8 +246,8 @@
           staff.drawNoteMatrix(context, 'C');
           
           element.bind('click', function(e) {
-            var x = e.offsetX;
-            var y = e.offsetY;
+            var x = (e.offsetX || e.clientX - $(e.target).offset().left + window.pageXOffset);
+            var y = (e.offsetY || e.clientY - $(e.target).offset().top + window.pageYOffset);
 
             var rowHeight = 120;
 
