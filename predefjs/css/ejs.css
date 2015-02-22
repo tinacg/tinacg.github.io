@@ -256,15 +256,64 @@ blockquote footer:before {
 .sandbox-menu {
     position: absolute;
     z-index: 19;
-    right: -13px; top: -1px;
+
+    /*
+    right: -13px;
+    top: -1px;
+    */
+
+    /* EDIT: CHANGE MENU LOCATION */
+    left: 15px;
+    bottom: -22px;
+    
     cursor: pointer;
     font-size: 80%;
     overflow: hidden;
     width: 10px;
+
+    /*
     border-top: 2px solid #4ab;
     height: 2px;
     border-bottom: 6px double #4ab;
+    */
+
+/* EDIT: Make it a triangle */
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid #5a5;
+    
 }
+
+/* EDIT: ICON FOR RESTORING CODE */
+.sandbox-reset {
+    position: absolute;
+    z-index: 19;
+
+    /*
+    right: -13px;
+    top: -1px;
+    */
+
+    /* EDIT: CHANGE MENU LOCATION */
+    left: 40px;
+    bottom: -23px;
+    
+    cursor: pointer;
+    font-size: 80%;
+    overflow: hidden;
+
+    /*
+    border-top: 2px solid #4ab;
+    height: 2px;
+    border-bottom: 6px double #4ab;
+    */
+
+    /* EDIT USE ICON */
+    width: 20px;
+    height: 20px;
+    background: url("../reset_chrome.png") center right no-repeat;
+}
+
 
 .sandbox-open-menu {
     font-family: tahoma, arial, sans-serif;

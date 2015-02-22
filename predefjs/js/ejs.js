@@ -76,7 +76,11 @@ window.addEventListener("load", function() {
     Esc: function(cm) { cm.display.input.blur(); },
     "Ctrl-Enter": function(cm) { runCode(cm.state.context); },
     "Ctrl-`": function(cm) { closeCode(cm.state.context); },
-    "Ctrl-Q": resetSandbox
+
+    // EDIT: REASSIGN CTRL-Q TO REVERT CODE
+    "Ctrl-Q": function(cm) { revertCode(cm.state.context); },
+    
+    // "Ctrl-Q": resetSandbox
   };
 
   var nextID = 0;
@@ -105,7 +109,11 @@ window.addEventListener("load", function() {
       editor.focus();
     }
     var out = wrap.appendChild(elt("div", {"class": "sandbox-output"}));
-    var menu = wrap.appendChild(elt("div", {"class": "sandbox-menu", title: "Sandbox menu..."}));
+    var menu = wrap.appendChild(elt("div", {"class": "sandbox-menu", title: "Click to Run (Ctrl-Enter)"}));
+
+    /* EDIT: ADD RESET ICON */
+    var codeReset = wrap.appendChild(elt("div", {"class": "sandbox-reset", title: "Click to Reset code (Ctrl-Q)"}));
+
     var sandbox = node.getAttribute("data-sandbox");
     if (lang == "text/html" && !sandbox) {
       sandbox = "html" + nextID++;
@@ -120,7 +128,13 @@ window.addEventListener("load", function() {
                                        isHTML: lang == "text/html",
                                        sandbox: sandbox};
     data.output = new SandBox.Output(out);
-    menu.addEventListener("click", function() { openMenu(data, menu); });
+    // menu.addEventListener("click", function() { openMenu(data, menu); });
+
+    // EDIT: RUN CODE ON MENU CLICK
+    menu.addEventListener("click", function() { runCode(data); });
+
+    // EDIT: RESET CODE
+    codeReset.addEventListener("click", function() { revertCode(data); });
   }
 
   function openMenu(data, node) {
