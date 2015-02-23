@@ -140,6 +140,10 @@
 
       win.onerror = function(e, _file, line) {
         if (!self.output) return;
+
+        // EDIT: ADD CUSTOM ERROR MESSAGE
+        // self.output.out("error", [e + (line != null ? " (line " + line + ")" : "")]);
+        
         self.output.out("error", [e + (line != null ? " (line " + line + ")" : "")]);
         return true;
       };
@@ -210,6 +214,9 @@
     error: function(exception) {
       if (!this.output) throw exception;
       var stack = parseStack(exception.stack);
+
+      // EDIT: ADD CUSTOM MESSAGE
+      // this.output.out("error", [String(exception) + (stack.length ? " (" + frameString(stack[0]) + ")" : "")]);
       this.output.out("error", [String(exception) + (stack.length ? " (" + frameString(stack[0]) + ")" : "")]);
       if (stack.length > 1) {
         this.output.div.lastChild.appendChild(document.createTextNode(" "));
