@@ -289,14 +289,11 @@ blockquote footer:before {
     position: absolute;
     z-index: 19;
 
-    /*
-    right: -13px;
-    top: -1px;
-    */
-
     /* EDIT: CHANGE MENU LOCATION */
-    left: 40px;
+    /* left: 40px; */
+    /* top: -1px; */
     bottom: -23px;
+    right: 15px;
     
     cursor: pointer;
     font-size: 80%;
