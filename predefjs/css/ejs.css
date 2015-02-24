@@ -88,7 +88,8 @@ code {
 }
 
 h1, h2, h3 {
-    font-family: 'Cinzel', Georgia, serif;
+    /* font-family: 'Cinzel', Georgia, serif; */
+    font-family: Georgia, serif;
     font-weight: 700;
     margin: 1rem 0;
     letter-spacing: 2px;
