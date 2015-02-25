@@ -16,8 +16,6 @@ document.getElementById("startTimer").addEventListener("click", function() {
   var mins = parseInt(document.getElementById("minutes").value);
   var secs = 60 * mins;
 
-  secs = mins;
-
   document.title = "Start...";
   
   clearInterval(intv);
