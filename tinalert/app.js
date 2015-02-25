@@ -24,6 +24,9 @@ document.getElementById("startTimer").addEventListener("click", function() {
     document.getElementById("secondsLeft").innerHTML = secstomins(secs - secsDiff(startDate));
     if ((secs - secsDiff(startDate)) <= 0) {
       clearInterval(intv);
+      if (alertWindow) {
+        alertWindow.close();
+      }
       alertWindow = window.open("alert window", "alertWindow", "location=no,menubar=yes,resizable=yes,scrollbars=yes,height=100,width=500");
       var msg = document.getElementById("message").value || "TiNAlert time's up";
       alertWindow.document.write("<h1>" + msg + "</h1>");
