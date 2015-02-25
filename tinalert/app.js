@@ -11,7 +11,6 @@ document.getElementById("testButton").addEventListener("click", function() {
 
 document.getElementById("startTimer").addEventListener("click", function() {
 
-  var startDate = (new Date()).getTime();
   
   var mins = parseInt(document.getElementById("minutes").value);
   var secs = 60 * mins;
@@ -21,6 +20,7 @@ document.getElementById("startTimer").addEventListener("click", function() {
   clearInterval(intv);
   
   intv = setInterval(function () {
+    var startDate = (new Date()).getTime();
     document.title = secstomins(secs - secsDiff(startDate));
     document.getElementById("secondsLeft").innerHTML = secstomins(secs - secsDiff(startDate));
     if ((secs - secsDiff(startDate)) <= 0) {
