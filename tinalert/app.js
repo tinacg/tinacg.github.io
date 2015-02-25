@@ -1,6 +1,11 @@
 var alertWindow;
 var intv;
 
+document.getElementById("clearMessage").addEventListener("click", function() {
+  document.getElementById("minutes").value = "";
+  document.getElementById("message").value = "";
+});
+
 document.getElementById("testButton").addEventListener("click", function() {
   this.value = "Wait 3 seconds";
   setTimeout(function() {
