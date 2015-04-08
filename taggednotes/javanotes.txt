@@ -1,0 +1,24 @@
+Increasing orders of structure
+syntax
+7 apr 2015 Java nutshell 6th, p. 17
+characters
+literal values, identifiers, tokens
+data types
+operators (groups individual tokens)
+statements (groups expressions to form logical chunks)
+methods (named collections of statements that can be invoked)
+classes (collections of methods and fields)
+packages (collections of related classes)
+programs (interacting classes from one or more packages)
+--
+Comments
+comments
+7 apr 2015 Java nutshell 6th, p. 19
+//  single line
+
+/*  */  multi-line
+
+/**
+ * doc comment
+ */
+--

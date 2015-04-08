@@ -1,0 +1,7 @@
+The Clojure Way
+clojure
+8 apr 2015, Joy of Clojure p. xxvii
+Leave all programming baggage behind
+
+ability to create little languages
+--

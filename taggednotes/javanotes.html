@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+	<meta charset="utf-8">
+	<title>Tagged Notes</title>
+	<link rel="stylesheet" href="layout.css" type="text/css">
+  </head>
+  <body>
+	<div id="container">
+	  <div class="sidebar">
+		<div class="tags" id="tags">
+		  <p onclick="">arrays</p>
+		  <p>strings</p>
+		</div>
+	  </div> <!-- END sidebar -->
+	  <div class="notes" id="notes">
+		<br>
+		Please select a tag
+		<hr>
+		<pre>
+  Format:
+  
+  title
+  tags, comma-separated
+  date and reference, page number
+  notes
+  ... more notes
+  ... even more notes
+  --
+  next title
+  next tags...
+
+  Run python process.py source.txt destination.js
+		</pre>
+	  </div>
+	</div> <!-- END div id="container" -->
+	<script src="javanotes.js"></script>
+	<script src="readnotes.js"></script>
+	<script src="setupnotes.js"></script>
+  </body>
+</html>
