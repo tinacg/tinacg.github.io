@@ -4,6 +4,7 @@ body, html {
     margin: 0;
     padding: 0;
     height: 100%;
+    font-family: monospace;
 }
 
 p {
@@ -27,9 +28,9 @@ p {
     width: 80%;
     height: 100%;
     margin-left: 19%;
-    display: inline-block;
     vertical-align: top;
     white-space: normal;
+    overflow: auto;
 }
 
 .tags {

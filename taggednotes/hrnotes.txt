@@ -1,0 +1,439 @@
+Ciclo mensal
+calendário
+5 mar 2015
+1 Salário (líquido) e bônus (até quinto dia útil, sábado é útil)
+2 
+3 após pagar salário, mandar email pra contabilidade pra gerar FGTS
+4   e entregar boletos para Priscilla, vencimento no email (até dia 7)
+5
+6
+7 
+8
+9
+10 VB - solicitar pelo site (até dia 15)
+11   Vale-transporte e Vale-alimentação
+12
+13
+14
+15
+16
+17 
+18 Vale (adiantamento) em dinheiro (até dia 20)
+19
+20
+21 Puxar marcações do relógio de ponto
+22   Preencher planilha pra contabilidade
+23   
+24   Juntar holerites e vales (adiantamento) assinados pra Joyce
+25   e se não estiver, pra Priscilla
+26
+27 Vale-transporte em dinheiro (até final do mês)
+28   pedir funcionário assinar vale-alimentação
+29
+30
+31
+--
+Puxar marcações de ponto do relógio
+DIMEP, relógio de ponto
+23 fev 2015
+Abrir o programa REP (relógio de ponto)
+
+1. a) DMP REP
+      Comunicação
+      Printpoint I/II
+      IP - conectar
+    conectar
+
+   b) Comunicação
+      Printpoint I/II
+      IP
+      coleta / monitoração
+
+Coletar do dia 21 jan - 20 fev
+               21 fev - 20 mar
+               21 mar - 20 abr
+               etc.
+               
+Espera o programa coletar até chegar a data de hoje
+
+[] clica o botão "Exportar"
+Seleciona RELÓGIO DE PONTO e clica [>]
+
+usar datas acima
+não importa se for fim de semana
+Clica "exportar"
+(melhor escolher local do arquivo no servidor)
+Clica "Sim" para substituir dados
+Fecha o programa
+--
+Edição de cartão de ponto
+DIMEP, cartão de ponto
+23 fev 2015
+Abrir o programa "DMP Advance" (manipulador de dados)
+Senha: s...
+
+Se for necessário escolher banco de dados, usar "Advance".
+
+Clica botão Importar []
+
+Escolhe "Rep"
+
+datas do dia 21 jan - 20 fev
+             21 fev - 20 mar
+             21 mar - 20 abr
+             etc.
+               
+Pressione Enter para continuar
+
+Clica em [>>]
+
+continua [>>]
+
+Deseja efetuar coleta?
+Não, já foi feito
+
+Verifica se existe arquivo log?
+Não
+
+Deseja calcular agora?
+Não
+
+Clique no botão "Edição cartão", e faça uma pessoa por vez
+Pressione Enter para continuar
+
+Para o almoço, o que importa é a duração. Pode começar às 12:30
+
+Tolerância de almoço é de 5 minutos, se alterar deixe duração de uma hora
+
+Ninguém deve ganhar hora extra por entrar cedo de manhã, nem no almoço
+
+Na saída a tolerância é de 15 minutos. 18:15 vira 18:00
+
+Rita tem horário de 7:30 até 17:00
+
+Salvar antes de dar motivos para alterações.
+Tudo que foi alterado precisa ser justificado
+
+Justificativa padrão: "Marcação incorreta / Marcação correta"
+
+Clique na caixa "Selecionar todos"
+
+Salvar e calcular, na função "Edição Cartão"
+
+Clique em Folha - cartão de ponto (botão)
+
+Escolher aba "Gerenciar marcações indevidas" para manipular horários de
+batidas incorretas
+
+Clica para apagar (fica vermelho)
+volta para a aba "Inclusão de marcações"
+Clica em "Salvar" abaixo
+
+Quando funcionário não bateu ponto, escolha a aba "Inclusão de marcações"
+Inserir a marcação correta (fora de ordem, no espaço à direita)
+
+Motivos: "Esqueceu de bater", "Erro no cartão"
+
+Para preencher vários campos em branco, use teclas ^ v pra mover na mesma
+coluna, e preencha horários em colunas
+
+Depois de verificar todos, imprima todos os cartões
+--
+Duração e direito de férias
+férias
+23 fev 2015
+Cristiane, Rita, e estoque devem tirar férias direto
+Outros podem ser picados
+
+Contabilidade envia folha "Recibo de férias" com datas "período de gozo"
+
+Período de abono é como vender dias de férias para a empresa.
+Férias podem ser 20 ou 30 dias, não há outras opções
+--
+Marcação de férias
+DIMEP, cartão de ponto, férias
+23 fev 2015
+Assim que tiver "recibo de férias":
+
+Clica botão "Funcionários" na barra embaixo
+
+Selecione a aba "Outros dados"
+Clique em "Alterar", canto esquerdo embaixo
+
+As datas início e final das férias corresponde ao "Período de gozo"
+
+Clique em Salvar embaixo
+
+Entregue a folha de "Recibo de férias" (sem assinatura) pra Priscilla
+
+Re-importar marcações (como explicado em "Edição de cartão de ponto")
+--
+Incluir justificativas
+DIMEP, cartão de ponto, atestados, justificativas
+23 fev 2015
+Calcular primeiro
+a) Na barra, escolha "Rotinas"
+   > Justificativa coletivas (não individual)
+   Altere a data para coincidir com as datas da justificativa
+
+b) Justificativa - Abonado - quando empresa liberou
+     AT - Atestado
+
+c) Não mexer no resto
+
+d) Salvar (na barra embaixo)
+
+e) Fecha a janela, não é necessário recalcular
+
+f) Se for feito errado, é necessário re-importar
+--
+Planilha (Folha de Pagamento) para contabilidade
+contabilidade, planilha, assistência médica, DSR, horas extras
+23 fev 2015, 24 mar 2015
+Recebe planilha no final do mês
+
+Colunas "vales" e "Atestado médico" deixa branco
+
+Descontar DSR (Descanso Semanal Remunerado) é normalmente N (Não)
+
+Se for sim, desconta um dia do salário (totaliza dois dias de desconto)
+DSR deve ser "Sim" caso haja mais de duas faltas não justificadas
+numa semana ou num dia antes ou depois de um feriado. É raramente "Sim".
+
+
+Horas extras de motoristas é 100%, resto, 60%.
+- Severino
+- Neuri
+- Reinaldo
+
+Assist. Médica é o valor que o funcionário paga para Unimed
+
+Para conferir:
+No site da Unimed, acesse Faturamentos > Faturas demonstrativas
+Clique no ícone "Rel. Analítico"
+
+O funcionário paga metade da própria assistência e 100% dos dependentes
+
+Exemplo: Célia - 519.83 / 2 = 259.91
+         Luana - 249.45     = 249.95
+         Total:             = 509.36
+
+Relação de dependentes:
+  Anice - ignorar
+  (1) David: Irene
+  (1) Léo: Maria M. F.
+  (3) João Carlos: Julia C., Mateus, Priscila D., Caio F.
+  (2) Márcia: Carolina B., Paulo R. L.
+  (1) Célia: Luana
+--
+Vale (adiantamento)
+adiantamento, vale
+23 fev 2015
+Todos menos Márcia, João Carlos, Heitor, etc. recebem vale (adiantamento)
+
+Pago no dia 20 ou antes
+
+Valor é 40% do salário, arredondado para cima em dezenas (650, 660, 670)
+--
+Valores no holerite para verificar
+holerite, verificar
+23 fev 2015
+Salário
+Adiantamento
+Atrasos em horas, minutos
+Horas extras, 100% para motoristas (Severino, Neuri, Reinaldo), 60% outros
+Vale-transporte
+Assistência Médica
+--
+Pagamento de salário
+salário, pagamentos
+4 mar 2015
+Valor do Salário líquido
+
+Funcionário assina:
+Holerite, 2 vezes, com data
+Cartão de ponto, sem data
+Recibo de pagamento (se tiver), com data
+vale-transporte (se tiver), 1 vez, sem data
+vale-alimentação, com data
+
+Entregar:
+Uma via do holerite
+Uma via do vale-transporte (se tiver)
+recibo do vale (adiantamento) se tive
+
+Após o pagamento do salário, enviar email pra contabilidade pedindo
+boletos de FGTS (total 4 boletos)
+
+DARF pagamento
+DARF pro labore
+GPS (escrever vencimento no boleto)
+FGTS
+
+Data de vencimentos no email, escrever no boleto impresso e entregar para
+Priscilla
+--
+Material para Pagamentos
+pagamentos
+5 mar 2015
+Talão de recibos e vales com Claldinei
+
+Problemas:
+  - Priscilla
+  - Cléber, Valéria (contabilidade)
+  - Akemi (?)
+--
+Serviços Online
+serviços, contas
+12 mar 15
+VB - Vale-transporte e Vale-alimentação
+www.vb.com.br
+
+Unimed Paulistana
+unimedpaulistana.com.br
+Portal PJ
+
+ver informações no caderno
+--
+VB Vale-transporte e Vale-alimentação
+VB, vale-transporte, vale-alimentação
+12 mar 15
+Dados cadastrais > Funcionários
+
+<b>Importante</b>: Alterar período de dias primeiro.
+Sempre o número de dias úteis no mês seguinte
+
+Pedidos > Gerar pedidos > Pedido Personalizado
+
+Selecione data para o pagamento:
+  o dia seguinte
+
+Período de utilização dos benefícios:
+  primeiro dia do mês seguinte até o final do mês
+
+Separar os envelopes?
+  Não,
+  Nome do funcionário
+
+Continuar ->
+
+Região: São Paulo
+        Rio Vermelho
+        Todos
+        Alimentação convênio
+
+Confirmar pedido
+Imprimir boleto
+entrega pra Priscilla
+
+<b>Vale-transporte</b>
+Próximo - Funcionários
+aumenta lista p/ 50 por página
+
+Coluna "período de dias"
+  Alterar para dias úteis no mês seguinte. Exemplo: abril 2015 tem 20
+
+Pedidos -> Gerar pedidos
+  Data prevista: dia seguinte
+  período: sempre do primeiro do mês até o último dia
+
+Quem tá de férias só deve receber vale-transporte para dias que trabalhar
+
+<b>Para imprimir:</b>
+
+Para Vale-alimentação
+
+Relatórios > Pedidos
+Listagem de funcionários
+Para imprimir
+
+Para Vale-transporte
+
+Recibo de recarga de itens eletrônicos
+o último pedido
+
+Relatórios > Pedidos
+Listagem de funcionários
+escolher data do mês passado
+Conferir pelo período de utilização:
+  deve ser o mês atual
+
+Problemas: Ocorrências
+--
+Vale-transporte em dinheiro
+pagamentos, vale-transporte, planilha
+12 mar 2015
+Tem planilha Excel
+
+Quem vendeu férias recebe VT em dinheiro
+
+Empresa paga 94% do valor do vale-transporte
+
+Para quem recebe pela VB, o 6% é descontado do salário pela contabilidade
+
+Para quem recebe em dinheiro, 6% é descontado do pagamento em dinheiro
+
+Fórmula: desconto = (salário / 30) x dias úteis x 0,06
+
+Recebem 4x R$ 3,50:
+ Márcia
+ Marlene
+ Sandro
+
+Recebem 2x R$ 5,45:
+ Claldinei
+ Célia
+ Cida
+ Adriano
+ Cristiane
+
+Valor recebido = valor total menos desconto,
+arredondado pra cima pro próximo Real
+
+Recibo deve ser preenchido:
+
+PTL                  R$ 308
+Nome funcionário   VT 04/15
+--
+Pagamentos pra quem entra de férias
+pagamentos, férias, vale, contabilidade, adiantamento
+18 mar 2015
+Para quem está de férias (avisou um mês antes):
+  vale-transporte não é pago porque funcionário não vem pra empresa
+  vale-alimentação é sempre pago
+
+Contabilidade gera o recibo de férias
+Entrega para Priscilla e ela escreve um cheque
+Valor calculado pela contabilidade é um mês mais um terço do salário
+
+Quem entra de férias antes do pagamento de salário deve receber o
+pagamento de férias pelo menos três dias antes de entrar de férias
+
+Por exemplo, alguém que tira férias de 20 de abril até 10 de maio:
+  como não trabalhou entre 1 de maio e 10 de maio, o vale (adiantamento)
+  será 2/3 do valor normal
+
+  em 5 de junho, o funcionário recebe o resto do salário
+--
+Pagamento do vale (adiantamento)
+adiantamento, pagamentos, vale, planilha
+19 mar 2015
+Existe uma planilha somente com nomes e valores
+
+1. Funcionário confere o valor
+2. Assina
+3. Data (próprio punho)
+--
+Zerar Banco de horas
+DIMEP, cartão de ponto, banco de horas
+23 mar 2015
+Barra > Cadastros
+  > Justificativas
+  > Horas extras: selecione "Não altera"
+
+Banco de Horas > Lançar débito
+  Rotinas > Atualizar Banco de Horas
+  Atualiza B. H.
+  Escolhe funcionário
+  Preenche e clica "Salvar" embaixo
+  

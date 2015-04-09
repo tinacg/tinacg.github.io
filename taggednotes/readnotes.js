@@ -49,6 +49,25 @@ function createNotes(tagName) {
   
   document.getElementById("notes").innerHTML = "<br>" + unescape(tagName) + ' <span onclick="expandAll();">(expand all)</span> <span onclick="collapseAll();">(collapse all)</span>';
   document.getElementById("notes").appendChild(notesHTML);
+  document.getElementById("notes").scrollTop = 0;
+}
+
+function createAllNotes() {
+  availableNotes = [];
+  var notesHTML = document.createElement("p");
+
+  for (var i = 0; i < notes.numNotes; i++) {
+    noteId = "note" + i;
+    console.log(noteId);
+    notesHTML.appendChild(createNote(notes[noteId]));
+    availableNotes.push(noteId);
+  }
+  
+  document.getElementById("notes").innerHTML = '<br>All notes<span onclick="expandAll();"> (expand all)</span> <span onclick="collapseAll();">(collapse all)</span>';
+  document.getElementById("notes").appendChild(notesHTML);
+
+  collapseAll();
+  document.getElementById("notes").scrollTop = 0;
 }
 
 function expandAll() {
@@ -87,9 +106,11 @@ function collectTags(notesObj) {
     });
   }
 
-  var tagsHTML = "<br>";
+  var tagsHTML = '<br><span onclick="createAllNotes()">All notes</span><br><br>';
 
-  Object.keys(simpleTags).sort().forEach(function(tag) {
+  Object.keys(simpleTags).sort(function(a, b) {
+    return a.toLowerCase().localeCompare(b.toLowerCase());
+  }).forEach(function(tag) {
     tagsHTML += "&nbsp;<span>" + createTag(tag) + "</span><br>";
   });
 
