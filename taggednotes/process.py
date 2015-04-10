@@ -1,12 +1,13 @@
 import sys
 
-if len(sys.argv) < 3:
-    print("Usage: python process.py input.txt output.js")
+if len(sys.argv) != 2:
+    print("Usage: python process.py languagenotes")
 else:
-    with open(sys.argv[2], 'w') as output:
+    language = sys.argv[1].replace(".", "")
+    with open(language + ".js", 'w') as output:
         print("var notes = {", file=output)
         
-        with open(sys.argv[1]) as input:
+        with open(language + ".txt") as input:
             id = 0
             while True:
                 title = input.readline()
