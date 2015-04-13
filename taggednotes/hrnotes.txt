@@ -150,6 +150,31 @@ Contabilidade envia folha "Recibo de férias" com datas "período de gozo"
 Período de abono é como vender dias de férias para a empresa.
 Férias podem ser 20 ou 30 dias, não há outras opções
 --
+Alterações a fazer pra quem tira férias
+férias, vale-transporte, pagamentos, cartão de ponto, VB
+13 abr 2015
+1. avisa contabilidade do período de férias
+
+2. receber "Recibo de Férias" da contabilidade
+   imprimir três vias:
+	- Arquivo
+	- funcionário
+	- Priscilla (para escrever cheque)
+
+3. alterar planilha de vale-transporte em dinheiro
+
+4. quem vendeu as férias, recebe o vale-transporte em dinheiro
+
+5. No site da VB, alterar o número de dias de benefícios
+   - Dados cadastrais > Funcionários
+
+6. No caso de não receber o benefício, excluir:
+   - clique em Detalhar (Dados Funcionário)
+   - Benefícios > Excluir vale-transporte
+   - anotar código do benefício, para logo poder re-adicionar
+
+7. Após confirmar o pedido, re-adicionar o benefício.
+--
 Marcação de férias
 DIMEP, cartão de ponto, férias
 23 fev 2015
@@ -296,7 +321,7 @@ Portal PJ
 ver informações no caderno
 --
 VB Vale-transporte e Vale-alimentação
-VB, vale-transporte, vale-alimentação
+VB, vale-transporte, vale-alimentação, férias
 12 mar 15
 Dados cadastrais > Funcionários
 
@@ -323,7 +348,7 @@ Região: São Paulo
         Alimentação convênio
 
 Confirmar pedido
-Imprimir boleto
+Imprimir boleto (CABREUVA)
 entrega pra Priscilla
 
 <b>Vale-transporte</b>
@@ -333,11 +358,12 @@ aumenta lista p/ 50 por página
 Coluna "período de dias"
   Alterar para dias úteis no mês seguinte. Exemplo: abril 2015 tem 20
 
+Verificar quem está de férias. 
+Quem tá de férias só deve receber vale-transporte para dias que trabalhar
+  
 Pedidos -> Gerar pedidos
   Data prevista: dia seguinte
   período: sempre do primeiro do mês até o último dia
-
-Quem tá de férias só deve receber vale-transporte para dias que trabalhar
 
 <b>Para imprimir:</b>
 
@@ -436,4 +462,3 @@ Banco de Horas > Lançar débito
   Atualiza B. H.
   Escolhe funcionário
   Preenche e clica "Salvar" embaixo
-  

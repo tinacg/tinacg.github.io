@@ -33,6 +33,7 @@ else:
                     if body_line == "" or body_line.strip() == "--":
                         break
                     body_line = body_line.rstrip()
+                    body_line = body_line.replace("\\", "\\\\")
                     print(body_line.replace('"', "&quot;"), file=output, end="<br>")
                 print('" },\n', file=output)
 

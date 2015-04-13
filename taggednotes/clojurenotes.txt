@@ -1,7 +1,231 @@
 The Clojure Way
 clojure
-8 apr 2015, Joy of Clojure 2nd ed p. xxvii
+8 apr 2015, Joy 2nd, p. xxvii
+
 Leave all programming baggage behind
 
 ability to create little languages
+--
+Clojure features
+clojure
+13 apr 2015, Joy 2nd, p. 3
+
+avoid complications of managing state
+
+being a Lisp, it can manipulate data and code uniformly: as lists
+--
+McCarthy Lisp core
+lisp, core
+13 apr 2015, Joy 2nd, p. 9
+
+seven functions and two special forms:
+
+atom, car, cdr, cons, eq, quote, label
+cond, lambda
+--
+Notion of state
+state, time, identity
+13 apr 2015, Joy 2nd, p. 17
+
+Time refers to relative moments when events occur.
+An entity's properties over time forms its identity.
+At any given time, a snapshot, or state, can be taken.
+This state is immutable, as a manifestation of its properties at a given
+moment in time.
+
+As an example, Clojure represents an entity as a flipbook.
+The whole book is the identity. Changing the illustration is adding a
+picture to the book, and flipping the pages represents states over time.
+
+In contrast, a mutable picture conflates state and identity. Rather than
+adding pictures to a flipbook, parts of the mutable picture are erased
+and redrawn.
+--
+Functional programming and mathematics
+functional programming
+13 apr 2015, Joy 2nd, p. 24
+
+Mathematics view little, if anything, as objects. It is built on the
+relationships between one set of elements and another through the
+application of functions.
+--
+Valid expressions
+expressions
+13 apr 2015, Joy 2nd, p. 26
+Valid Clojure expressions accepted by the REPL are:
+
+numbers, symbols, keywords, Booleans, characters, strings, functions,
+function calls, macros, literal maps, vectors, queues, records, and sets.
+
+Numbers, strings, and keywords are self-evaluating.
+
+Comments are indicated by a semicolon (or more)  ; my comment
+--
+Scalars
+scalars, data types
+13 apr 2015, Joy 2nd, p. 26
+
+Scalars are the base data types, including integers, floats, rationals,
+symbols, keywords, strings, characters, Booleans, and regex patterns.
+--
+Integers
+integers, data types
+13 apr 2015, Joy 2nd, p. 27
+
+The size of integers is limited by the available memory.
+Integers are Java longs up to its limit. Larger integers are BigInts,
+and printed with a trailing N.
+
+adding (+ 1 2N) results in 3N
+
+binary, octal, and hex are written as 2r1001, 0177, and 0x7f.
+integers in arbitrary radices are written as 17r80g.
+--
+Floats
+floats, data types
+13 apr 2015, Joy 2nd, p. 27-28
+
+floats can be written in exponential form.
+
+Arbitrary precision floats have a trailing M.
+
+adding (+ 1.1 2.2M) results in 3.3.
+To preserve precision, both arguments must be M
+--
+Rationals
+rationals, data types
+13 apr 2015, Joy 2nd, p. 28
+
+Rational numbers are a precise representation, written as an integer
+over another: 3/2. They are automatically simplified. They do not print N
+--
+Symbols
+symbols, data types
+13 apr 2015, Joy 2nd, p. 28
+
+Symbols are objects in their own right but mostly used to represent
+another value:
+
+(def rational-pi 22/7)
+
+Evaluating a symbol returns whatever value the symbol is referring to
+in the current context. Typical uses of symbols are to refer to function
+parameters, local variables, globals, and Java classes.
+--
+Keywords
+keywords, data types
+13 apr 2015, Joy 2nd, p. 28
+
+Keywords always evaluate to themselves.
+They are written as <b>:MySymbolName</b>
+--
+Strings
+strings, data types
+13 apr 2015, Joy 2nd, p. 29
+
+Strings are written inside double quotes, and may include newlines as
+part of the literal.
+
+"abc
+def"
+
+"he said \"hello\""
+--
+Characters
+characters, data types
+13 apr 2015, Joy 2nd, p. 29
+
+Characters are written with a literal syntax and are stored as Java
+Characters. \a, \u30DE, and \space are some examples.
+--
+Collections
+collections
+13 apr 2015, Joy 2nd, p. 29
+
+Collections include lists, vectors, maps, and sets
+--
+Lists
+lists, collections
+13 apr 2015, Joy 2nd, p. 29
+
+Literal lists are written with parentheses.
+
+When evaluating a list, the first item is resolved to a function, macro,
+or special operator. If it is a function, the remaining items are
+evaluated in order, and passed as function parameters. Macros and special
+operators have specific processing rules.
+
+Lists can contain items of any type.
+The empty list, (), is <b>not</b> the same as nil.
+--
+Forms
+forms, objects
+13 apr 2015, Joy 2nd, p. 29
+
+A form is any object meant to be evaluated, such as lists, vectors, maps,
+numbers, keywords, and symbols.
+
+A special form has special syntax or special evaluation rules. An example
+is the dot operator for Java interoperability.
+--
+Vectors
+vectors, collections
+13 apr 2015, Joy 2nd, p. 30
+
+The literal syntax for vectors uses square brackets [1 2 :c]
+
+Vectors evaluate each item in order. No function or macro call is done
+on the vector itself, although if a list is inside the vector, that list
+is evaluated with normal rules for a list.
+
+The empty vector, [], is not the same as nil.
+--
+Maps
+maps, collections
+13 apr 2015, Joy 2nd, p. 30
+
+Maps store unique keys and one value per key. They are similar to hashes
+or dictionaries in other languages.
+
+There are several types of maps with different properties.
+
+The literal syntax is curly braces with alternating keys and values.
+Commas are considered whitespace (they are optional, but frequently used)
+
+{1 "one", 2 "two", 3 "three"}
+
+Keys and values are evaluated before the result is stored in the map.
+The order in which the elements are evaluated is not guaranteed.
+
+The empty map, {}, is not the same as nil.
+--
+Sets
+sets, collections
+13 apr 2015, Joy 2nd, p. 30
+
+Sets store zero or more unique items. The literal syntax is curly braces
+with a leading hash #{1 2 "three}
+
+The empty set, #{}, is not the same as nil.
+--
+Function properties
+functions
+13 apr 2015, Joy 2nd, p. 31
+
+Functions are a first-class type, meaning they can be used the same as
+any value. They can be stored in vars (with def), held in lists and
+other collections, passed as arguments to other functions, and returned
+as the result of other functions.
+--
+Vars
+vars
+13 apr 2015, Joy 2nd, p. 31
+
+The closest analogy to other languages' variables is the <i>var</i>.
+
+A var is named by a symbol and holds a single value. It may be shadowed
+by function parameters and locals.
+
+The most common way to create vars is with <b>def</b>
+(def x 17)
 --
