@@ -14,6 +14,7 @@ else:
                 if title == "":
                     break
                 title = title.strip()
+                title = title.replace("\"", "\\\"")
                 
                 # new note
                 tags_line = input.readline().strip()
