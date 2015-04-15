@@ -58,9 +58,9 @@ body: "Recebe planilha no final do mês<br><br>Colunas &quot;vales&quot; e &quot
 note8: { 
 id: "note8", 
 title: "Vale (adiantamento)",
-tags: ['adiantamento', 'vale'],
+tags: ['adiantamento', 'vale', 'pagamentos', 'planilha'],
 reference: "23 fev 2015",
-body: "Todos menos Márcia, João Carlos, Heitor, etc. recebem vale (adiantamento)<br><br>Pago no dia 20 ou antes<br><br>Valor é 40% do salário, arredondado para cima em dezenas (650, 660, 670)<br>" },
+body: "Todos menos Márcia, João Carlos, Heitor, etc. recebem vale (adiantamento)<br><br>Pago no dia 20 ou antes<br><br>Valor é 40% do salário, arredondado para cima em dezenas (650, 660, 670)<br><br>Existe uma planilha somente com nomes e valores<br><br>1. Funcionário confere o valor<br>2. Assina<br>3. Data (próprio punho)<br><br>Preencher Vale (diferente do recibo):<br><br>                   Valor<br>Nome (no centro)<br>	           data<br>			   assinatura<br>" },
 
 note9: { 
 id: "note9", 
@@ -102,7 +102,7 @@ id: "note14",
 title: "Vale-transporte em dinheiro",
 tags: ['pagamentos', 'vale-transporte', 'planilha'],
 reference: "12 mar 2015",
-body: "Tem planilha Excel<br><br>Quem vendeu férias recebe VT em dinheiro<br><br>Empresa paga 94% do valor do vale-transporte<br><br>Para quem recebe pela VB, o 6% é descontado do salário pela contabilidade<br><br>Para quem recebe em dinheiro, 6% é descontado do pagamento em dinheiro<br><br>Fórmula: desconto = (salário / 30) x dias úteis x 0,06<br><br>Recebem 4x R$ 3,50:<br> Márcia<br> Marlene<br> Sandro<br><br>Recebem 2x R$ 5,45:<br> Claldinei<br> Célia<br> Cida<br> Adriano<br> Cristiane<br><br>Valor recebido = valor total menos desconto,<br>arredondado pra cima pro próximo Real<br><br>Recibo deve ser preenchido:<br><br>PTL                  R$ 308<br>Nome funcionário   VT 04/15<br>" },
+body: "Tem planilha Excel<br><br>Quem vendeu férias recebe VT em dinheiro<br><br>Empresa paga 94% do valor do vale-transporte<br><br>Para quem recebe pela VB, o 6% é descontado do salário pela contabilidade<br><br>Para quem recebe em dinheiro, 6% é descontado do pagamento em dinheiro<br><br>Fórmula: desconto = (salário / 30) x dias úteis x 0,06<br><br>Recebem 4x R$ 3,50:<br> Márcia<br> Marlene<br> Sandro<br><br>Recebem 2x R$ 5,45:<br> Claldinei<br> Célia<br> Cida<br> Adriano<br> Cristiane<br><br>Valor recebido = valor total menos desconto,<br>arredondado pra cima pro próximo Real<br><br>Recibo deve ser preenchido:<br><br>PTL                                         R$ 308<br>Nome funcionário   VT 04/15 (mês seguinte)<br>" },
 
 note15: { 
 id: "note15", 
@@ -113,24 +113,17 @@ body: "Para quem está de férias (avisou um mês antes):<br>  vale-transporte n
 
 note16: { 
 id: "note16", 
-title: "Pagamento do vale (adiantamento)",
-tags: ['adiantamento', 'pagamentos', 'vale', 'planilha'],
-reference: "19 mar 2015",
-body: "Existe uma planilha somente com nomes e valores<br><br>1. Funcionário confere o valor<br>2. Assina<br>3. Data (próprio punho)<br>" },
-
-note17: { 
-id: "note17", 
 title: "Zerar Banco de horas",
 tags: ['DIMEP', 'cartão de ponto', 'banco de horas'],
 reference: "23 mar 2015",
 body: "Barra > Cadastros<br>  > Justificativas<br>  > Horas extras: selecione &quot;Não altera&quot;<br><br>Banco de Horas > Lançar débito<br>  Rotinas > Atualizar Banco de Horas<br>  Atualiza B. H.<br>  Escolhe funcionário<br>  Preenche e clica &quot;Salvar&quot; embaixo<br>" },
 
-note18: { 
-id: "note18", 
+note17: { 
+id: "note17", 
 title: "Quantidade média de notas necessárias",
 tags: ['pagamentos'],
 reference: "14 abr 2015",
 body: "Para 22 pagamentos:<br>R$ 1: 9, R$ 2: 18, R$ 5: 11, R$ 10: 9, R$ 20: 18<br><br>Para 29 pagamentos:<br>R$ 1: 12, R$ 2: 24, R$ 5: 15, R$ 10: 12, R$ 20: 24<br>" },
 
-numNotes: 19
+numNotes: 18
 };

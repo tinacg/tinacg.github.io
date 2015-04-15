@@ -252,13 +252,19 @@ Relação de dependentes:
   (1) Célia: Luana
 --
 Vale (adiantamento)
-adiantamento, vale
+adiantamento, vale, pagamentos, planilha
 23 fev 2015
 Todos menos Márcia, João Carlos, Heitor, etc. recebem vale (adiantamento)
 
 Pago no dia 20 ou antes
 
 Valor é 40% do salário, arredondado para cima em dezenas (650, 660, 670)
+
+Existe uma planilha somente com nomes e valores
+
+1. Funcionário confere o valor
+2. Assina
+3. Data (próprio punho)
 
 Preencher Vale (diferente do recibo):
 
@@ -447,15 +453,6 @@ Por exemplo, alguém que tira férias de 20 de abril até 10 de maio:
   será 2/3 do valor normal
 
   em 5 de junho, o funcionário recebe o resto do salário
---
-Pagamento do vale (adiantamento)
-adiantamento, pagamentos, vale, planilha
-19 mar 2015
-Existe uma planilha somente com nomes e valores
-
-1. Funcionário confere o valor
-2. Assina
-3. Data (próprio punho)
 --
 Zerar Banco de horas
 DIMEP, cartão de ponto, banco de horas
