@@ -88,3 +88,7 @@ p {
     white-space: normal;
 }
 
+.noteTitle {
+    color: blue;
+    font-weight: bold;
+}
