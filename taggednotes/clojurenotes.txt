@@ -666,3 +666,12 @@ next. rest can return both empty and non-empty sequences, while next is
 Note: Although this example looks like it is constructing a new seq on
 each loop iteration, it runs faster than equivalent code using "empty?"
 --
+Printing the last stack trace in the REPL
+stack trace, repl
+14 apr 2015, from older notes
+
+https://clojuredocs.org/clojure.core/use
+
+(use '[clojure.stacktrace :only (e)])
+(e)
+--
