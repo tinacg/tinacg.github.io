@@ -555,7 +555,7 @@ Create and switch to namespaces with the ns macro:
 the *ns* var refers to the current namespace.
 --
 Loading other namespaces with :require
-namespaces, directives
+namespaces, directives, require
 14 apr 2015, Joy 2nd, p. 48
 
 As part of the ns macro, :require will load a namespace.
@@ -571,7 +571,7 @@ method, but the namespace symbol is used only as a qualifier. The class
 symbol references the class itself.
 --
 Loading and creating mappings in your own namespace with :refer
-namespaces, directives
+namespaces, directives, refer
 14 apr 2015, Joy 2nd, p. 48-49
 
 To avoid having to call symbols by their qualified names, use the
@@ -585,7 +585,7 @@ To avoid having to call symbols by their qualified names, use the
 is not recommended practice.
 --
 Create mappings with :refer
-namespaces, directives
+namespaces, directives, refer
 14 apr 2015, Joy 2nd, p. 49
 
 :refer, when used as a directive of ns, works almost exactly like the
@@ -596,7 +596,7 @@ mappings for libraries that have already been loaded.
     (:refer joy.ch2))
 --
 Renaming references and required names
-namespaces, directives
+namespaces, directives, rename
 14 apr 2015, Joy 2nd, p. 49
 
 The :rename keyword sets up aliases, taking a map. It may be used with
