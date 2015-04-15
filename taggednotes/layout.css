@@ -64,6 +64,7 @@ p {
     height: 100%;
     overflow: auto;
     white-space: nowrap;
+    background-color: #EEEEFF;
 }
 
 .sidebar {
@@ -75,11 +76,14 @@ p {
 
 .notes {
     width: 81%;
-    height: 100%;
+    height: 92%;
     margin-left: 19%;
+    padding-bottom: 20px;
     vertical-align: top;
     white-space: normal;
     overflow: auto;
+    border: 1px solid blue;
+    background-color: white;
 }
 
 .tags {
