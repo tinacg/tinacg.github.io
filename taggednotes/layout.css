@@ -61,7 +61,7 @@ p {
 }
 
 #container {
-    height: 100%;
+    height: 98%;
     overflow: auto;
     white-space: nowrap;
     background-color: #EEEEFF;
@@ -75,7 +75,7 @@ p {
 }
 
 .notes {
-    width: 81%;
+    width: 79%;
     height: 92%;
     margin-left: 19%;
     padding-bottom: 20px;
