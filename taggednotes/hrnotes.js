@@ -125,5 +125,12 @@ tags: ['DIMEP', 'cartão de ponto', 'banco de horas'],
 reference: "23 mar 2015",
 body: "Barra > Cadastros<br>  > Justificativas<br>  > Horas extras: selecione &quot;Não altera&quot;<br><br>Banco de Horas > Lançar débito<br>  Rotinas > Atualizar Banco de Horas<br>  Atualiza B. H.<br>  Escolhe funcionário<br>  Preenche e clica &quot;Salvar&quot; embaixo<br>" },
 
-numNotes: 18
+note18: { 
+id: "note18", 
+title: "Quantidade média de notas necessárias",
+tags: ['pagamentos'],
+reference: "14 abr 2015",
+body: "Para 22 pagamentos:<br>R$ 1: 9, R$ 2: 18, R$ 5: 11, R$ 10: 9, R$ 20: 18<br><br>Para 29 pagamentos:<br>R$ 1: 12, R$ 2: 24, R$ 5: 15, R$ 10: 12, R$ 20: 24<br>" },
+
+numNotes: 19
 };

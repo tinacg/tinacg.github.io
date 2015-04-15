@@ -303,28 +303,28 @@ body: "<br>Create and switch to namespaces with the ns macro:<br>(ns joy.ch2)<br
 note43: { 
 id: "note43", 
 title: "Loading other namespaces with :require",
-tags: ['namespaces', 'directives'],
+tags: ['namespaces', 'directives', 'require'],
 reference: "14 apr 2015, Joy 2nd, p. 48",
 body: "<br>As part of the ns macro, :require will load a namespace.<br>The :as directive will create an alias<br><br>(ns joy.req<br>    (:require [clojure.set :as s]))<br><br>(s/intersection #{1 2 3} #{3 4 5})<br><br>superficially, using a namespaced function looks like a call to a static<br>method, but the namespace symbol is used only as a qualifier. The class<br>symbol references the class itself.<br>" },
 
 note44: { 
 id: "note44", 
 title: "Loading and creating mappings in your own namespace with :refer",
-tags: ['namespaces', 'directives'],
+tags: ['namespaces', 'directives', 'refer'],
 reference: "14 apr 2015, Joy 2nd, p. 48-49",
 body: "<br>To avoid having to call symbols by their qualified names, use the<br>:refer option of the :require directive.<br><br>(ns joy.use-ex<br>    (:require [clojure.string :refer (capitalize)]))<br>(map capitalize [&quot;joe&quot; &quot;trout&quot;])<br><br>:refer :all brings in all the public vars from the given namespace, but<br>is not recommended practice.<br>" },
 
 note45: { 
 id: "note45", 
 title: "Create mappings with :refer",
-tags: ['namespaces', 'directives'],
+tags: ['namespaces', 'directives', 'refer'],
 reference: "14 apr 2015, Joy 2nd, p. 49",
 body: "<br>:refer, when used as a directive of ns, works almost exactly like the<br>option given in the :require directive, except that it only creates<br>mappings for libraries that have already been loaded.<br><br>(ns joy.yet-another<br>    (:refer joy.ch2))<br>" },
 
 note46: { 
 id: "note46", 
 title: "Renaming references and required names",
-tags: ['namespaces', 'directives'],
+tags: ['namespaces', 'directives', 'rename'],
 reference: "14 apr 2015, Joy 2nd, p. 49",
 body: "<br>The :rename keyword sets up aliases, taking a map. It may be used with<br>:refer and :require<br><br>(ns joy.yet-another<br>    (:refer clojure.set :rename {union onion}))<br>" },
 
@@ -359,9 +359,16 @@ body: "<br>If it is necessary to check for nil and false, use nil? and false?<br
 note51: { 
 id: "note51", 
 title: "Checking for an empty collection with seq",
-tags: ['collections', 'nil', 'empty'],
+tags: ['collections', 'nil', 'empty', 'seq'],
 reference: "14 apr 2015, Joy 2nd, p. 53-54",
 body: "<br>(seq x) will return nil if the collection is empty. It is used for testing<br>for termination, instead of (when-not (empty? s) ...)<br><br>(when (seq s)<br>  (prn (first s))<br>  (recur (rest s)))<br><br>since seq is being used in each iteration, rest should be used instead of<br>next. rest can return both empty and non-empty sequences, while next is<br>(seq (rest s)), so it will return nil instead of an empty sequence.<br><br>Note: Although this example looks like it is constructing a new seq on<br>each loop iteration, it runs faster than equivalent code using &quot;empty?&quot;<br>" },
 
-numNotes: 52
+note52: { 
+id: "note52", 
+title: "Printing the last stack trace in the REPL",
+tags: ['stack trace', 'repl'],
+reference: "14 apr 2015, from older notes",
+body: "<br>https://clojuredocs.org/clojure.core/use<br><br>(use '[clojure.stacktrace :only (e)])<br>(e)<br>" },
+
+numNotes: 53
 };

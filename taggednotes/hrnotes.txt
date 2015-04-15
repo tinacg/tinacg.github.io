@@ -462,3 +462,12 @@ Banco de Horas > Lançar débito
   Atualiza B. H.
   Escolhe funcionário
   Preenche e clica "Salvar" embaixo
+--
+Quantidade média de notas necessárias
+pagamentos
+14 abr 2015
+Para 22 pagamentos:
+R$ 1: 9, R$ 2: 18, R$ 5: 11, R$ 10: 9, R$ 20: 18
+
+Para 29 pagamentos:
+R$ 1: 12, R$ 2: 24, R$ 5: 15, R$ 10: 12, R$ 20: 24
