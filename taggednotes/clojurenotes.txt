@@ -649,7 +649,7 @@ nil, false
 If it is necessary to check for nil and false, use nil? and false?
 --
 Checking for an empty collection with seq
-collections, nil, empty
+collections, nil, empty, seq
 14 apr 2015, Joy 2nd, p. 53-54
 
 (seq x) will return nil if the collection is empty. It is used for testing
