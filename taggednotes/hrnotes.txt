@@ -259,6 +259,13 @@ Todos menos Márcia, João Carlos, Heitor, etc. recebem vale (adiantamento)
 Pago no dia 20 ou antes
 
 Valor é 40% do salário, arredondado para cima em dezenas (650, 660, 670)
+
+Preencher Vale (diferente do recibo):
+
+                   Valor
+Nome (no centro)
+	           data
+			   assinatura
 --
 Valores no holerite para verificar
 holerite, verificar
@@ -418,8 +425,8 @@ arredondado pra cima pro próximo Real
 
 Recibo deve ser preenchido:
 
-PTL                  R$ 308
-Nome funcionário   VT 04/15
+PTL                                         R$ 308
+Nome funcionário   VT 04/15 (mês seguinte)
 --
 Pagamentos pra quem entra de férias
 pagamentos, férias, vale, contabilidade, adiantamento
