@@ -366,9 +366,51 @@ body: "<br>(seq x) will return nil if the collection is empty. It is used for te
 note52: { 
 id: "note52", 
 title: "Printing the last stack trace in the REPL",
-tags: ['stack trace', 'repl'],
+tags: ['stack trace', 'repl', 'exception', 'debugging'],
 reference: "14 apr 2015, from older notes",
 body: "<br>https://clojuredocs.org/clojure.core/use<br><br>(use '[clojure.stacktrace :only (e)])<br>(e)<br>" },
 
-numNotes: 53
+note53: { 
+id: "note53", 
+title: "Destructuring is positionally binding locals",
+tags: ['destructuring', 'vector'],
+reference: "15 apr 2015, Joy 2nd, p. 55",
+body: "<br>Destructuring allows you to place a collecttion of names in a binding form<br>where you'd normally put a single name.<br><br>The simplest kind of destructuring is picking apart a vector:<br><br>(let [[f-name m-name l-name] whole-name]<br>     (str l-name &quot;, &quot; f-name &quot; &quot; m-name))<br><br>Using an ampersand indicates that remaining values will be collected into a seq<br><br>(let [[a b c & more] (range 10)])<br><br>The entire collection can be bound to a local with :as.<br><br>(let [[a b c & more :as all] range-vec])<br><br>all will remain a vector, while 'more' is a seq.<br><br>Destructuring works for 'let' locals and in function parameters. The ampersand<br>inside function arguments is not part of destructuring. It is part of the<br>general support for multiple function bodies.<br>" },
+
+note54: { 
+id: "note54", 
+title: "Destructuring with a map",
+tags: ['destructuring', 'map'],
+reference: "15 apr 2015, Joy 2nd, p. 57",
+body: "<br>If we wish to pull values from a map, a map of locals on the left obtaining<br>values of the keys to the right.<br><br>(def name-map {:f-name &quot;Guy&quot; :l-name &quot;Steele&quot;})<br>(let [{f-name :fname l-name :l-name} name-map])<br><br>To avoid this repetitive form, the directives :keys, :strs, and :syms can be<br>used, to indicate what kind of key is used in the target map.<br><br>(let [{:keys [f-name l-name]} name-map])<br><br>:as may also be used to keep the entire map.<br><br>The directive :or followed by a map provides default values:<br><br>(let [{:keys [title f-name],<br>     :or {title &quot;Mr.&quot;}} name-map])<br><br>These map destructuring features also work on lists, used when functions accept<br>keyword arguments:<br><br>(whole-name :f-name &quot;Guy&quot; :l-name &quot;Steele&quot;)<br>" },
+
+note55: { 
+id: "note55", 
+title: "Associative destructuring",
+tags: ['destructuring'],
+reference: "15 apr 2015, Joy 2nd, p. 58-59",
+body: "<br>A vector can be defstructured by providing a map declaring local names as<br>indices into the vector:<br><br>(let [{first-thing 0, last-thing 3} [1 2 3 4]]<br>     [first-thing last-thing])  ; [1 4]<br>" },
+
+note56: { 
+id: "note56", 
+title: "Searching documentation",
+tags: ['doc', 'find-doc', 'help'],
+reference: "15 apr 2015, Joy 2nd, p. 60",
+body: "<br>The find-doc function searches both function names and doc strings<br>" },
+
+note57: { 
+id: "note57", 
+title: "For directives",
+tags: ['for', 'directives', 'let', 'when'],
+reference: "15 apr 2015, Joy 2nd, p. 61",
+body: "<br>In a for form, :let works with a binding vector. :when limits the elements<br>used to only those returning a truthy value in the expression<br>" },
+
+note58: { 
+id: "note58", 
+title: "Last exception in the REPL",
+tags: ['exception', 'debugging', 'repl', 'stack trace'],
+reference: "15 apr 2015, Joy 2nd, p. 63",
+body: "<br>The last exception is stored in the *e variable.<br><br>(.printStackTrace *e) will print the stack trace.<br>" },
+
+numNotes: 59
 };
