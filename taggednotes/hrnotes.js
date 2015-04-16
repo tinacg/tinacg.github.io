@@ -4,7 +4,7 @@ id: "note0",
 title: "Ciclo mensal",
 tags: ['calendário'],
 reference: "5 mar 2015",
-body: "1 Salário (líquido) e bônus (até quinto dia útil, sábado é útil)<br>2<br>3 após pagar salário, mandar email pra contabilidade pra gerar FGTS<br>4   e entregar boletos para Priscilla, vencimento no email (até dia 7)<br>5<br>6<br>7<br>8<br>9<br>10 VB - solicitar pelo site (até dia 15)<br>11   Vale-transporte e Vale-alimentação<br>12<br>13<br>14<br>15<br>16<br>17<br>18 Vale (adiantamento) em dinheiro (até dia 20)<br>19<br>20<br>21 Puxar marcações do relógio de ponto<br>22   Preencher planilha pra contabilidade<br>23<br>24   Juntar holerites e vales (adiantamento) assinados pra Joyce<br>25   e se não estiver, pra Priscilla<br>26<br>27 Vale-transporte em dinheiro (até final do mês)<br>28   pedir funcionário assinar vale-alimentação<br>29<br>30<br>31<br>" },
+body: "1 Salário (líquido) e bônus (até quinto dia útil, sábado é útil)<br>2<br>3 após pagar salário, mandar email pra contabilidade pra gerar FGTS<br>4   e entregar boletos para Priscilla, vencimento no email (até dia 7)<br>5<br>6<br>7<br>8<br>9<br>10 VB - solicitar pelo site (até dia 15)<br>11   Vale-transporte e Vale-alimentação<br>12<br>13<br>14<br>15<br>16<br>17<br>18 Vale (adiantamento) em dinheiro (até dia 20)<br>19<br>20<br>21 Puxar marcações do relógio de ponto e pegar atestados com Mun<br>22   Preencher planilha pra contabilidade<br>23<br>24   Juntar holerites e vales (adiantamento) assinados pra Joyce<br>25   e se não estiver, pra Priscilla<br>26<br>27 Vale-transporte em dinheiro (até final do mês)<br>28   pedir funcionário assinar vale-alimentação<br>29<br>30<br>31<br>" },
 
 note1: { 
 id: "note1", 
@@ -123,7 +123,14 @@ id: "note17",
 title: "Quantidade média de notas necessárias",
 tags: ['pagamentos'],
 reference: "14 abr 2015",
-body: "Para 22 pagamentos:<br>R$ 1: 9, R$ 2: 18, R$ 5: 11, R$ 10: 9, R$ 20: 18<br><br>Para 29 pagamentos:<br>R$ 1: 12, R$ 2: 24, R$ 5: 15, R$ 10: 12, R$ 20: 24<br>" },
+body: "Para 22 pagamentos:<br>R$ 1: 9, R$ 2: 18, R$ 5: 11, R$ 10: 9, R$ 20: 18 = R$ 550<br><br>Para 29 pagamentos:<br>R$ 1: 12, R$ 2: 24, R$ 5: 15, R$ 10: 12, R$ 20: 24 = R$ 735<br>" },
 
-numNotes: 18
+note18: { 
+id: "note18", 
+title: "Marcar dia como feriado",
+tags: ['DIMEP', 'cartão de ponto'],
+reference: "16 abr 2015",
+body: "No programa DMP Advance:<br><br>1. (barra) Cadastros > feriados nacionais<br><br>2. clique na data do feriado<br><br>3. clique em salvar embaixo<br>" },
+
+numNotes: 19
 };

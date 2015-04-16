@@ -72,16 +72,16 @@ body: "<br>Rational numbers are a precise representation, written as an integer<
 note10: { 
 id: "note10", 
 title: "Symbols",
-tags: ['symbols', 'data types'],
-reference: "13 apr 2015, Joy 2nd, p. 28, 41",
-body: "<br>Symbols are objects in their own right but mostly used to represent<br>another value:<br><br>(def rational-pi 22/7)<br><br>Evaluating a symbol returns whatever value the symbol is referring to<br>in the current context. Typical uses of symbols are to refer to function<br>parameters, local variables, globals, and Java classes.<br><br>If a symbol begins with a namespace and a slash, it is a qualified symbol<br>" },
+tags: ['symbols', 'data types', 'metadata', 'namespaces'],
+reference: "13 apr 2015, 16 apr 2015, Joy 2nd, p. 28, 41, 79-80",
+body: "<br>Symbols are objects in their own right but mostly used to represent<br>another value:<br><br>(def rational-pi 22/7)<br><br>Evaluating a symbol returns whatever value the symbol is referring to<br>in the current context. Typical uses of symbols are to refer to function<br>parameters, local variables, globals, and Java classes.<br><br>If a symbol begins with a namespace and a slash, it is a qualified symbol<br><br>Symbols are primarily used to give a name to a value. They are discrete<br>entities from one lexical scope to another, and often even in a single<br>scope.<br><br>Symbols aren't unique based on name alone.<br>(identical? 'goat 'goat)  ; false<br><br>Symbol equality looks only at the name<br>(= 'goat 'goat)  ; true<br>(name 'goat)  ; &quot;goat&quot;<br><br>Two identically named symbols are not the same object because they have<br>unique metadata.<br><br>Symbols, like keywords, do not belong to any specific namespace.<br><br>Using resolve and syntax-quote returns what looks like a<br>namespace-qualified symbol. Qualification is a characteristic of<br>evaluation and not inherent in the symbol. This also applies to symbols<br>qualified with class names.<br>" },
 
 note11: { 
 id: "note11", 
 title: "Keywords",
-tags: ['keywords', 'data types'],
-reference: "13 apr 2015, Joy 2nd, p. 28",
-body: "<br>Keywords always evaluate to themselves.<br>They are written as <b>:MySymbolName</b><br>" },
+tags: ['keywords', 'data types', 'get'],
+reference: "13 apr 2015, 16 apr 2015, Joy 2nd, p. 28, 76",
+body: "<br>Keywords always evaluate to themselves.<br>They are written as <b>:MySymbolName</b><br><br>Keywords are almost always used as map keys, and as enumeration values<br><br>(get map key not-found) will look up map for the keyed value, and return<br>not-found if the key is not present.<br><br>A keyword also works as a function. Given a map, it looks itself up.<br>" },
 
 note12: { 
 id: "note12", 
@@ -412,5 +412,54 @@ tags: ['exception', 'debugging', 'repl', 'stack trace'],
 reference: "15 apr 2015, Joy 2nd, p. 63",
 body: "<br>The last exception is stored in the *e variable.<br><br>(.printStackTrace *e) will print the stack trace.<br>" },
 
-numNotes: 59
+note59: { 
+id: "note59", 
+title: "Creating and checking rational numbers",
+tags: ['rationals', 'numbers'],
+reference: "16 apr 2015, Joy 2nd, p. 74",
+body: "<br>rational? will check if a number is rational (or integer)<br><br>ratio? checks if a number is a ratio (has a numerator and denominator)<br><br>A ratio can be taken apart with numerator and denominator.<br><br>rationalize will create a rational (or BigInteger) of a given number, but<br>should not be used on Java float or double primitive (they will most<br>likely be truncated)<br><br>To maintain perfect accuracy, never use Java math libraries unless they<br>return results as BigDecimals.<br>" },
+
+note60: { 
+id: "note60", 
+title: "Qualified keywords",
+tags: ['keywords', 'qualifying'],
+reference: "16 apr 2015, Joy 2nd, p. 77",
+body: "<br>A keyword with two colons returns the keyword prefixed by the current<br>namespace name. However, the prefix is arbitrary, and is in no way<br>associated with a given namespace.<br><br>Qualified keywords are useful when a word could have an ambiguous meaning<br>" },
+
+note61: { 
+id: "note61", 
+title: "Storing and retrieving metadata",
+tags: ['metadata'],
+reference: "16 apr 2015, Joy 2nd, p. 79",
+body: "<br>(with-meta object metadata-map) attaches the metadata to the given object<br><br>(let [x (with-meta 'goat {:ornery true})])<br><br>(meta obj) will retrieve the metadata map<br><br>Keywords cannot hold metadata because equally named keywords are the same<br>object.<br>" },
+
+note62: { 
+id: "note62", 
+title: "Regular expressions (regexes)",
+tags: ['regexes'],
+reference: "16 apr 2015, Joy 2nd, p. 82",
+body: "<br>A literal regular expression (regex) looks like<br><br>#&quot;a pattern&quot;<br><br>and produces a compiled regex object that can be used with Java interop<br>method calls.<br><br>Unlike Java, doubling backslashes is not necessary in Clojure.<br>" },
+
+note63: { 
+id: "note63", 
+title: "Regex flags",
+tags: ['regexes', 'flags'],
+reference: "16 apr 2015, Joy 2nd, p. 82",
+body: "<br>Regex flags are written as (?i), for example, for a case insensitive<br>pattern. A flag sets the mode for the rest of the pattern.<br><br>d  UNIX_LINES, . ^ and $ match only '\\n'<br>i  CASE_INSENSITIVE, ASCII matched without regard to upper or lower case<br>x  COMMENTS, whitespace and comments in the pattern are ignored<br>m  MULTILINE, ^ and $ match near line terminators instead of the<br>     beginning or end of the entire input string<br>s  DOTALL, . matches any character, including the line terminator<br>u  UNICODE_CASE, causes the i flag to use Unicode case insensitivity<br>" },
+
+note64: { 
+id: "note64", 
+title: "Test if a string matches and find all matches with re-seq",
+tags: ['regexes', 're-seq', 'capturing group'],
+reference: "16 apr 2015, Joy 2nd, p. 83",
+body: "<br>The re-seq function returns a lazy seq of all matches in a string. The<br>result can be used to test whether a string matches or to find all matches<br>in a string or mapped file.<br><br>(re-seq #&quot;\\w+&quot; &quot;one-two/three&quot;)<br><br>Capturing groups in the pattern causes each returned item to be a vector<br><br>(re-seq #&quot;\\w*(\\w)&quot; &quot;one-two/three&quot;)<br>" },
+
+note65: { 
+id: "note65", 
+title: "Avoid the mutable regex Matcher",
+tags: ['regexes', 'matcher', 're-matcher', 're-groups', 're-find'],
+reference: "16 apr 2015, Joy 2nd, p. 83",
+body: "<br>Because the Java Matcher object mutates in a non-thread-safe way, the<br>functions re-matcher, re-groups and re-find should all be avoided.<br>" },
+
+numNotes: 66
 };

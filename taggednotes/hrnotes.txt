@@ -21,7 +21,7 @@ calendário
 18 Vale (adiantamento) em dinheiro (até dia 20)
 19
 20
-21 Puxar marcações do relógio de ponto
+21 Puxar marcações do relógio de ponto e pegar atestados com Mun
 22   Preencher planilha pra contabilidade
 23   
 24   Juntar holerites e vales (adiantamento) assinados pra Joyce
@@ -471,7 +471,18 @@ Quantidade média de notas necessárias
 pagamentos
 14 abr 2015
 Para 22 pagamentos:
-R$ 1: 9, R$ 2: 18, R$ 5: 11, R$ 10: 9, R$ 20: 18
+R$ 1: 9, R$ 2: 18, R$ 5: 11, R$ 10: 9, R$ 20: 18 = R$ 550
 
 Para 29 pagamentos:
-R$ 1: 12, R$ 2: 24, R$ 5: 15, R$ 10: 12, R$ 20: 24
+R$ 1: 12, R$ 2: 24, R$ 5: 15, R$ 10: 12, R$ 20: 24 = R$ 735
+--
+Marcar dia como feriado
+DIMEP, cartão de ponto
+16 abr 2015
+No programa DMP Advance:
+
+1. (barra) Cadastros > feriados nacionais
+
+2. clique na data do feriado
+
+3. clique em salvar embaixo

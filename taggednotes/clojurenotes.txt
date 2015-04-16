@@ -100,8 +100,8 @@ Rational numbers are a precise representation, written as an integer
 over another: 3/2. They are automatically simplified. They do not print N
 --
 Symbols
-symbols, data types
-13 apr 2015, Joy 2nd, p. 28, 41
+symbols, data types, metadata, namespaces
+13 apr 2015, 16 apr 2015, Joy 2nd, p. 28, 41, 79-80
 
 Symbols are objects in their own right but mostly used to represent
 another value:
@@ -113,13 +113,41 @@ in the current context. Typical uses of symbols are to refer to function
 parameters, local variables, globals, and Java classes.
 
 If a symbol begins with a namespace and a slash, it is a qualified symbol
+
+Symbols are primarily used to give a name to a value. They are discrete
+entities from one lexical scope to another, and often even in a single
+scope.
+
+Symbols aren't unique based on name alone.
+(identical? 'goat 'goat)  ; false
+
+Symbol equality looks only at the name
+(= 'goat 'goat)  ; true
+(name 'goat)  ; "goat"
+
+Two identically named symbols are not the same object because they have
+unique metadata.
+
+Symbols, like keywords, do not belong to any specific namespace.
+
+Using resolve and syntax-quote returns what looks like a
+namespace-qualified symbol. Qualification is a characteristic of
+evaluation and not inherent in the symbol. This also applies to symbols
+qualified with class names.
 --
 Keywords
-keywords, data types
-13 apr 2015, Joy 2nd, p. 28
+keywords, data types, get
+13 apr 2015, 16 apr 2015, Joy 2nd, p. 28, 76
 
 Keywords always evaluate to themselves.
 They are written as <b>:MySymbolName</b>
+
+Keywords are almost always used as map keys, and as enumeration values
+
+(get map key not-found) will look up map for the keyed value, and return
+not-found if the key is not present.
+
+A keyword also works as a function. Given a map, it looks itself up.
 --
 Strings
 strings, data types
@@ -758,4 +786,93 @@ exception, debugging, repl, stack trace
 The last exception is stored in the *e variable.
 
 (.printStackTrace *e) will print the stack trace.
+--
+Creating and checking rational numbers
+rationals, numbers
+16 apr 2015, Joy 2nd, p. 74
+
+rational? will check if a number is rational (or integer)
+
+ratio? checks if a number is a ratio (has a numerator and denominator)
+
+A ratio can be taken apart with numerator and denominator.
+
+rationalize will create a rational (or BigInteger) of a given number, but
+should not be used on Java float or double primitive (they will most
+likely be truncated)
+
+To maintain perfect accuracy, never use Java math libraries unless they
+return results as BigDecimals.
+--
+Qualified keywords
+keywords, qualifying
+16 apr 2015, Joy 2nd, p. 77
+
+A keyword with two colons returns the keyword prefixed by the current
+namespace name. However, the prefix is arbitrary, and is in no way
+associated with a given namespace.
+
+Qualified keywords are useful when a word could have an ambiguous meaning
+--
+Storing and retrieving metadata
+metadata
+16 apr 2015, Joy 2nd, p. 79
+
+(with-meta object metadata-map) attaches the metadata to the given object
+
+(let [x (with-meta 'goat {:ornery true})])
+
+(meta obj) will retrieve the metadata map
+
+Keywords cannot hold metadata because equally named keywords are the same
+object.
+--
+Regular expressions (regexes)
+regexes
+16 apr 2015, Joy 2nd, p. 82
+
+A literal regular expression (regex) looks like
+
+#"a pattern"
+
+and produces a compiled regex object that can be used with Java interop
+method calls.
+
+Unlike Java, doubling backslashes is not necessary in Clojure.
+--
+Regex flags
+regexes, flags
+16 apr 2015, Joy 2nd, p. 82
+
+Regex flags are written as (?i), for example, for a case insensitive
+pattern. A flag sets the mode for the rest of the pattern.
+
+d  UNIX_LINES, . ^ and $ match only '\n'
+i  CASE_INSENSITIVE, ASCII matched without regard to upper or lower case
+x  COMMENTS, whitespace and comments in the pattern are ignored
+m  MULTILINE, ^ and $ match near line terminators instead of the
+     beginning or end of the entire input string
+s  DOTALL, . matches any character, including the line terminator
+u  UNICODE_CASE, causes the i flag to use Unicode case insensitivity
+--
+Test if a string matches and find all matches with re-seq
+regexes, re-seq, capturing group
+16 apr 2015, Joy 2nd, p. 83
+
+The re-seq function returns a lazy seq of all matches in a string. The
+result can be used to test whether a string matches or to find all matches
+in a string or mapped file.
+
+(re-seq #"\w+" "one-two/three")
+
+Capturing groups in the pattern causes each returned item to be a vector
+
+(re-seq #"\w*(\w)" "one-two/three")
+--
+Avoid the mutable regex Matcher
+regexes, matcher, re-matcher, re-groups, re-find
+16 apr 2015, Joy 2nd, p. 83
+
+Because the Java Matcher object mutates in a non-thread-safe way, the
+functions re-matcher, re-groups and re-find should all be avoided.
 --
