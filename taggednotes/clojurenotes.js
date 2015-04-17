@@ -289,7 +289,7 @@ body: "<br>The doto macro is used when calling a set of mutators to a fresh inst
 note41: { 
 id: "note41", 
 title: "Throwing and catching",
-tags: ['exceptions'],
+tags: ['exceptions', 'try', 'catch'],
 reference: "14 apr 2015, Joy 2nd, p. 46",
 body: "<br>Throwing and catching is similar to Java<br><br>(throw (Exception. &quot;This is throwed&quot;))<br><br>(try<br> (f)<br> (catch ArithmeticException ae &quot;no dividing by zero&quot;)<br> (catch Exception e (str &quot;exception &quot; (.getMessage e)))<br> (finally (println &quot;returning&quot;)))<br>" },
 

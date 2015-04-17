@@ -560,7 +560,7 @@ The doto macro is used when calling a set of mutators to a fresh instance
       (.put "BIN" "/usr/bin"))
 --
 Throwing and catching
-exceptions
+exceptions, try, catch
 14 apr 2015, Joy 2nd, p. 46
 
 Throwing and catching is similar to Java
