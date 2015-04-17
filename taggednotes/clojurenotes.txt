@@ -170,9 +170,16 @@ Characters. \a, \u30DE, and \space are some examples.
 --
 Collections
 collections
-13 apr 2015, Joy 2nd, p. 29
+13 apr 2015, 17 apr 2015, Joy 2nd, p. 29, 87
 
-Collections include lists, vectors, maps, and sets
+Collections include lists, vectors, maps, and sets.
+
+The three logical categories (or partitions) are sequentials, maps, and
+sets. If two objects belong to different partitions, they will never be
+equal.
+
+Few collection types are sequences, but several, such as vectors, are
+sequential.
 --
 Lists
 lists, collections
@@ -202,10 +209,21 @@ A special form is part of the core language, but not created in terms of
 functions, types, or macros.
 --
 Vectors
-vectors, collections
-13 apr 2015, Joy 2nd, p. 30
+vectors, collections, rseq
+13 apr 2015, Joy 2nd, p. 30, 88, 91
+
+Vectors are probably the most frequently used collection type. They are
+used for argument lists, as stacks, map entries, and to hold large
+amounts of application data.
 
 The literal syntax for vectors uses square brackets [1 2 :c]
+
+A vector can be created from another collection with the vec function
+(vec (range 10))
+
+To concatenate a sequence to a vector, use (into my-vector other-seq)
+
+The vector function builds a vector from its arguments.
 
 Vectors evaluate each item in order. No function or macro call is done
 on the vector itself, although if a list is inside the vector, that list
@@ -214,10 +232,49 @@ is evaluated with normal rules for a list.
 The empty vector, [], is not the same as nil.
 
 A vector, like scalars and maps, evaluates to itself.
+
+Vectors support the rseq function, which returns a seq in reverse order
+
+Vectors can store Java primitive types with the vector-of function. Types
+are indicated by keywords such as :int, :char, and :boolean.
+
+Vectors are efficient in adding and removing things from the right end,
+accessing or changing by numeric index, and walking in either direction.
+--
+Vector length
+vectors, length, count
+17 apr 2015, Joy 2nd, p. 92
+
+The length of a vector is (count my-vector)
+--
+Vector lookup
+vectors, lookup, nth, get
+17 apr 2015, Joy 2nd, p. 92
+ 
+(nth my-vec 3 optional-value-if-not-found)
+  ;; throws IndexOutOfBoundsException
+  
+(my-vec 3)  ; throws IndexOutOfBoundsException
+
+(get my-vec 3 optional-value-if-not-found)
+--
+Changing a vector
+vectors, changing, assoc, replace
+17 apr 2015, Joy 2nd, p. 93
+
+Any item in a vector can be changed with the assoc function.
+
+(assoc my-vec 3 "new value")
+
+The vector length may be used as the index to add to the end, though
+conj is normally used for this purpose.
+
+(replace {2 :a, 4 :b} [1 2 3 2 3 4])
+;=> [1 :a 3 :a 3 :b]
 --
 Maps
 maps, collections
-13 apr 2015, Joy 2nd, p. 30
+13 apr 2015, Joy 2nd, p. 30, 88
 
 Maps store unique keys and one value per key. They are similar to hashes
 or dictionaries in other languages.
@@ -235,6 +292,8 @@ The order in which the elements are evaluated is not guaranteed.
 The empty map, {}, is not the same as nil.
 
 A map, like a vector or scalar, evaluates to itself.
+
+Maps support the functions keys and vals.
 --
 Sets
 sets, collections
@@ -677,8 +736,8 @@ nil, false
 If it is necessary to check for nil and false, use nil? and false?
 --
 Checking for an empty collection with seq
-collections, nil, empty, seq
-14 apr 2015, Joy 2nd, p. 53-54
+collections, nil, empty, seq, rest
+14 apr 2015, Joy 2nd, p. 53-54, 86
 
 (seq x) will return nil if the collection is empty. It is used for testing
 for termination, instead of (when-not (empty? s) ...)
@@ -686,6 +745,8 @@ for termination, instead of (when-not (empty? s) ...)
 (when (seq s)
   (prn (first s))
   (recur (rest s)))
+
+If there are no items, rest will return an empty sequence and never nil.
 
 since seq is being used in each iteration, rest should be used instead of
 next. rest can return both empty and non-empty sequences, while next is
@@ -875,4 +936,62 @@ regexes, matcher, re-matcher, re-groups, re-find
 
 Because the Java Matcher object mutates in a non-thread-safe way, the
 functions re-matcher, re-groups and re-find should all be avoided.
+--
+Persistence
+persistence
+17 apr 2015, Joy 2nd, p. 85
+
+A persistent collection allows you to preserve historical versions of its
+state and promises that all versions will have the same update and lookup
+complexity guarantees.
+--
+Java array vs. a persistent array
+array, persistence
+17 apr 2015, Joy 2nd, p. 85-86
+
+A Java array can be created with into-array
+
+(def ds (into-array [:willie :barnabas :adam]))
+(seq ds)  ; display in REPL
+(aset ds 1 :quentin)  ; set value in array slot
+
+In Clojure, replacing a value creates a new vector with the changed value.
+The unmodified elements are shared, so the operation is efficient
+
+(def ds [:willie :barnabas :adam])
+(def ds2 (replace {:barnabas :quentin} ds))
+--
+sequential? caveat
+sequential
+17 apr 2015, Joy 2nd, p. 87
+
+The function sequential? may return false for some sequential objects,
+due to implementation details.
+--
+Sequences, sequentials, and seq
+seq, sequentials, sequences, equality
+17 apr 2015, Joy 2nd, p. 86-88
+
+A sequential collection holds a series of values without reordering them.
+Examples are lists, vectors, and anything implementing java.util.List.
+
+A sequence is a sequential collection representing a series of values.
+They may not exist yet, or be empty. Such non-existent values may be
+computed as necessary.
+
+seq is an API for navigating collections.
+It consists of the functions first and rest.
+
+If two sequentials have the same values in the same order, = returns true
+even if their concrete types are different.
+
+However, if one collection is sequential and the other not, = returns
+false.
+--
+Exception: No matching method found
+exception, debugging
+17 apr 2015
+
+An IllegalArgumentException: No matching method found may be because the
+argument types do not match the method signature.
 --
