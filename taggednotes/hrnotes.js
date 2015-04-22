@@ -128,7 +128,7 @@ body: "Para 22 pagamentos:<br>R$ 1: 9, R$ 2: 18, R$ 5: 11, R$ 10: 9, R$ 20: 18 =
 note18: { 
 id: "note18", 
 title: "Marcar dia como feriado",
-tags: ['DIMEP', 'cartão de ponto'],
+tags: ['DIMEP', 'cartão de ponto', 'feriados'],
 reference: "16 abr 2015",
 body: "No programa DMP Advance:<br><br>1. (barra) Cadastros > feriados nacionais<br><br>2. clique na data do feriado<br><br>3. clique em salvar embaixo<br>" },
 

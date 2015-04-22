@@ -477,7 +477,7 @@ Para 29 pagamentos:
 R$ 1: 12, R$ 2: 24, R$ 5: 15, R$ 10: 12, R$ 20: 24 = R$ 735
 --
 Marcar dia como feriado
-DIMEP, cartão de ponto
+DIMEP, cartão de ponto, feriados
 16 abr 2015
 No programa DMP Advance:
 

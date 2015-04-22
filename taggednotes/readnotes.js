@@ -6,7 +6,7 @@ function createNote(noteObj) {
   
   var title = document.createElement("p");
 
-  title.innerHTML = '<br><span class="noteTitle" onclick="toggleNote(\'' + noteObj.id + '\')"><b>' + noteObj.title + '</b></span><hr>';
+  title.innerHTML = '<hr><span class="noteTitle" onclick="toggleNote(\'' + noteObj.id + '\')"><b>' + noteObj.title + '</b></span><br><br>';
 
   var noteContents = document.createElement("p");
   noteContents.setAttribute("id", noteObj.id);
@@ -18,16 +18,23 @@ function createNote(noteObj) {
     tags.innerHTML += "[" + createTag(tag) + "] ";
   });
 
+  tags.innerHTML += "<br><br>"
+
   var ref = document.createElement("p");
   ref.innerHTML = noteObj.reference;
+  ref.innerHTML += "<br><br>";
   
   var body = document.createElement("pre");
 
   body.innerHTML = noteObj.body;
 
+  var padding = document.createElement("p");
+  padding.innerHTML = "<br><br>";
+  
   noteContents.appendChild(tags);
   noteContents.appendChild(ref);
   noteContents.appendChild(body);
+  noteContents.appendChild(padding);
   
   note.appendChild(title);
   note.appendChild(noteContents);

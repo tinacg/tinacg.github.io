@@ -183,7 +183,7 @@ sequential.
 --
 Lists
 lists, collections
-13 apr 2015, Joy 2nd, p. 29
+13 apr 2015, 17 apr 2015, Joy 2nd, p. 29, 99
 
 Literal lists are written with parentheses.
 
@@ -194,6 +194,12 @@ operators have specific processing rules.
 
 Lists can contain items of any type.
 The empty list, (), is <b>not</b> the same as nil.
+
+List elements can only be found by starting with the first element and walking
+each node. Nodes can be added or removed only at the left end.
+
+Lists are almost exclusively used to represent code forms. There is rarely any
+value over vectors.
 --
 Forms
 forms, objects, special forms
@@ -259,7 +265,7 @@ vectors, lookup, nth, get
 (get my-vec 3 optional-value-if-not-found)
 --
 Changing a vector
-vectors, changing, assoc, replace
+vectors, changing, assoc, replace, conj
 17 apr 2015, Joy 2nd, p. 93
 
 Any item in a vector can be changed with the assoc function.
@@ -969,8 +975,8 @@ The function sequential? may return false for some sequential objects,
 due to implementation details.
 --
 Sequences, sequentials, and seq
-seq, sequentials, sequences, equality
-17 apr 2015, Joy 2nd, p. 86-88
+seqs, sequentials, sequences, equality
+17 apr 2015, Joy 2nd, p. 86-88, 100
 
 A sequential collection holds a series of values without reordering them.
 Examples are lists, vectors, and anything implementing java.util.List.
@@ -987,6 +993,8 @@ even if their concrete types are different.
 
 However, if one collection is sequential and the other not, = returns
 false.
+
+Regardless of its type, all seqs print with rounded parentheses.
 --
 Exception: No matching method found
 exception, debugging
@@ -994,4 +1002,107 @@ exception, debugging
 
 An IllegalArgumentException: No matching method found may be because the
 argument types do not match the method signature.
+--
+Matrix processing libraries
+matrices, libraries
+17 apr 2015, Joy 2nd, p. 93
+
+Colt and Incanter are two libraries for matrix processing.
+--
+Getting and changing nested vectors
+vectors, nested vectors, assoc-in, get-in, update-in
+17 apr 2015, Joy 2nd, p. 94
+
+The functions assoc-in, get-in, and update-in take a matrix (vector of vectors)
+and a series of indices to pick or change items.
+
+(get-in matrix [1 2])
+(assoc-in matrix [1 2] 'x)
+(update-in matrix [1 2] / 100)  ; applies a function to the existing value
+  the slot 'x' at [1 2] becomes (/ x 100)
+--
+Vectors as stacks
+vectors, stacks, conj, pop, peek
+17 apr 2015, Joy 2nd, p. 95
+
+adding: use conj, not assoc
+getting: use peek, not last
+removing: use pop, not dissoc
+
+conj and pop are the equivalent functions to push and pop. pop will return a
+new vector with the rightmost item dropped. peek returns the rightmost item.
+
+peek is preferrable to last when using a vector (last walks the vector)
+
+These functions also work with lists, but on the left side instead. When treated
+as stacks, the ordering should be ignored.
+
+next on a one-item list returns nil, but rest and pop return an empty list.
+--
+Accumulate to a vector to make reversing unnecessary
+vectors, algorithms, accumulating
+17 apr 2015, Joy 2nd, p. 96
+
+A typical list-processing function will leave the result reversed. To avoid
+reversing the result, the result can be accumulated to a vector:
+
+(defn my-map [f coll]
+  (loop [coll coll, acc []]
+        (if (empty? coll)
+            acc
+            (recur (next coll)
+                   (conj acc (f (first coll)))))))
+(my-map - (range 5))
+--
+Subvectors (slices)
+subvectors, slices, vectors
+17 apr 2015, Joy 2nd, p. 97
+
+Slicing a vector is fast
+(subvec my-vec 3 6)
+ 
+The first index is included, and the ending index is excluded. The slice begins
+at 3 and ends before index 6.
+
+Sub-subvectors keeps a reference to the original vector, so using them is still
+efficient.
+--
+Place items inside a seq
+seqs, inserting
+17 apr 2015, http://stackoverflow.com/questions/5088803/in-clojure-is-there-an-easy-way-to-convert-between-list-types
+
+(into [0] (set [1 2 3 2 1 4 5]))
+(into #{} [1 2 3 4 5 4 3 2 1])
+--
+Test if a collection holds certain values
+collections, contains
+17 apr 2015, Cookbook, p. 111
+
+Use some with the desired values inside a set
+(some #{1 2} (range 10))
+
+The set acts like a function, and works as a predicate.
+
+For nil and false, use (some nil? my-coll) and (some false? my-coll)
+
+contains? checks for the existence of a key, not a value.
+--
+Adding to a list
+lists, conj, cons, adding
+17 apr 2015, Joy 2nd, p. 99
+
+The right way of adding to the front of a list is to use conj
+
+(conj my-lst value)
+
+Using cons only promise that the result is some kind of seq.
+Only conj will guarantee returning a bigger list.
+--
+No dotted pair
+cons, dotted pair, vectors
+17 apr 2015, Joy 2nd, p. 100
+
+There is no dotted pair in Clojure.
+(cons 1 2) throws an IllegalArgumentException.
+For a simple pair, a vector should be used.
 --

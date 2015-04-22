@@ -1,0 +1,60 @@
+The 'unless' form is the opposite of "when"
+unless
+21 apr 2015, Realm, p. 63
+
+(unless predicate expressions) is the opposite of "when".
+
+(unless (> temperature 212) 'not-yet-boiling)
+--
+Only #f is considered to be false
+booleans, false
+21 apr 2015; Realm, p. 57
+
+Everything except #f counts as #t
+--
+Empty, null, and '() are interchangeable
+empty, null, lists
+21 apr 2015, Realm, p. 44
+
+empty, null, and '() can all be interchanged
+--
+Boolean true and false values
+booleans, true, false
+21 apr 2015, Realm, p. 52
+
+The Booleans #t, #true, true, also, #f, #false, false are interchangeable
+--
+Equality testing
+equality, predicates
+21 apr 2015, Realm, p. 65-67
+
+(equal? x y) is updated whenever a struct is defined. equal? compares
+
+(eq? x y) tests for object identity. It will be true for two references to the
+same object.
+
+eq? compares whether changing one structure will change the other structure
+--
+Reading out loud
+reading
+21 apr 2015, Realm, p. 33, 52
+
+set! is "set bang"
+student? is "student, huh?"
+--
+Testing with rackunit
+testing, rackunit
+21 apr 2015, Realm, p. 68-70
+
+(require rackunit)
+
+Commonly used functions are:
+
+check-equal?
+check-not-equal?
+check-true
+check-false
+check-not-false
+(check-pred number? 2)
+(check-= m n epsilon) checks that m and n are within epsilon of each other
+--
