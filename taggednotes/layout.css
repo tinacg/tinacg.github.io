@@ -92,3 +92,8 @@ p {
     color: blue;
     font-weight: bold;
 }
+
+.alert {
+    color: red;
+    font-weight: bold;
+}
