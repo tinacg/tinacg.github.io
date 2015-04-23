@@ -291,14 +291,14 @@ Valor do Salário líquido
 Funcionário assina:
 Holerite, 2 vezes, com data
 Cartão de ponto, sem data
-Recibo de pagamento (se tiver), com data
+Recibo de pagamento (extra), se tiver, com data
 vale-transporte (se tiver), 1 vez, sem data
 vale-alimentação, com data
 
 Entregar:
 Uma via do holerite
 Uma via do vale-transporte (se tiver)
-recibo do vale (adiantamento) se tive
+recibo do vale (adiantamento) se tiver
 
 Após o pagamento do salário, enviar email pra contabilidade pedindo
 boletos de FGTS (total 4 boletos)

@@ -74,7 +74,7 @@ id: "note10",
 title: "Pagamento de salário",
 tags: ['salário', 'pagamentos'],
 reference: "4 mar 2015",
-body: "Valor do Salário líquido<br><br>Funcionário assina:<br>Holerite, 2 vezes, com data<br>Cartão de ponto, sem data<br>Recibo de pagamento (se tiver), com data<br>vale-transporte (se tiver), 1 vez, sem data<br>vale-alimentação, com data<br><br>Entregar:<br>Uma via do holerite<br>Uma via do vale-transporte (se tiver)<br>recibo do vale (adiantamento) se tive<br><br>Após o pagamento do salário, enviar email pra contabilidade pedindo<br>boletos de FGTS (total 4 boletos)<br><br>DARF pagamento<br>DARF pro labore<br>GPS (escrever vencimento no boleto)<br>FGTS<br><br>Data de vencimentos no email, escrever no boleto impresso e entregar para<br>Priscilla<br>" },
+body: "Valor do Salário líquido<br><br>Funcionário assina:<br>Holerite, 2 vezes, com data<br>Cartão de ponto, sem data<br>Recibo de pagamento (extra), se tiver, com data<br>vale-transporte (se tiver), 1 vez, sem data<br>vale-alimentação, com data<br><br>Entregar:<br>Uma via do holerite<br>Uma via do vale-transporte (se tiver)<br>recibo do vale (adiantamento) se tiver<br><br>Após o pagamento do salário, enviar email pra contabilidade pedindo<br>boletos de FGTS (total 4 boletos)<br><br>DARF pagamento<br>DARF pro labore<br>GPS (escrever vencimento no boleto)<br>FGTS<br><br>Data de vencimentos no email, escrever no boleto impresso e entregar para<br>Priscilla<br>" },
 
 note11: { 
 id: "note11", 
