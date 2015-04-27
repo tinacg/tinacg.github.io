@@ -1,0 +1,79 @@
+Check if argument is an atom or list
+atom, list, lists, types, atoms
+24 apr 2015, http://learnxinyminutes.com/docs/common-lisp/
+
+(atom x) checks if x is an atom. Returns T or NIL
+(atom 3)  ; T
+(atom '())  ; T
+(atom nil)  ; T
+(atom (lambda (x) (+ 1 x)))  ; T
+(atom '(1 2 3))  ; NIL
+
+(listp x) checks if x is a list or '() or NIL
+(listp '())  ; T
+(listp nil)  ; T
+(listp '(1 2 3))  ; T
+(listp 3)  ; NIL
+--
+Semicolon and Block comments
+comments
+24 apr 2015, http://learnxinyminutes.com/docs/common-lisp/
+
+; comments after some expressions
+;; normal comments
+;;; section comments
+;;;; file-level comments
+
+#| Block comments
+  #|
+    Can be nested
+  |#
+|#
+--
+Symbols
+symbols
+24 apr 2015, http://learnxinyminutes.com/docs/common-lisp/
+
+Quoting a name to create a symbol automatically uppercases it
+It is the same as (quote name)
+
+(intern "some-name") creates a symbol from a string. It is case-sensitive
+--
+Falsity
+falsity, nil
+24 apr 2015, http://learnxinyminutes.com/docs/common-lisp/
+
+Anything not NIL is considered true.
+NOTE: '() is the same as NIL
+
+(if nil 'yes 'no)  ; NO
+(if '() 'yes 'no)  ; NO
+(if 0 'yes 'no)  ; YES
+
+t is boolean for true
+--
+Calling a function manually
+funcall
+24 apr 2015, http://learnxinyminutes.com/docs/common-lisp/
+
+(funcall #'+ 1 2 3)  ; 6
+
+#' is read "sharp-quote"
+--
+Characters
+characters
+24 apr 2015, http://learnxinyminutes.com/docs/common-lisp/
+
+#\A
+#\u03BB  ; Greek lambda
+
+To print a Unicode character
+(format t "~a" #\u03bb)
+--
+Concatenating strings
+strings, concatenate
+24 apr 2015, http://learnxinyminutes.com/docs/common-lisp/
+
+(concatenate 'string "Common" " " "Lisp" " says \"Hi\"")
+(format t "~a~%" "He said \"Bye.\"")  ; newline at end
+--

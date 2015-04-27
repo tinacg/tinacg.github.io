@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+	<meta charset="utf-8">
+	<title>Common Lisp - Tagged Notes</title>
+	<link rel="stylesheet" href="layout.css" type="text/css">
+  </head>
+  <body>
+	<div id="container">
+	  <div class="sidebar">
+		<div class="tags" id="tags">
+		  <p onclick="">Loading...</p>
+		</div>
+	  </div> <!-- END sidebar -->
+	  <div class="notes" id="notes">
+		<br>
+		Common Lisp notes, started 24 apr 2015
+		<br><br>
+		Please select a tag
+		<hr>
+		<pre>
+  Format (languagenotes.txt):
+  
+  title
+  tags, comma-separated
+  date and reference, page number
+  notes
+  ... more notes
+  ... even more notes
+  --
+  next title
+  next tags...
+
+  Run python process.py languagenotes
+
+  http://learnxinyminutes.com/docs/common-lisp/
+		</pre>
+	  </div>
+	</div> <!-- END div id="container" -->
+	<script src="commonlispnotes.js"></script>
+	<script src="readnotes.js"></script>
+	<script src="setupnotes.js"></script>
+  </body>
+</html>

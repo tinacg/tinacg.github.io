@@ -86,7 +86,7 @@ body: "Talão de recibos e vales com Claldinei<br><br>Problemas:<br>  - Priscill
 note12: { 
 id: "note12", 
 title: "Serviços Online",
-tags: ['serviços', 'contas'],
+tags: ['serviços', 'contas', 'VB', 'assistência médica'],
 reference: "12 mar 15",
 body: "VB - Vale-transporte e Vale-alimentação<br>www.vb.com.br<br><br>Unimed Paulistana<br>unimedpaulistana.com.br<br>Portal PJ<br><br>ver informações no caderno<br>" },
 
