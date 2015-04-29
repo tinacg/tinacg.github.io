@@ -48,5 +48,12 @@ tags: ['strings', 'concatenate'],
 reference: "24 apr 2015, http://learnxinyminutes.com/docs/common-lisp/",
 body: "<br>(concatenate 'string &quot;Common&quot; &quot; &quot; &quot;Lisp&quot; &quot; says \\&quot;Hi\\&quot;&quot;)<br>(format t &quot;~a~%&quot; &quot;He said \\&quot;Bye.\\&quot;&quot;)  ; newline at end<br>" },
 
-numNotes: 7
+note7: { 
+id: "note7", 
+title: "The secret of Lisp",
+tags: ['secret', 'enlightenment', 'lists', 'functions', 'atom', 'nil', 'empty list'],
+reference: "29 apr 2015",
+body: "<br>Adding 1 + 1<br><br>The function call is a list<br><br>? (+ 1 1)<br>2<br><br>The list is a function call (calling cons multiple times)<br><br>? (cons (quote +) (cons 1 (cons 1 nil)))<br>(+ 1 1)<br><br>? (eval (cons (quote +) (cons 1 (cons 1 nil))))<br>2<br><br><br>? (cons 'list nil)<br>(list)<br><br>Is the empty list a list?<br>No, an empty list is the nil symbol, and a symbol is merely an atom.<br><br>http://stackoverflow.com/questions/16606172/is-an-empty-list-in-lisp-built-from-a-cons-cell<br><br>? (atom '())  ; because '() is the same as nil<br>T<br><br>? (atom nil)<br>T<br><br>? (atom (quote (1)))<br>NIL<br>" },
+
+numNotes: 8
 };

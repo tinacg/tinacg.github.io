@@ -77,3 +77,39 @@ strings, concatenate
 (concatenate 'string "Common" " " "Lisp" " says \"Hi\"")
 (format t "~a~%" "He said \"Bye.\"")  ; newline at end
 --
+The secret of Lisp
+secret, enlightenment, lists, functions, atom, nil, empty list
+29 apr 2015
+
+Adding 1 + 1
+
+The function call is a list
+
+? (+ 1 1)
+2
+
+The list is a function call (calling cons multiple times)
+
+? (cons (quote +) (cons 1 (cons 1 nil)))
+(+ 1 1)
+
+? (eval (cons (quote +) (cons 1 (cons 1 nil))))
+2
+
+
+? (cons 'list nil)
+(list)
+
+Is the empty list a list?
+No, an empty list is the nil symbol, and a symbol is merely an atom.
+
+http://stackoverflow.com/questions/16606172/is-an-empty-list-in-lisp-built-from-a-cons-cell
+
+? (atom '())  ; because '() is the same as nil
+T
+
+? (atom nil)
+T
+
+? (atom (quote (1)))
+NIL
