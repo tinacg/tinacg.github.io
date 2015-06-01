@@ -53,7 +53,7 @@ NOTE: '() is the same as NIL
 t is boolean for true
 --
 Calling a function manually
-funcall
+funcall, sharp-quote
 24 apr 2015, http://learnxinyminutes.com/docs/common-lisp/
 
 (funcall #'+ 1 2 3)  ; 6
@@ -113,3 +113,10 @@ T
 
 ? (atom (quote (1)))
 NIL
+--
+Using sharp-quote
+functions, sharp-quote
+1 jun 2015, On Lisp p. 15
+
+Sharp-quote, #' is used only for referring to the function named by a
+symbol, usually those defined with defun. It expands to (function <expr>).
