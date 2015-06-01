@@ -81,7 +81,7 @@ id: "note11",
 title: "Keywords",
 tags: ['keywords', 'data types', 'get'],
 reference: "13 apr 2015, 16 apr 2015, Joy 2nd, p. 28, 76",
-body: "<br>Keywords always evaluate to themselves.<br>They are written as <b>:MySymbolName</b><br><br>Keywords are almost always used as map keys, and as enumeration values<br><br>(get map key not-found) will look up map for the keyed value, and return<br>not-found if the key is not present.<br><br>A keyword also works as a function. Given a map, it looks itself up.<br>" },
+body: "<br>Keywords always evaluate to themselves.<br>They are written as &lt;b&gt;:MySymbolName&lt;/b&gt;<br><br>Keywords are almost always used as map keys, and as enumeration values<br><br>(get map key not-found) will look up map for the keyed value, and return<br>not-found if the key is not present.<br><br>A keyword also works as a function. Given a map, it looks itself up.<br>" },
 
 note12: { 
 id: "note12", 
@@ -108,8 +108,8 @@ note15: {
 id: "note15", 
 title: "Lists",
 tags: ['lists', 'collections'],
-reference: "13 apr 2015, Joy 2nd, p. 29",
-body: "<br>Literal lists are written with parentheses.<br><br>When evaluating a list, the first item is resolved to a function, macro,<br>or special operator. If it is a function, the remaining items are<br>evaluated in order, and passed as function parameters. Macros and special<br>operators have specific processing rules.<br><br>Lists can contain items of any type.<br>The empty list, (), is <b>not</b> the same as nil.<br>" },
+reference: "13 apr 2015, 17 apr 2015, Joy 2nd, p. 29, 99",
+body: "<br>Literal lists are written with parentheses.<br><br>When evaluating a list, the first item is resolved to a function, macro,<br>or special operator. If it is a function, the remaining items are<br>evaluated in order, and passed as function parameters. Macros and special<br>operators have specific processing rules.<br><br>Lists can contain items of any type.<br>The empty list, (), is &lt;b&gt;not&lt;/b&gt; the same as nil.<br><br>List elements can only be found by starting with the first element and walking<br>each node. Nodes can be added or removed only at the left end.<br><br>Lists are almost exclusively used to represent code forms. There is rarely any<br>value over vectors.<br>" },
 
 note16: { 
 id: "note16", 
@@ -142,9 +142,9 @@ body: "<br>(nth my-vec 3 optional-value-if-not-found)<br>  ;; throws IndexOutOfB
 note20: { 
 id: "note20", 
 title: "Changing a vector",
-tags: ['vectors', 'changing', 'assoc', 'replace'],
+tags: ['vectors', 'changing', 'assoc', 'replace', 'conj'],
 reference: "17 apr 2015, Joy 2nd, p. 93",
-body: "<br>Any item in a vector can be changed with the assoc function.<br><br>(assoc my-vec 3 &quot;new value&quot;)<br><br>The vector length may be used as the index to add to the end, though<br>conj is normally used for this purpose.<br><br>(replace {2 :a, 4 :b} [1 2 3 2 3 4])<br>;=> [1 :a 3 :a 3 :b]<br>" },
+body: "<br>Any item in a vector can be changed with the assoc function.<br><br>(assoc my-vec 3 &quot;new value&quot;)<br><br>The vector length may be used as the index to add to the end, though<br>conj is normally used for this purpose.<br><br>(replace {2 :a, 4 :b} [1 2 3 2 3 4])<br>;=&gt; [1 :a 3 :a 3 :b]<br>" },
 
 note21: { 
 id: "note21", 
@@ -172,14 +172,14 @@ id: "note24",
 title: "Vars",
 tags: ['vars'],
 reference: "13 apr 2015, Joy 2nd, p. 31",
-body: "<br>The closest analogy to other languages' variables is the <i>var</i>.<br><br>A var is named by a symbol and holds a single value. It may be shadowed<br>by function parameters and locals.<br><br>The most common way to create vars is with <b>def</b><br>(def x 17)<br>" },
+body: "<br>The closest analogy to other languages' variables is the &lt;i&gt;var&lt;/i&gt;.<br><br>A var is named by a symbol and holds a single value. It may be shadowed<br>by function parameters and locals.<br><br>The most common way to create vars is with &lt;b&gt;def&lt;/b&gt;<br>(def x 17)<br>" },
 
 note25: { 
 id: "note25", 
 title: "Anonymous functions",
 tags: ['anonymous functions', 'functions'],
 reference: "14 apr 2015, Joy 2nd, p. 32",
-body: "<br>An anonymous function can be defined using the <b>fn</b> special form.<br><br>(fn [x y]<br>    (println &quot;making a set&quot;)<br>    #{x y})<br><br>The anonymous function can be called by making it the first item of a list<br><br>((fn [x y]<br>     (println &quot;making a set&quot;)<br>     #{x y})<br> 1 2)<br>" },
+body: "<br>An anonymous function can be defined using the &lt;b&gt;fn&lt;/b&gt; special form.<br><br>(fn [x y]<br>    (println &quot;making a set&quot;)<br>    #{x y})<br><br>The anonymous function can be called by making it the first item of a list<br><br>((fn [x y]<br>     (println &quot;making a set&quot;)<br>     #{x y})<br> 1 2)<br>" },
 
 note26: { 
 id: "note26", 
@@ -207,14 +207,14 @@ id: "note29",
 title: "In-place function definition shorthand",
 tags: ['functions', 'shorthand', 'reader features'],
 reference: "14 apr 2015, Joy 2nd, p. 34-35",
-body: "<br>#() is a reader feature that is shorthand notation for <b>fn</b>.<br><br>Arguments are implicitly declared through special symbols prefixed with %<br><br>(def make-list2+ #(list %1 %2 %&))<br><br>% is the same as %1, but %1 is preferred. %& denotes variable arguments.<br>" },
+body: "<br>#() is a reader feature that is shorthand notation for &lt;b&gt;fn&lt;/b&gt;.<br><br>Arguments are implicitly declared through special symbols prefixed with %<br><br>(def make-list2+ #(list %1 %2 %&))<br><br>% is the same as %1, but %1 is preferred. %& denotes variable arguments.<br>" },
 
 note30: { 
 id: "note30", 
 title: "Treat a block of expressions as one with do",
 tags: ['do', 'block', 'forms'],
 reference: "14 apr 2015, Joy 2nd, p. 35",
-body: "<br>Placing a block of expressions inside a <b>do</b> form will treat them<br>as one, but only the last one is returned. Do is typically used for the<br>purpose of creating side effects.<br>" },
+body: "<br>Placing a block of expressions inside a &lt;b&gt;do&lt;/b&gt; form will treat them<br>as one, but only the last one is returned. Do is typically used for the<br>purpose of creating side effects.<br>" },
 
 note31: { 
 id: "note31", 
@@ -235,7 +235,7 @@ id: "note33",
 title: "When to use when",
 tags: ['when', 'conditionals'],
 reference: "14 apr 2015, Joy 2nd, p. 38",
-body: "<br>Use when in these cases:<br><br>- There is no <b>else</b> part associated with the conditional<br>- You require an implicit do to perform side effects.<br>" },
+body: "<br>Use when in these cases:<br><br>- There is no &lt;b&gt;else&lt;/b&gt; part associated with the conditional<br>- You require an implicit do to perform side effects.<br>" },
 
 note34: { 
 id: "note34", 
@@ -263,7 +263,7 @@ id: "note37",
 title: "Auto-gensym",
 tags: ['gensym', 'auto-gensym'],
 reference: "14 apr 2015, Joy 2nd, p. 42",
-body: "<br>Inside a syntax-quote, appending a # to the end of a symbol name creates<br>a new, unique symbol name.<br><br>`myvar#<br>;;=> myvar__152__auto__<br>" },
+body: "<br>Inside a syntax-quote, appending a # to the end of a symbol name creates<br>a new, unique symbol name.<br><br>`myvar#<br>;;=&gt; myvar__152__auto__<br>" },
 
 note38: { 
 id: "note38", 
@@ -298,7 +298,7 @@ id: "note42",
 title: "The .. macro",
 tags: ['macros', '..', 'chain'],
 reference: "14 apr 2015, Joy 2nd, p. 45-46",
-body: "<br>A chain of Java method calls is a sequence where a method uses the return<br>type of the previous method call, such as<br><br>new java.util.Date().toString().endsWith(&quot;2001&quot;);<br><br>which is equivalent to (.endsWith (.toString (java.util.Date.)) &quot;2001&quot;)<br><br>but is difficult to read. With the .. macro, the above becomes<br><br>(.. (java.util.Date.) toString (endsWith &quot;2001&quot;))<br><br>However, .. is not used very much in practice outside of macro<br>definitions. The macros -> and ->> are used in a similar manner and are<br>also useful in non-interop situations.<br>" },
+body: "<br>A chain of Java method calls is a sequence where a method uses the return<br>type of the previous method call, such as<br><br>new java.util.Date().toString().endsWith(&quot;2001&quot;);<br><br>which is equivalent to (.endsWith (.toString (java.util.Date.)) &quot;2001&quot;)<br><br>but is difficult to read. With the .. macro, the above becomes<br><br>(.. (java.util.Date.) toString (endsWith &quot;2001&quot;))<br><br>However, .. is not used very much in practice outside of macro<br>definitions. The macros -&gt; and -&gt;&gt; are used in a similar manner and are<br>also useful in non-interop situations.<br>" },
 
 note43: { 
 id: "note43", 
@@ -506,9 +506,9 @@ body: "<br>The function sequential? may return false for some sequential objects
 note72: { 
 id: "note72", 
 title: "Sequences, sequentials, and seq",
-tags: ['seq', 'sequentials', 'sequences', 'equality'],
-reference: "17 apr 2015, Joy 2nd, p. 86-88",
-body: "<br>A sequential collection holds a series of values without reordering them.<br>Examples are lists, vectors, and anything implementing java.util.List.<br><br>A sequence is a sequential collection representing a series of values.<br>They may not exist yet, or be empty. Such non-existent values may be<br>computed as necessary.<br><br>seq is an API for navigating collections.<br>It consists of the functions first and rest.<br><br>If two sequentials have the same values in the same order, = returns true<br>even if their concrete types are different.<br><br>However, if one collection is sequential and the other not, = returns<br>false.<br>" },
+tags: ['seqs', 'sequentials', 'sequences', 'equality'],
+reference: "17 apr 2015, Joy 2nd, p. 86-88, 100",
+body: "<br>A sequential collection holds a series of values without reordering them.<br>Examples are lists, vectors, and anything implementing java.util.List.<br><br>A sequence is a sequential collection representing a series of values.<br>They may not exist yet, or be empty. Such non-existent values may be<br>computed as necessary.<br><br>seq is an API for navigating collections.<br>It consists of the functions first and rest.<br><br>If two sequentials have the same values in the same order, = returns true<br>even if their concrete types are different.<br><br>However, if one collection is sequential and the other not, = returns<br>false.<br><br>Regardless of its type, all seqs print with rounded parentheses.<br>" },
 
 note73: { 
 id: "note73", 
@@ -517,5 +517,68 @@ tags: ['exception', 'debugging'],
 reference: "17 apr 2015",
 body: "<br>An IllegalArgumentException: No matching method found may be because the<br>argument types do not match the method signature.<br>" },
 
-numNotes: 74
+note74: { 
+id: "note74", 
+title: "Matrix processing libraries",
+tags: ['matrices', 'libraries'],
+reference: "17 apr 2015, Joy 2nd, p. 93",
+body: "<br>Colt and Incanter are two libraries for matrix processing.<br>" },
+
+note75: { 
+id: "note75", 
+title: "Getting and changing nested vectors",
+tags: ['vectors', 'nested vectors', 'assoc-in', 'get-in', 'update-in'],
+reference: "17 apr 2015, Joy 2nd, p. 94",
+body: "<br>The functions assoc-in, get-in, and update-in take a matrix (vector of vectors)<br>and a series of indices to pick or change items.<br><br>(get-in matrix [1 2])<br>(assoc-in matrix [1 2] 'x)<br>(update-in matrix [1 2] / 100)  ; applies a function to the existing value<br>  the slot 'x' at [1 2] becomes (/ x 100)<br>" },
+
+note76: { 
+id: "note76", 
+title: "Vectors as stacks",
+tags: ['vectors', 'stacks', 'conj', 'pop', 'peek'],
+reference: "17 apr 2015, Joy 2nd, p. 95",
+body: "<br>adding: use conj, not assoc<br>getting: use peek, not last<br>removing: use pop, not dissoc<br><br>conj and pop are the equivalent functions to push and pop. pop will return a<br>new vector with the rightmost item dropped. peek returns the rightmost item.<br><br>peek is preferrable to last when using a vector (last walks the vector)<br><br>These functions also work with lists, but on the left side instead. When treated<br>as stacks, the ordering should be ignored.<br><br>next on a one-item list returns nil, but rest and pop return an empty list.<br>" },
+
+note77: { 
+id: "note77", 
+title: "Accumulate to a vector to make reversing unnecessary",
+tags: ['vectors', 'algorithms', 'accumulating'],
+reference: "17 apr 2015, Joy 2nd, p. 96",
+body: "<br>A typical list-processing function will leave the result reversed. To avoid<br>reversing the result, the result can be accumulated to a vector:<br><br>(defn my-map [f coll]<br>  (loop [coll coll, acc []]<br>        (if (empty? coll)<br>            acc<br>            (recur (next coll)<br>                   (conj acc (f (first coll)))))))<br>(my-map - (range 5))<br>" },
+
+note78: { 
+id: "note78", 
+title: "Subvectors (slices)",
+tags: ['subvectors', 'slices', 'vectors'],
+reference: "17 apr 2015, Joy 2nd, p. 97",
+body: "<br>Slicing a vector is fast<br>(subvec my-vec 3 6)<br><br>The first index is included, and the ending index is excluded. The slice begins<br>at 3 and ends before index 6.<br><br>Sub-subvectors keeps a reference to the original vector, so using them is still<br>efficient.<br>" },
+
+note79: { 
+id: "note79", 
+title: "Place items inside a seq",
+tags: ['seqs', 'inserting'],
+reference: "17 apr 2015, http://stackoverflow.com/questions/5088803/in-clojure-is-there-an-easy-way-to-convert-between-list-types",
+body: "<br>(into [0] (set [1 2 3 2 1 4 5]))<br>(into #{} [1 2 3 4 5 4 3 2 1])<br>" },
+
+note80: { 
+id: "note80", 
+title: "Test if a collection holds certain values",
+tags: ['collections', 'contains'],
+reference: "17 apr 2015, Cookbook, p. 111",
+body: "<br>Use some with the desired values inside a set<br>(some #{1 2} (range 10))<br><br>The set acts like a function, and works as a predicate.<br><br>For nil and false, use (some nil? my-coll) and (some false? my-coll)<br><br>contains? checks for the existence of a key, not a value.<br>" },
+
+note81: { 
+id: "note81", 
+title: "Adding to a list",
+tags: ['lists', 'conj', 'cons', 'adding'],
+reference: "17 apr 2015, Joy 2nd, p. 99",
+body: "<br>The right way of adding to the front of a list is to use conj<br><br>(conj my-lst value)<br><br>Using cons only promise that the result is some kind of seq.<br>Only conj will guarantee returning a bigger list.<br>" },
+
+note82: { 
+id: "note82", 
+title: "No dotted pair",
+tags: ['cons', 'dotted pair', 'vectors'],
+reference: "17 apr 2015, Joy 2nd, p. 100",
+body: "<br>There is no dotted pair in Clojure.<br>(cons 1 2) throws an IllegalArgumentException.<br>For a simple pair, a vector should be used.<br>" },
+
+numNotes: 83
 };

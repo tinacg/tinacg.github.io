@@ -35,6 +35,10 @@ else:
                         break
                     body_line = body_line.rstrip()
                     body_line = body_line.replace("\\", "\\\\")
+
+                    body_line = body_line.replace("<", "&lt;")
+                    body_line = body_line.replace(">", "&gt;")
+                    
                     print(body_line.replace('"', "&quot;"), file=output, end="<br>")
                 print('" },\n', file=output)
 
