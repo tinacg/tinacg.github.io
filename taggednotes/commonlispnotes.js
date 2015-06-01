@@ -60,7 +60,7 @@ id: "note8",
 title: "Using sharp-quote",
 tags: ['functions', 'sharp-quote'],
 reference: "1 jun 2015, On Lisp p. 15",
-body: "<br>Sharp-quote, #' is used only for referring to the function named by a<br>symbol, usually those defined with defun. It expands to (function &lt;expr&gt;).<br>" },
+body: "<br>Sharp-quote, #' is used only for referring to the function named by a<br>symbol, such as built-ins and those defined with defun.<br><br>It expands to (function &lt;expr&gt;).<br>" },
 
 numNotes: 9
 };

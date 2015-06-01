@@ -119,4 +119,6 @@ functions, sharp-quote
 1 jun 2015, On Lisp p. 15
 
 Sharp-quote, #' is used only for referring to the function named by a
-symbol, usually those defined with defun. It expands to (function <expr>).
+symbol, such as built-ins and those defined with defun.
+
+It expands to (function <expr>).
