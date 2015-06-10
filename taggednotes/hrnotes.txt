@@ -470,11 +470,17 @@ Banco de Horas > Lançar débito
 Quantidade média de notas necessárias
 pagamentos
 14 abr 2015
-Para 22 pagamentos:
+Media para 22 pagamentos:
 R$ 1: 9, R$ 2: 18, R$ 5: 11, R$ 10: 9, R$ 20: 18 = R$ 550
 
-Para 29 pagamentos:
+Media para 29 pagamentos:
 R$ 1: 12, R$ 2: 24, R$ 5: 15, R$ 10: 12, R$ 20: 24 = R$ 735
+
+90% dos 29 pagamentos precisaria no máximo de:
+R$ 1: 15, R$ 2: 28, R$ 5: 18, R$ 10: 15, R$ 20: 28 = R$ 871
+
+Arredondado:
+R$ 1: 15, R$ 2: 30, R$ 5: 25, R$ 10: 20, R$ 20: 30 = R$ 1000
 --
 Marcar dia como feriado
 DIMEP, cartão de ponto, feriados

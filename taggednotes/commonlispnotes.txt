@@ -122,3 +122,40 @@ Sharp-quote, #' is used only for referring to the function named by a
 symbol, such as built-ins and those defined with defun.
 
 It expands to (function <expr>).
+--
+Quoted objects should not be returned
+quote, return values
+2 jun 2015, On Lisp p. 37
+
+Functions should not return anything that isn't safe to modify. Functions
+should not return values that incorporate quoted objects. The exception
+is functions which generate macro expansions.
+
+(defun exclaim (expr)
+  (append expr '(oh my)))
+
+should be
+
+(defun exclaim (expr)
+  (append expr (list 'oh 'my)))
+
+because the following sequence will alter subsequent calls to exclaim:
+
+(exclaim '(lions and tigers))
+(nconc * '(goodness))
+;; * gives the last result in the REPL
+
+(exclaim '(fixnums and bignums))
+;; now has GOODNESS at the end
+--
+Lexical closures
+closures
+5 jun 2015, Lisp Gentle Intro p. 559, On Lisp p. 17
+
+A lexical closure is a type of function that remember their lexical
+context.
+
+Because Common Lisp is lexically scoped, a function containing free
+variables must save copies of these bindings at the time the function is
+defined. The combination of a function and a set of variable bindings is
+called a closure.
