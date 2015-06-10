@@ -123,7 +123,7 @@ id: "note17",
 title: "Quantidade média de notas necessárias",
 tags: ['pagamentos'],
 reference: "14 abr 2015",
-body: "Para 22 pagamentos:<br>R$ 1: 9, R$ 2: 18, R$ 5: 11, R$ 10: 9, R$ 20: 18 = R$ 550<br><br>Para 29 pagamentos:<br>R$ 1: 12, R$ 2: 24, R$ 5: 15, R$ 10: 12, R$ 20: 24 = R$ 735<br>" },
+body: "Media para 22 pagamentos:<br>R$ 1: 9, R$ 2: 18, R$ 5: 11, R$ 10: 9, R$ 20: 18 = R$ 550<br><br>Media para 29 pagamentos:<br>R$ 1: 12, R$ 2: 24, R$ 5: 15, R$ 10: 12, R$ 20: 24 = R$ 735<br><br>90% dos 29 pagamentos precisaria no máximo de:<br>R$ 1: 15, R$ 2: 28, R$ 5: 18, R$ 10: 15, R$ 20: 28 = R$ 871<br><br>Arredondado:<br>R$ 1: 15, R$ 2: 30, R$ 5: 25, R$ 10: 20, R$ 20: 30 = R$ 1000<br>" },
 
 note18: { 
 id: "note18", 
