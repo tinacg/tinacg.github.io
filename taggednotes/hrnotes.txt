@@ -479,8 +479,8 @@ R$ 1: 12, R$ 2: 24, R$ 5: 15, R$ 10: 12, R$ 20: 24 = R$ 735
 90% dos 29 pagamentos precisaria no máximo de:
 R$ 1: 15, R$ 2: 28, R$ 5: 18, R$ 10: 15, R$ 20: 28 = R$ 871
 
-Arredondado:
-R$ 1: 15, R$ 2: 30, R$ 5: 25, R$ 10: 20, R$ 20: 30 = R$ 1000
+Arredondado para 99%:
+R$ 1: 20, R$ 2: 40, R$ 5: 20, R$ 10: 20, R$ 20: 30 = R$ 1000
 --
 Marcar dia como feriado
 DIMEP, cartão de ponto, feriados
