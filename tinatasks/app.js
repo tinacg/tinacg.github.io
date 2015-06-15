@@ -222,7 +222,7 @@
       }
 
       // pass moment() now to a function that returns D/M/Y
-      
+
       $scope.daysDiff = function(then, now) {
         // var nineteenseventy = moment("1/1/1970 0:00:00", "D/M/YYYY H:mm:ss");
         // var then_since1970 = numdays(moment(then, "D/M/YY H:mm:ss").valueOf());
@@ -244,7 +244,8 @@
         }
 
         if (isNaN(result) || result < 0) {
-          result = "";
+          // result = "";
+          return "today (past due)";
         } else {
           if (result === 1) {
             return "in " + result + " day " + parenthesize(diaDaSemana[iso_weekday]);
@@ -255,6 +256,13 @@
           }
         }
       };
+
+      // 15 jun 2015 check if due date is today. Used to highlight/bold
+      // task description
+      $scope.dueToday = function(then, now) {
+        return $scope.daysDiff(then, now).indexOf("today") !== -1;
+      };
+
     }
 
     function clean() {

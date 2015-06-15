@@ -62,7 +62,14 @@
 					  <td valign="top" style="padding-right: 10px;"><input type="checkbox" ng-model="task.done" ng-change="updateTask(tasks[tab.name], task)" /></td>
 					  <td valign="top" style="padding-right: 10px;">{{task.category}}</td>
 					  <td valign="top" style="padding-right: 10px;">
+
+						<!-- 15 jun 2015 -->
+						<!-- Try to bold task description -->
+						<span ng-style="dueToday(task.dueDate, now) && {'color': '#993333', 'font-weight': 'bold'}">
+						
 						{{task.description}}
+
+						</span>
 						<!-- 
 							 <a href ng-click="task.editing=true"><b>(edit)</b></a>
 							 -->
