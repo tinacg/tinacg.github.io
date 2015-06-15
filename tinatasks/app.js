@@ -263,6 +263,10 @@
         return $scope.daysDiff(then, now).indexOf("today") !== -1;
       };
 
+      $scope.dueTomorrow = function(then, now) {
+        return $scope.daysDiff(then, now).indexOf("in 1 day") !== -1;
+      };
+
     }
 
     function clean() {
