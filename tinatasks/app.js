@@ -57,7 +57,8 @@
       $scope.addTask = function(tabName, taskDone, taskDescription, taskCategory, taskDueDate) {
         taskDescription = taskDescription || "My Task";
         taskCategory = taskCategory || "~uncategorized";
-        taskDueDate = taskDueDate || "soon";
+        // taskDueDate = taskDueDate || "soon;"
+        taskDueDate = taskDueDate || "now";
         
         $scope.tasks[tabName].$add({ done: taskDone,
                                      description: taskDescription,
