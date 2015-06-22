@@ -1,0 +1,13 @@
+A function
+functions
+22 jun 2015
+
+public static void f() {
+    doSomething();
+}
+
+// JS
+function f() {
+    doSomething();
+}
+--

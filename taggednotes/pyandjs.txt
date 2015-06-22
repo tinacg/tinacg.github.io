@@ -1,0 +1,22 @@
+Scrambling sequences
+sequences
+22 jun 2015 LP5E (Learning Python 5th ed.) p. 609
+
+Move the front item to the end on each loop iteration.
+Slicing allows + to work for arbitrary sequence types.
+
+S = 'spam'
+for i in range(len(S)):
+    S = S[1:] + S[:1]
+    print(S, end=' ')
+
+# pams amsp mspa spam
+
+// JS
+
+var s = 'spam';
+for (var i = 0; i < s.length; i++) {
+    s = s.slice(1) + s.slice(0, 1);
+    console.log(s);
+}
+--
