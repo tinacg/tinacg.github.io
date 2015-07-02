@@ -110,17 +110,12 @@ ImageOverlay.prototype.draw = function()
     }
   } 
 
-  // I ran into a case where sw.x was -2046 and worldwidth was 2048.
-  // So only 2 pixels of the overlay were shown. This factor ensures
-  // at least a meaningful percentage of the width will be covered
-  var wiggleRoom = 0.9;
+  console.log(sw.x + worldwidth);
 
-  while (sw.x < -(wiggleRoom * worldwidth)) {
+  if ((sw.x + worldwidth) < worldwidth * 0.01) {
     sw.x += worldwidth;
   }
-
-  // console.log(sw.x);
-  
+ 
   div.style.left = sw.x + 'px';
   
   div.style.top = ne.y + 'px';
