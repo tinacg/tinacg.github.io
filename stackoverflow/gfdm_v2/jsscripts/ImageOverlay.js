@@ -89,15 +89,19 @@ ImageOverlay.prototype.draw = function()
   }
   prevX = sw.x;
 
+  /*
   var divLeft = sw.x;
   var screenWidth = document.getElementById("map_canvas_1").clientWidth;
   
   if (worldwidth > screenWidth) {
     console.log("world width more than screenWidth");
     console.log("divLeft:" + divLeft);
+    // console.log("ne.x:" + ne.x);
+    console.log("divLeft + worldwidth " + (divLeft + worldwidth));
     while (divLeft > 0) {
       divLeft -= worldwidth;
     }
+    console.log("divLeft after change" + divLeft);
   } else {
     console.log("world width less than screenWidth");
     console.log("divLeft:" + divLeft);
@@ -105,9 +109,13 @@ ImageOverlay.prototype.draw = function()
       divLeft -= worldwidth;
     }
   }
+  */
+
+  var overlayOrigin = overlayProjection.fromLatLngToDivPixel(new google.maps.LatLng(0, 0));  
+  var divLeft = overlayOrigin.x - (worldwidth / 2);
   
   var div = this.div_;
-  div.style.left = divLeft + 'px';
+  div.style.left = Math.round(divLeft) + 'px';
   div.style.top = ne.y + 'px';
   div.style.width = Math.round(worldwidth) + 'px';
   div.style.height = (sw.y - ne.y) + 'px';
