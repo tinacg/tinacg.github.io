@@ -1,6 +1,6 @@
 //Define the objects
 ImageOverlay.prototype = new google.maps.OverlayView();
-
+ 
 //Define the functions
 function ImageOverlay(bounds, image, map,id,flag_basin)
 {
@@ -18,7 +18,7 @@ function ImageOverlay(bounds, image, map,id,flag_basin)
   }
   this.flag_basin = flag_basin;
 }
-
+ 
 ImageOverlay.prototype.onAdd = function() 
 {
   var div = document.createElement('DIV');
@@ -26,7 +26,7 @@ ImageOverlay.prototype.onAdd = function()
   div.style.borderStyle = "none";
   div.style.borderWidth = "0px";
   div.style.position = "absolute";
-  div.style.left = "520px";  // 200 px
+  div.style.left = "200px";
   div.style.top="100px";
   //div.style.opacity = 0.8;
   var img = document.createElement("img");
@@ -34,13 +34,13 @@ ImageOverlay.prototype.onAdd = function()
   img.src = this.image_;
   img.onerror = function (evt){
   	this.src = 'icons/gm_noimage.gif';
-  }
-  // img.style.width = "100%";
-  img.style.width = "none";	// HEXG
+  	}
+  // img.style.width = "none";
+  img.style.width = "100%";	
   img.style.height = "100%";
   if (this.flag_basin == 1)
   {
-    img.style.opacity = 0.2;
+  img.style.opacity = 0.2;
   }
   else
   {
@@ -59,7 +59,7 @@ ImageOverlay.prototype.ChangeOpacity = function()
   img.style.opacity = overlay_opacity;
 }
 
-
+ 
 //ImageOverlay.prototype.draw = function() 
 //{ 
 //  var overlayProjection = this.getProjection();
@@ -72,64 +72,57 @@ ImageOverlay.prototype.ChangeOpacity = function()
 //  div.style.height = (sw.y - ne.y) + 'px';
 //}
 
+function getWorldWidth() {
+  return overlay.getProjection().getWorldWidth();
+}
+
+function setDivLeft(newLeft) {
+  overlay.div_.style.left = newLeft;
+  overlay.draw();
+}
+
 // Modified by HEXG
 ImageOverlay.prototype.draw = function() 
 { 
   var overlayProjection = this.getProjection();
   var worldwidth = overlayProjection.getWorldWidth();
-
-  // var prevX = null;
+  var prevX = null;
   var sw = overlayProjection.fromLatLngToDivPixel(this.bounds_.getSouthWest());
   var ne = overlayProjection.fromLatLngToDivPixel(this.bounds_.getNorthEast());
-
-  /*
   if (prevX !=null) {
-    // Check for a gigantic jump to prevent wrapping around the world
-    var dist = sw.x - prevX;
-    if (Math.abs(dist) > (worldwidth * 0.9)) {
-      if (dist > 0) {
-        sw.x -= worldwidth;
-      } else {
-        sw.x += worldwidth;
-      }
-    }
+     // Check for a gigantic jump to prevent wrapping around the world
+     var dist = sw.x - prevX;
+     if (Math.abs(dist) > (worldwidth * 0.9)) {
+         if (dist > 0) { sw.x -= worldwidth } else { sw.x += worldwidth }
+        }
   }
- 
   prevX = sw.x;
-  */
+
+
+  var divLeft = sw.x;
+  var viewCenter = overlayProjection.fromLatLngToDivPixel(this.getMap().getCenter());
+
+  console.log();
+  console.log("divleft: " + divLeft);
+  console.log("viewcenter.x " + viewCenter.x);
+  console.log("zoom:" + this.getMap().getZoom());
+
+  while (divLeft > viewCenter.x) {
+    divLeft -= worldwidth;
+  }
   
+  console.log("new divleft: " + divLeft);
+
+
   var div = this.div_;
 
-  // Tina's hack
-  var screenWidth = document.getElementById("map_canvas_1").clientWidth;
-
-  // determine acceptable range for div.style.left  
-  if (worldwidth > screenWidth) {
-    while (sw.x > 0) {
-      sw.x -= worldwidth;
-    }
-  } 
-
-  console.log(sw.x + worldwidth);
-
-  if ((sw.x + worldwidth) < worldwidth * 0.01) {
-    sw.x += worldwidth;
-  }
-
-  console.log("");
-  console.log("sw.x:" + sw.x);
-  console.log("zoom: " + this.getMap().getZoom());
-  div.style.left = sw.x + 'px';
-  
+  div.style.left = Math.round(divLeft) + 'px';
   div.style.top = ne.y + 'px';
-  div.style.width = (ne.x - sw.x) + 'px';
+  div.style.width = Math.round(worldwidth) + 'px';
   div.style.height = (sw.y - ne.y) + 'px';
 }
 // Modified by HEXG
-
-
-
-
+ 
 ImageOverlay.prototype.onRemove = function() 
 {
   this.div_.parentNode.removeChild(this.div_);
@@ -141,12 +134,12 @@ ImageOverlay.prototype.remove = function()
   if (this.getMap()) 
   {
     this.setMap(null); 
-    //replace color bar with white strip
+  //replace color bar with white strip
   } 
   else 
   {
     this.setMap(this.map_);
-    //replace color bar with new colorbar
+  //replace color bar with new colorbar
   }
 }
 
@@ -159,5 +152,5 @@ ImageOverlay.prototype.swap=function(image_str)
   //img.onload=imageLoaded();
   img.onerror = function (evt){
   	this.src = 'icons/gm_noimage.gif';
-  }	
+	}	
 }

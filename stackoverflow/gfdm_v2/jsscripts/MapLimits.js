@@ -42,7 +42,7 @@ function getAllowedBounds(map) {
   var neLng = ne.lng();
   var neLat = ne.lat();
   
-  if (swLng > neLng) {
+  if (swLng >= neLng) {
     swLng -= 360;
   } 
   var width = neLng - swLng;
