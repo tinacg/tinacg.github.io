@@ -93,10 +93,14 @@ ImageOverlay.prototype.draw = function()
   var screenWidth = document.getElementById("map_canvas_1").clientWidth;
   
   if (worldwidth > screenWidth) {
+    console.log("world width more than screenWidth");
+    console.log("divLeft:" + divLeft);
     while (divLeft > 0) {
       divLeft -= worldwidth;
     }
   } else {
+    console.log("world width less than screenWidth");
+    console.log("divLeft:" + divLeft);
     if (divLeft > (screenWidth / 2)) {
       divLeft -= worldwidth;
     }
