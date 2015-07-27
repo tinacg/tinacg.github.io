@@ -69,9 +69,16 @@
 						<span ng-style="dueToday(task.dueDate, now) && {'color': '#AA2222', 'font-weight': 'bold'}">
 
 						  <span ng-style="dueTomorrow(task.dueDate, now) && {'font-style': 'italic', 'color': '#F07010', 'font-weight': 'bold'}">
-							
+
+                            <!-- ADD CLICKABLE HERE -->
+                            <!-- http://stackoverflow.com/questions/14761724/angularjs-insert-html-from-a-string -->
+
+                            <div ng-bind-html="task.description | asUrl"></div>
+
+                            <!--
 						{{task.description}}
-						
+						      -->
+                            
 						</span>
 
 						</span>

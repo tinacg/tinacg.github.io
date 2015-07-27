@@ -56,12 +56,43 @@
       
       $scope.addTask = function(tabName, taskDone, taskDescription, taskCategory, taskDueDate) {
         taskDescription = taskDescription || "My Task";
+
+        // if description is an url, make it clickable
+        var domains = ['.co', '.ne', '.or', '.ed', '.br', '.go', '.mi'];
+        var domainsLen = domains.length;
+
+        function wordContainsDomain(word) {
+          for (var i = 0; i < domainsLen; i++) {
+            if (word.indexOf(domains[i]) !== -1) {
+              return true;
+            }
+          }
+          return false;
+        }
+
+        var descWords = taskDescription.split(" ");
+
+        var descWithLinks = "";
+
+        for (var i = 0, len = descWords.length; i < len; i++) {
+          var currentWord = descWords[i];
+          if (wordContainsDomain(currentWord)) {
+            if (currentWord.substr(0, 4) !== "http") {
+              currentWord = "http://" + currentWord;
+            }
+            descWithLinks += '<a href="' + currentWord + '" target="_blank">' + currentWord + '</a> ';
+          } else {
+            descWithLinks += currentWord + " ";
+          }
+        }
+        
         taskCategory = taskCategory || "~uncategorized";
         // taskDueDate = taskDueDate || "soon;"
         taskDueDate = taskDueDate || "now";
         
         $scope.tasks[tabName].$add({ done: taskDone,
-                                     description: taskDescription,
+                                     // description: taskDescription,
+                                     description: descWithLinks,
                                      category: taskCategory,
                                      createDate: (new Date()).getTime(),
                                      dueDate: taskDueDate,
@@ -296,4 +327,12 @@
       });
     };
   });
+
+  // http://stackoverflow.com/questions/27379836/angularjs-sce-only-html-safe-ahref
+  app.filter("asUrl", function($sce) {
+    return function(urlCode) {
+      return $sce.trustAsHtml(urlCode);
+    }
+  });
+  
 })();
