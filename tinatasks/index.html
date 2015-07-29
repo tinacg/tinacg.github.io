@@ -73,21 +73,27 @@
                             <!-- ADD CLICKABLE HERE -->
                             <!-- http://stackoverflow.com/questions/14761724/angularjs-insert-html-from-a-string -->
 
-                            <div ng-bind-html="task.description | asUrl"></div>
+                            <span ng-bind-html="task.description | asUrl"></span>
+                            <span ng-show="task.done">
+						      <a href ng-click="removeTask(tasks[tab.name], task)"><b>(delete)</b></a>
+						    </span>
+
 
                             <!--
-						{{task.description}}
+						        {{task.description}}
 						      -->
                             
-						</span>
+						  </span>
 
 						</span>
 						<!-- 
 							 <a href ng-click="task.editing=true"><b>(edit)</b></a>
 							 -->
-						<span ng-show="task.done">
-						  <a href ng-click="removeTask(tasks[tab.name], task)"><b>(delete)</b></a>
-						</span>
+                        <!-- 
+						     <span ng-show="task.done">
+						       <a href ng-click="removeTask(tasks[tab.name], task)"><b>(delete)</b></a>
+						     </span>
+                             -->
 					  </td>
 					  <td valign="top" style="padding-right: 10px;">{{task.dueDate}}</td>
 					  <!-- <td>{{task.createDate | date}}</td> -->
@@ -136,7 +142,11 @@
 				<td valign="top">{{task.dueDate}}</td>
 				<td valign="top" style="padding: 0px 10px 0px 10px;">{{daysDiff(task.dueDate, now)}}</td>
 				<td valign="top" style="padding: 0px 10px 0px 0px;"><i>{{task.category}}</i></td>
-				<td valign="top" style="max-width: 500px; padding: 0px 10px 0px 0px;">{{task.description}}</td>
+				<td valign="top" style="max-width: 500px; padding: 0px 10px 0px 0px;">
+
+                  <!--   {{task.description}} -->
+                  <div ng-bind-html="task.description | asUrl"></div>
+                </td>
 			  </tr>
 			</tbody>
 		  </table>
