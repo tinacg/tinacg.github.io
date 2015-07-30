@@ -50,6 +50,7 @@
 		<td width="50%" valign="top">
 		  Title: <input ng-model="saveTitle"><button ng-click="addEntry(saveTitle)">Add new</button><br>
 		  Variable definitions and functions<br>
+          The function <b>out(str)</b> displays <b>str</b> to textarea to the right<br>
 		  <textarea id="demotext" ng-model="code"></textarea>
 		</td>
 		<td width="50%" valign="top">
@@ -60,7 +61,7 @@
 		  <input type="button" onclick="$('#resulttext').val('');" value="clear">
 
 		  <br>
-		  <textarea ng-model="result" id="resulttext" rows="10" cols="55" disabled></textarea>
+		  <textarea ng-model="result" id="resulttext" rows="10" cols="55"></textarea>
 		</td>
 	  </tr>
 	</table>
