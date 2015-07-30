@@ -1,7 +1,7 @@
 var out = function() {
   var params = Array.prototype.slice.call(arguments);
   var paramString = params.join(" ");
-  $("#resulttext").val($("#resulttext").val() + "OUT) " + paramString + "\n");
+  $("#resulttext").val($("#resulttext").val() + paramString + "\n");
   console.log("OUT) " + paramString);
   return "";
 };
