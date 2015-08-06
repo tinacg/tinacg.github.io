@@ -1,0 +1,17 @@
+Description of Polyglot
+polyglot
+6.aug.15
+
+A collection of commonly used data structures and processes.
+
+Target languages: Clojure, Java, JavaScript, and Python.
+--
+Wishlist
+polyglot
+6.aug.15
+
+Filter elements given a predicate and list
+Flatten an array of arrays with arbitrary depths
+Get all ancestors of arbitrary tree node that references children
+Get all children of arbitrary tree node that references immediate parent
+Array slice between two given indices

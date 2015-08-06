@@ -431,7 +431,7 @@ id: "note61",
 title: "Last exception in the REPL",
 tags: ['exception', 'debugging', 'repl', 'stack trace'],
 reference: "15 apr 2015, Joy 2nd, p. 63",
-body: "<br>The last exception is stored in the *e variable.<br><br>(.printStackTrace *e) will print the stack trace.<br>" },
+body: "<br>The last exception is stored in the *e variable.<br><br>(pst) will print a given exception to a given depth, or depth 12 of the last<br>exception if nothing is given.<br><br>(.printStackTrace *e) will print the stack trace.<br>" },
 
 note62: { 
 id: "note62", 

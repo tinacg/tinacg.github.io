@@ -852,6 +852,9 @@ exception, debugging, repl, stack trace
 
 The last exception is stored in the *e variable.
 
+(pst) will print a given exception to a given depth, or depth 12 of the last
+exception if nothing is given.
+
 (.printStackTrace *e) will print the stack trace.
 --
 Creating and checking rational numbers
