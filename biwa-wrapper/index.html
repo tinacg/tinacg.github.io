@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head>
+	<meta charset="utf-8">
+	<title>BiwaScheme wrapper</title>
+  </head>
+  <body>
+	Using <a href="http://www.biwascheme.org/">BiwaScheme</a> 0.6.2
+	<br>
+	<br>
+	
+	Evaluate single line (expression is wrapped by print)
+	<br>
+
+	<input type="text" id="singleLineCode" size="50">
+	<br>
+
+	<input type="button" value="eval" id="evalSingle">
+	<input type="button" value="clear code" id="clearSingle">
+	<br><br>
+	
+	Function (print ...) will generate console output
+	<br>
+	
+	<textarea id="code" rows="5" cols="60"></textarea>
+	<br>
+	
+	<input type="button" value="eval" id="eval">
+	<input type="button" value="clear code" id="clearCode">
+	<input type="button" value="clear output" id="clearOutput">
+	<br><br>
+	
+	<div id="bs-console"></div>
+	<script src="biwascheme-0.6.2-min.js"></script>
+	<script src="process.js"></script>
+  </body>
+</html>
