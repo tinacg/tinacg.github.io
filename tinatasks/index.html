@@ -4,6 +4,7 @@
 	<title>TiNAtasks</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="pikaday.css" />
 	<style>
 	  td { padding-right: 10px; border-bottom: 1px dotted #CCCCCC; }
 	</style>
@@ -13,6 +14,8 @@
 	<script src="../js/angularfire.min.js"></script>
 	<script src="../js/moment-with-locales.min.js"></script>
 	<script src="components.js"></script>
+	<script src="pikaday.js"></script>
+	<script src="pikaday-angular.js"></script>
 	<script src="app.js"></script>
   </head>
 
@@ -50,7 +53,8 @@
 					  <td valign="top">&nbsp;</td>
 					  <td valign="top"><input ng-model="taskCategory" focus-on="newTaskAdded" size="12" /></td>
 					  <td valign="top"><input ng-model="taskDescription" size="35" /></td>
-					  <td valign="top"><input ng-model="taskDueDate" size="12" /></td>
+					  <!-- <td valign="top"><input ng-model="taskDueDate" size="12" /></td> -->
+                      <td valign="top"><input pikaday="taskDueDatePicker" ng-model="taskDueDate" size="12" /></td>
 					  <td valign="top"><input type="submit" value="Add Task" /></td>
 					  <td valign="top"><!-- <input type="button" value="refresh" ng-click="now = momentNow()" /> --> &nbsp; </td>
 

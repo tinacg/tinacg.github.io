@@ -2,6 +2,7 @@ var alertWindow;
 var intv;
 
 document.getElementById("clearMessage").addEventListener("click", function() {
+  document.getElementById("hours").value = "";
   document.getElementById("minutes").value = "";
   document.getElementById("message").value = "";
 });

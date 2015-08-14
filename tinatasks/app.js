@@ -1,6 +1,12 @@
 (function() {
-  var app = angular.module('tinatasks', ["components", "firebase"]);
+  var app = angular.module('tinatasks', ["components", "firebase", "pikaday"]);
   var ref = new Firebase("https://tinacg.firebaseio.com/tinatasks");
+
+  app.config(['pikadayConfigProvider', function(pikaday) {
+    pikaday.setConfig({
+      format: "D/M/YY"
+    });
+  }]);
   
   app.controller('TaskController', ['$rootScope', '$scope', '$firebase', function($rootScope, $scope, $firebase) {
     function init(authData) {
