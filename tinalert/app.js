@@ -16,9 +16,10 @@ document.getElementById("testButton").addEventListener("click", function() {
 
 document.getElementById("startTimer").addEventListener("click", function() {
   var startDate = (new Date()).getTime();
-  
+
+  var hrs = parseInt(document.getElementById("hours").value);
   var mins = parseInt(document.getElementById("minutes").value);
-  var secs = 60 * mins;
+  var secs = (3600 * hrs) + (60 * mins);
 
   document.title = "Start...";
   
@@ -36,6 +37,8 @@ document.getElementById("startTimer").addEventListener("click", function() {
       var msg = document.getElementById("message").value || "TiNAlert time's up";
       alertWindow.document.write("<h1>" + msg + "</h1>");
       alertWindow.document.close();
+
+      document.title = "Time's up!";
     }
   }, 1000);
 });
