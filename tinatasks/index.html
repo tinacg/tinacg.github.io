@@ -32,12 +32,12 @@
 	  (it is now {{nowFull}})
 	  <br>
 	  {{notification}}
-
+      
 	  <tabs>
-		<pane title="tasks">
+		<pane tab-title="tasks">
 		  
 		  <tabs>
-			<pane ng-repeat="tab in tabs" title="{{tab.name}}">
+			<pane ng-repeat="tab in tabs" tab-title="{{tab.name}}">
 			  
 			  <form ng-submit="addTask(tab.name, false, taskDescription, taskCategory, taskDueDate); taskCategory=''; taskDescription=''; taskDueDate='';">
 				<table>
@@ -139,7 +139,7 @@
 			</pane>
 			-->
 		
-		<pane title="all tasks">
+		<pane tab-title="all tasks">
 		  <table>
 			<tbody>
 			  <tr ng-repeat="task in allTasks | orderBy:[dueDateOrder]">
@@ -156,7 +156,7 @@
 		  </table>
 		</pane>
 
-		<pane title="tab management">
+		<pane tab-title="tab management">
 		  <br>
 		  <form ng-submit="addTab(tabName); tabName='';">
 			New tab:

@@ -4,7 +4,8 @@
 
   app.config(['pikadayConfigProvider', function(pikaday) {
     pikaday.setConfig({
-      format: "D/M/YY"
+      format: "D/M/YY",
+      reposition: false,
     });
   }]);
   
