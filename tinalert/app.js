@@ -18,8 +18,8 @@ document.getElementById("testButton").addEventListener("click", function() {
 document.getElementById("startTimer").addEventListener("click", function() {
   var startDate = (new Date()).getTime();
 
-  var hrs = parseInt(document.getElementById("hours").value);
-  var mins = parseInt(document.getElementById("minutes").value);
+  var hrs = parseInt(document.getElementById("hours").value) || 0;
+  var mins = parseInt(document.getElementById("minutes").value) || 0;
   var secs = (3600 * hrs) + (60 * mins);
 
   document.title = "Start...";
