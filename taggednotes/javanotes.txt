@@ -1,6 +1,7 @@
 Increasing orders of structure
 syntax
 7 apr 2015 Java nutshell 6th, p. 17
+
 characters
 literal values, identifiers, tokens
 data types
@@ -14,6 +15,7 @@ programs (interacting classes from one or more packages)
 Comments
 comments
 7 apr 2015 Java nutshell 6th, p. 19
+
 //  single line
 
 /*  */  multi-line
@@ -22,3 +24,27 @@ comments
  * doc comment
  */
 --
+The five reference types
+reference types
+22 aug 2015 Java nutshell 6th, p. 99
+
+Classes
+Interfaces
+Arrays
+Enumerated types (enums)
+Annotation types (usually just called "annotations")
+--
+The eight primitive types
+primitives
+22 aug 2015 Java nutshell 6th, p. 22
+
+boolean (true or false)
+char (Unicode 16-bit character)
+
+byte   8 bits signed integer
+short  16 bits
+int    32 bits
+long   64 bits
+
+float  32 bits
+double 64 bits
