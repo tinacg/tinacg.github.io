@@ -18,7 +18,11 @@
   }
   
   function load() {
-    return localStorage.tinacg_pontovirtual_marcacoes.split(",") || [];
+    if (localStorage.tinacg_pontovirtual_marcacoes) {
+      return localStorage.tinacg_pontovirtual_marcacoes.split(",");
+    } else {
+      return [];
+    }
   }
 
   function save() {
