@@ -47,8 +47,12 @@ function getAllowedBounds(map) {
   } 
   var width = neLng - swLng;
   
+  // var left = Math.min(-179+(width/2),-0.000001);
+  // var right = Math.max(179-(width/2),0.000001);
+
   var left = Math.min(-179+(width/2),-0.000001);
-  var right = Math.max(179-(width/2),0.000001);
+//  var right = Math.max(179-(width/4),0.000001);
+  var right = 179;
 
   var divHeight = document.getElementById("map_canvas_1").clientHeight;
   
