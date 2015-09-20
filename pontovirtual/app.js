@@ -8,9 +8,10 @@
   }
   
   btn.addEventListener("click", function() {
-    marcacoes.unshift(currentTimestamp());
+    marcacoes.unshift(currentTimestamp() + " " + document.getElementById("obs").value);
     save();
     updateDisplay();
+    document.getElementById("obs").value = "";
   });
 
   function updateDisplay() {
