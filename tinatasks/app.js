@@ -268,7 +268,7 @@
         // var now_since1970 = numdays(moment().valueOf());
         // return Math.max(0, then_since1970 - now_since1970);
         // var result = daysSince01(then.split(" ")[0]) - daysSince01(moment().locale('pt-BR').format("D/M/YY"))
-        var result = Math.floor((moment(then.split(" ")[0], "D/M/YY").startOf("day") - moment().startOf("day")) / 86400000);
+        var result = Math.round((moment(then.split(" ")[0], "D/M/YY").startOf("day") - moment().startOf("day")) / 86400000);
 
         var iso_weekday = moment(then.split(" ")[0], "D/M/YY").isoWeekday();
         var diaDaSemana = ['', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab', 'dom'];
