@@ -1,4 +1,4 @@
 TiNAcg.com
 ==========
 
-Currently experimenting with AngularFire basics
+A variety of productivity and language apps
