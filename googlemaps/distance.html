@@ -63,8 +63,9 @@
       }
 
       function initialize() {
-        var mapOptions = { center: new google.maps.LatLng(0.0, 0.0), zoom: 2,
-          mapTypeId: google.maps.MapTypeId.ROADMAP };
+          // var mapOptions = { center: new google.maps.LatLng(0.0, 0.0), zoom: 2,
+          var mapOptions = { center: new google.maps.LatLng(-23.551674, -46.63456), zoom: 14,
+                             mapTypeId: google.maps.MapTypeId.ROADMAP };
         map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 
         var geocoder = new google.maps.Geocoder();
