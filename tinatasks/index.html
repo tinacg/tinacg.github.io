@@ -7,7 +7,13 @@
 	<link rel="stylesheet" type="text/css" href="pikaday.css" />
 	<style>
 	  td { padding-right: 5px; padding-left: 25px; border-bottom: 1px dotted #CCCCCC; }
-	  th { padding-right: 5px; padding-left: 25px; border-bottom: 1px dotted #CCCCCC; }
+	 th { padding-right: 5px; padding-left: 25px; border-bottom: 1px dotted #CCCCCC; }
+
+     #weekdayHack {
+         color: #609;
+         font-weight: bold;
+     }
+     
 	</style>
 	
 	<script src="../js/firebase.js"></script>
@@ -50,6 +56,7 @@
 					  <th>Due date</th>
 					  <th>{{getShortDate(now)}}</th>
 					</tr>
+                    
 					<tr>
 					  <td valign="top">&nbsp;</td>
 					  <!-- <td valign="top"><input ng-model="taskCategory" focus-on="newTaskAdded" size="12" /></td> -->
@@ -61,10 +68,23 @@
 
 					</tr>
 
+                    <!-- WEEKDAY HACK -->
+                    
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td id="weekdayHack"></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+
 				  </thead>
 				  <tbody ng-repeat="task in tasks[tab.name] | orderBy:['done',dueDateOrder,'category','createDate']">
 					<!-- <tr ng-repeat="task in tasks | orderBy:['done','category','createDate']"> -->
-					<tr>
+
+
+                    
+
+                      <tr>
 					  <td valign="top" style="padding-right: 10px;"><input type="checkbox" ng-model="task.done" ng-change="updateTask(tasks[tab.name], task)" /></td>
 					  <!-- <td valign="top" style="padding-right: 10px;">{{task.category}}</td> -->
 					  <td valign="top" style="padding-right: 10px;">
@@ -205,5 +225,53 @@
 		  </table>
 		  -->
 	</div>
+
+    <script>
+     // generate a warning at the bottom of the page for certain weekdays
+     function setWeekdayHackMessage(text) {
+         document.getElementById("weekdayHack").innerHTML = text;
+     }
+     
+     function appendWeekdayHackMessage(text) {
+         document.getElementById("weekdayHack").innerHTML += "<br>" + text;
+     }
+
+     function setupWeekdayMessage(weekdayNum, msg) {
+         
+         var now = new Date();
+         var nowWeekday = now.getDay();
+
+         // Sunday  =   0
+         // Monday  =   1
+         // Tuesday =   2
+         // Wednesday = 3
+         // Thursday =  4
+         // Friday   =  5
+         // Saturday =  6
+
+         var dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+         if (nowWeekday === weekdayNum) {
+             msg = dayNames[nowWeekday] + ": " + msg;
+             setWeekdayHackMessage(msg);
+         }
+     }
+
+     function setupDayMessage(dayNum, msg) {
+         var now = new Date();
+         var nowDay = now.getDate();
+
+         if (nowDay === dayNum) {
+             msg = dayNum + " of month: " + msg;
+             appendWeekdayHackMessage(msg);
+         }
+     }
+     
+     setupWeekdayMessage(0, "groc for Mon, set rice and sorvete next to nespresso for Mon AM");
+     setupWeekdayMessage(1, "AM arroz de molho, descongela feijao");
+     setupWeekdayMessage(2, "PTL Repos");
+     setupWeekdayMessage(3, "7pm groc, arroz de molho a noite");
+
+     setupDayMessage(15, "Invest 1000 in Rico");
+    </script>
   </body>
 </html>
