@@ -6,56 +6,90 @@
   </head>
   <body>
     <h1><tt>http://tinacg.com/life.html</tt></h1>
-    <button id="step">Step</button> <button id="run">Run</button>
-    <button id="stop">Stop</button> <button id="clear">Clear</button>
+
+    <!-- Define animation control buttons -->
+    <button id="step">Step</button>
+    <button id="run">Run</button>
+    <button id="stop">Stop</button>
+    <button id="clear">Clear</button>
+
     <hr>
+    <!-- Canvas -->
     <canvas id="canvas"></canvas>
 
     <!-- add library from JSBin dropdown -->
     <script src="external/js/jquery-2.2.0.min.js"></script>
     <script>
      "use strict";
-     
-     var canvas = document.getElementById("canvas");
-     var context = canvas.getContext("2d");
 
-     // configuration, uses global variables for simplicity
-     canvas.width = 700;
-     canvas.height = 500;
+     // OUTLINE
 
-     var cellSize = 12;  // used in cell drawing and mouse click detection
+     // designed to be easy-to-understand, not the most efficient or
+     // with the shortest amount of lines.
+
+     // 1. define global settings
+     // 2. create representation of cells and grid
+     // 3. make grid's cells interactive
+     // 4. define generational progression rules
+     // 5. animate cells generation after generation
+
+     // Global settings
+     var cellSize = 12;  // in pixels, used in cell draw and click detection
      var cellAliveColor = "purple";
      var cellDeadColor = "white";
      var cellBorderColor = "lightBlue";
-     
+
+     // size for glider gun
      var gridRows = 23;
      var gridCols = 36;
 
+     // animation
      var running;  // used for animation
-     var frameStep = 60;  // milliseconds
+     var frameStep = 100;  // milliseconds, actual speed depends on computer
+     // and broser. Value will define the fastest possible animation speed.
 
-     function Cell() {
+     var canvas = document.getElementById("canvas");
+     var context = canvas.getContext("2d");
+
+     // slightly bigger than grid of cells
+     canvas.width = 450;
+     canvas.height = 300;
+
+     // cell borders
+     context.lineWidth = 1;
+     context.strokeStyle = cellBorderColor;
+
+     function Cell(row, col) {
+       // store row and col for drawing purposes
+       this.row = row;
+       this.col = col;
+       
        this.alive = false;
-       this.nextGenAlive = false;  // temp variable for progressing generations
+
+       // temporary variable for progressing generations
+       this.nextGenAlive = false;
      }
 
-     Cell.prototype.draw = function(row, col) {
+     Cell.prototype.draw = function() {
        // row and col are relevant only to the grid, so these values are not
        // kept in each individual cell. We must pass these values to the
        // drawing function to specify where to draw the cell.
        
-       // adding 0.5 will position border stroke at center of pixel
-       // without it, the cell borders will appear blurred.
-       var cornerX = cellSize * col + 0.5;  
-       var cornerY = cellSize * row + 0.5;
+       var cornerX = cellSize * this.col;
+       var cornerY = cellSize * this.row;
 
-       var cellColor = this.alive ? cellAliveColor : cellDeadColor;
-
+       var cellColor;
+       if (this.alive) {
+         cellColor = cellAliveColor;
+       } else {
+         cellColor = cellDeadColor;
+       }
+       
+       // inside of cell
        context.fillStyle = cellColor;
        context.fillRect(cornerX, cornerY, cellSize, cellSize);
-
-       context.lineWidth = 1;
-       context.strokeStyle = cellBorderColor;
+       
+       // border
        context.strokeRect(cornerX, cornerY, cellSize, cellSize);
      }
 
@@ -63,12 +97,12 @@
        this.rows = rows;
        this.cols = cols;
        
-       this.cells = [];  // outer array holds rows, and each row holds cols.
+       this.cells = [];  // outer array of rows, and each row holds cols.
 
        for (var row = 0; row < this.rows; row++) {
          this.cells[row] = [];  // initialize array of cols
          for (var col = 0; col < this.cols; col++) {
-           this.cells[row][col] = new Cell();
+           this.cells[row][col] = new Cell(row, col);
          }
        }
        this.draw();
@@ -77,10 +111,13 @@
      Grid.prototype.draw = function() {
        for (var row = 0; row < this.rows; row++) {
          for (var col = 0; col < this.cols; col++) {
-           this.cells[row][col].draw(row, col);
+           this.cells[row][col].draw();
          }
        }
      }
+
+     // initialize global grid
+     var grid = new Grid(gridRows, gridCols);
 
      canvas.addEventListener('click', function(event) {
        var boundingRect = this.getBoundingClientRect();
@@ -92,7 +129,7 @@
        
        if (row < grid.rows && col < grid.cols) {
          grid.cells[row][col].alive = !grid.cells[row][col].alive;
-         grid.cells[row][col].draw(row, col);
+         grid.cells[row][col].draw();
        }
      });
 
@@ -104,6 +141,7 @@
            // skip cell itself
            if (!(r == row && c == col)) {
              // validate coordinates to prevent errors
+             // cells outside the edge are "dead"
              if (r >= 0 && r < this.rows && c >= 0 && c < this.cols) {
                if (this.cells[r][c].alive) {
                  liveNeighbors++;
@@ -114,7 +152,9 @@
        }
        return liveNeighbors;
      }
-     
+
+     // with our function to determine how many live neighbors there are,
+     // we can determine what the cell will be in the next generation.
      Grid.prototype.cellNextGen = function(row, col) {
        var liveNeighbors = this.countLiveNeighbors(row, col);
        var cell = this.cells[row][col];
@@ -137,6 +177,7 @@
        }
      }
 
+     // finally, apply these rules to the entire grid
      Grid.prototype.gridNextGen = function() {
        var row;
        var col;
@@ -169,18 +210,6 @@
        grid.draw();
      };
 
-     // programmatically define cells
-     Grid.prototype.giveLife = function(row, col) {
-       this.cells[row][col].alive = true;
-     };
-
-     Grid.prototype.createCreature = function(coordinates) {
-       coordinates.forEach(function (point) {
-         // unpacks the row and column values from the pair and calls giveLife
-         this.giveLife.apply(this, point);
-       }, this);
-     }
-
      // controls, using jQuery for simplicity
      $("#step").click(function () {
        grid.gridNextGen();
@@ -201,9 +230,18 @@
      });
 
 
-     // initialize
-     var grid = new Grid(gridRows, gridCols);
+     // EXTRA:
+     // programmatically define cells
+     Grid.prototype.giveLife = function(row, col) {
+       this.cells[row][col].alive = true;
+     };
 
+     Grid.prototype.createCreature = function(coordinates) {
+       coordinates.forEach(function (point) {
+         // unpacks the row and column values from the pair and calls giveLife
+         this.giveLife.apply(this, point);
+       }, this);
+     }
 
      // spaceships
      var glider1 = [[15, 1],
