@@ -46,7 +46,7 @@
      // animation
      var running;  // used for animation
      var frameStep = 100;  // milliseconds, actual speed depends on computer
-     // and broser. Value will define the fastest possible animation speed.
+     // and browser. Value will define the fastest possible animation speed.
 
      var canvas = document.getElementById("canvas");
      var context = canvas.getContext("2d");
@@ -71,10 +71,6 @@
      }
 
      Cell.prototype.draw = function() {
-       // row and col are relevant only to the grid, so these values are not
-       // kept in each individual cell. We must pass these values to the
-       // drawing function to specify where to draw the cell.
-       
        var cornerX = cellSize * this.col;
        var cornerY = cellSize * this.row;
 
