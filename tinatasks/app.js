@@ -65,7 +65,7 @@
         taskDescription = taskDescription || "My Task";
 
         // if description is an url, make it clickable
-        var domains = ['.co', '.ne', '.or', '.ed', '.br', '.go', '.mi'];
+        var domains = ['.co', '.ne', '.or', '.ed', '.br', '.go', '.mi', '.io'];
         var domainsLen = domains.length;
 
         function wordContainsDomain(word) {
