@@ -27,8 +27,8 @@ document.getElementById("startTimer").addEventListener("click", function() {
   clearInterval(intv);
   
   intv = setInterval(function () {
-    document.title = secstomins(secs - secsDiff(startDate));
-    document.getElementById("secondsLeft").innerHTML = secstomins(secs - secsDiff(startDate));
+    document.title = secstohms(secs - secsDiff(startDate));
+    document.getElementById("secondsLeft").innerHTML = secstohms(secs - secsDiff(startDate));
     if ((secs - secsDiff(startDate)) <= 0) {
       clearInterval(intv);
       if (alertWindow) {
@@ -51,10 +51,20 @@ function secsDiff(start) {
 function secstomins(s) {
   var secsdisp = s % 60;
   var minsdisp = Math.floor(s / 60);
+  if (minsdisp < 10) {
+    minsdisp = "0" + minsdisp;
+  }
   if (secsdisp < 10) {
 	secsdisp = "0" + secsdisp;
   }
   return minsdisp + ":" + secsdisp;
+}
+
+function secstohms(s) {
+  // s < 3600 is 0:59:59
+  var hoursdisp = Math.floor(s / 3600);
+  var secsleft = s - hoursdisp * 3600;
+  return hoursdisp + ":" + secstomins(secsleft);
 }
 
 var now = new Date();
