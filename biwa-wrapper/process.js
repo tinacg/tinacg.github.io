@@ -6,6 +6,7 @@ document.getElementById("evalSingle").addEventListener("click", function () {
 
 document.getElementById("clearSingle").addEventListener("click", function() {
   document.getElementById("singleLineCode").value = "";
+  document.getElementById("singleLineCode").focus();
 });
 
 document.getElementById("eval").addEventListener("click", function () {
