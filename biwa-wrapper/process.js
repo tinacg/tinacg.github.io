@@ -1,7 +1,7 @@
 var intp = new BiwaScheme.Interpreter();
 
 document.getElementById("evalSingle").addEventListener("click", function () {
-  intp.evaluate("(print " + document.getElementById("singleLineCode").value + ")");
+  intp.evaluate("(print (" + document.getElementById("singleLineCode").value + "))");
 });
 
 document.getElementById("clearSingle").addEventListener("click", function() {

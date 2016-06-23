@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+  <head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>BiwaScheme Calculator</title>
+    <link rel="stylesheet" href="styles.css">      
+  </head>
+  <body>
+	( <input type="text" id="singleLineCode"> ) <!-- onfocus="blur();"> ) -->
+	<br>
+
+    <!--
+	<input type="button" value="eval" id="evalSingle">
+	<input type="button" value="clear code" id="clearSingle">
+	-->
+    
+	<div id="bs-console">
+      0
+    </div>
+    <br>
+    <div class="keypadRow">
+      <div class="keypadButton largeTextButton" id="leftParen">(</div>
+      <div class="keypadButton largeTextButton" id="rightParen">)</div>
+      <div class="keypadButton smallTextButton" id="bksp">bksp</div>
+      <div class="keypadButton largeTextButton" id="none">:)</div>
+      <div class="keypadButton smallTextButton" id="clear">clear</div>
+    </div>
+    <div class="keypadRow">
+      <div class="keypadButton largeTextButton" id="seven">7</div>
+      <div class="keypadButton largeTextButton" id="eight">8</div>
+      <div class="keypadButton largeTextButton" id="nine">9</div>
+      <div class="keypadButton largeTextButton" id="divide">/</div>
+      <div class="keypadButton smallTextButton" id="sqrt">sqrt</div>
+    </div>
+    <div class="keypadRow">
+      <div class="keypadButton largeTextButton" id="four">4</div>
+      <div class="keypadButton largeTextButton" id="five">5</div>
+      <div class="keypadButton largeTextButton" id="six">6</div>
+      <div class="keypadButton largeTextButton" id="multiply">*</div>
+      <div class="keypadButton smallTextButton" id="log">log</div>
+    </div>
+    <div class="keypadRow">
+      <div class="keypadButton largeTextButton" id="one">1</div>
+      <div class="keypadButton largeTextButton" id="two">2</div>
+      <div class="keypadButton largeTextButton" id="three">3</div>
+      <div class="keypadButton largeTextButton" id="subtract">-</div>
+      <div class="keypadButton smallTextButton" id="exp">exp</div>
+    </div>
+    <div class="keypadRow">
+      <div class="keypadButton largeTextButton" id="dot">.</div>
+      <div class="keypadButton largeTextButton" id="zero">0</div>
+      <div class="keypadButton largeTextButton" id="space">_</div>
+      <div class="keypadButton largeTextButton" id="add">+</div>
+      <div class="keypadButton smallTextButton" id="eval">eval</div>
+    </div>
+
+    <div class="keypadRow">
+      <span class="credits">
+	    Using BiwaScheme 0.6.2
+      </span>
+    </div>
+
+	<script src="biwascheme-0.6.2-min.js"></script>
+	<script src="process.js"></script>
+  </body>
+</html>
