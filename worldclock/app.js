@@ -12,6 +12,7 @@ moment.tz.load({
 moment.tz.names();
 
 localtime.innerHTML = moment().tz("America/Sao_Paulo").format("HH:mm");
-chi.innerHTML = moment().tz("America/Chicago").format("HH:mm");
+// chi.innerHTML = moment().tz("America/Chicago").format("HH:mm");
+ny.innerHTML = moment().tz("America/New_York").format("HH:mm");
 tw.innerHTML = moment().tz("Asia/Taipei").format("HH:mm");
 // hk.innerHTML = moment().tz("Asia/Hong_Kong").format("HH:mm");
