@@ -5,6 +5,8 @@ document.getElementById("clearMessage").addEventListener("click", function() {
   document.getElementById("hours").value = "";
   document.getElementById("minutes").value = "";
   document.getElementById("message").value = "";
+  document.getElementById("timeAlarm").value = "";
+  document.getElementById("alarmMessage").value = "";
 });
 
 document.getElementById("testButton").addEventListener("click", function() {
@@ -97,9 +99,18 @@ var timeNowIntv = setInterval(function() {
 
 function parsehhmm(s) {
   var parts = s.split(":");
-  var hh = parts[0];
-  var mm = parts[1];
-  return { hh: parseInt(hh), mm: parseInt(mm) };
+  var hh = parseInt(parts[0]);
+  var mm = parseInt(parts[1]);
+
+  if (isNaN(hh)) {
+    hh = 0;
+  }
+
+  if (isNaN(mm)) {
+    mm = 0;
+  }
+  
+  return { hh: hh, mm: mm };
 }
 
 function computeTimeDifference() {
@@ -117,7 +128,7 @@ function computeTimeDifference() {
   }
 
   var differenceHours = Math.floor(difference);
-  var differenceMins = Math.round((difference - differenceHours) * 60);
+  var differenceMins = Math.ceil((difference - differenceHours) * 60);
 
   // set timer above
   document.getElementById("hours").value = differenceHours;
