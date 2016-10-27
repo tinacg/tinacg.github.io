@@ -29,7 +29,7 @@ document.getElementById("startTimer").addEventListener("click", function() {
   clearInterval(intv);
   
   intv = setInterval(function () {
-    document.title = secstohms(secs - secsDiff(startDate));
+    document.title = secstohms(secs - secsDiff(startDate)) + " " + document.getElementById("message").value;
     document.getElementById("secondsLeft").innerHTML = secstohms(secs - secsDiff(startDate));
     if ((secs - secsDiff(startDate)) <= 0) {
       clearInterval(intv);
