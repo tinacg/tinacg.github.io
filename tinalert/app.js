@@ -71,3 +71,62 @@ var now = new Date();
 
 document.getElementById("currentTime").innerHTML = now.toString();
 
+// Alarm
+
+function pad(s) {
+  if (s.length < 2) {
+    return "0" + s;
+  } else {
+    return s;
+  }
+}
+
+function setTimeNow() {
+  var now = new Date();
+  var hoursNow = pad(now.getHours().toString());
+  var minutesNow = pad(now.getMinutes().toString());
+  var secondsNow = pad(now.getSeconds().toString());
+  
+  document.getElementById("timeNow").value = hoursNow + ":" + minutesNow + ":" + secondsNow;
+}
+
+setTimeNow();
+
+var timeNowIntv = setInterval(function() {
+  setTimeNow(); }, 1000);
+
+function parsehhmm(s) {
+  var parts = s.split(":");
+  var hh = parts[0];
+  var mm = parts[1];
+  return { hh: parseInt(hh), mm: parseInt(mm) };
+}
+
+function computeTimeDifference() {
+  // calculate difference between alarm time and now time
+  var timeAlarm = parsehhmm(document.getElementById("timeAlarm").value);
+  var timeAlarmHours = timeAlarm.hh + timeAlarm.mm / 60;
+
+  var now = new Date();
+  var nowHours = now.getHours() + now.getMinutes() / 60;
+
+  var difference = timeAlarmHours - nowHours;
+
+  if (difference < 0) {
+    difference += 24;
+  }
+
+  var differenceHours = Math.floor(difference);
+  var differenceMins = Math.round((difference - differenceHours) * 60);
+
+  // set timer above
+  document.getElementById("hours").value = differenceHours;
+  document.getElementById("minutes").value = differenceMins;
+  document.getElementById("message").value = document.getElementById("alarmMessage").value;
+  
+  document.getElementById("startTimer").click();
+}
+  
+document.getElementById("compute").onclick = function() {
+  computeTimeDifference();
+}
