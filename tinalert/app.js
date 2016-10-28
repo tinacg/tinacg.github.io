@@ -41,7 +41,7 @@ document.getElementById("startTimer").addEventListener("click", function() {
       alertWindow.document.write("<h1>" + msg + "</h1>");
       alertWindow.document.close();
 
-      document.title = "Time's up!";
+      document.title = "Time's up! " + document.getElementById("message").value;
     }
   }, 1000);
 });
