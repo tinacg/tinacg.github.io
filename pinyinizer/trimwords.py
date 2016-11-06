@@ -25,7 +25,7 @@ def add_to_tree(trad, line, tree):
         tree[trad[0]]['en'] = ""
     if len(trad) == 1:
         tree[trad[0]]['py'] += num_to_accent(parts['py']) + " / "
-        tree[trad[0]]['en'] += parts['en'] + " / "
+        tree[trad[0]]['en'] += parts['en'][:-2]
     else:
         add_to_tree(trad[1:], line, tree[trad[0]])
 
@@ -101,7 +101,7 @@ def num_to_accent(str):
     return ' '.join([decode_pinyin(syl) for syl in parts])
 
 infile = "/tmp/cedict_1_0_firstfew.txt"
-outfile = "/tmp/cedict_1_0_4chars.txt"
+outfile = "/home/heitor/tinacg.github.io/pinyinizer/cedict_tree.js"
 
 inhandle = open(infile)
 outhandle = open(outfile, "w")
@@ -111,7 +111,9 @@ for line in inhandle:
     
     if len(parts['trad']) <= 4:
         add_to_tree(parts['trad'], line, dicttree)
-        print("%s %s %s" % (parts['trad'], parts['py'], parts['en']), file=outhandle)
+        # print("%s %s %s" % (parts['trad'], parts['py'], parts['en']), file=outhandle)
+
+json.dump(dicttree, outhandle, ensure_ascii=False, indent=2)
 
 inhandle.close()
 outhandle.close()
