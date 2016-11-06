@@ -1,10 +1,12 @@
 import json
 import re
 
+# manually add "var cedict_tree = " to generated js file
+
 # Load CEDICT and remove entries over 4 characters long
 
-# infile = "/tmp/cedict_1_0_firstfew.txt"
-infile = "/tmp/HSK_level6.txt"
+# infile = "/tmp/cedict_1_0.txt"  # way too big: 9 MB
+infile = "/tmp/HSK_level6_trad.txt"
 outfile = "/home/heitor/tinacg.github.io/pinyinizer/cedict_tree.js"
 
 dicttree = {}
@@ -113,17 +115,37 @@ def num_to_accent(str):
     parts = str.split(' ')
     return ' '.join([decode_pinyin(syl) for syl in parts])
 
+# collect a set of single characters found in a file (HSK_level6_trad)
+
+charinfile = "/tmp/HSK_level6_trad.txt"
+
+charset = set()
+
+charinhandle = open(charinfile)
+
+for line in charinhandle:
+    tokens = line.split(',')
+    word = tokens[1]
+    for char in word:
+        charset.add(char)
+
+charinhandle.close()
+
+def word_in_HSK(word, charset):
+    return set(word).issubset(charset)
+
 inhandle = open(infile)
 outhandle = open(outfile, "w")
 
 for line in inhandle:
     parts = parse_HSK(line)
     
-    if len(parts['trad']) <= 4:
+    # check that all characters are in HSK set
+    if len(parts['trad']) <= 4 and set(parts['trad']).issubset(charset):    
         add_to_tree(parts['trad'], line, dicttree)
         # print("%s %s %s" % (parts['trad'], parts['py'], parts['en']), file=outhandle)
 
-json.dump(dicttree, outhandle, ensure_ascii=False, indent=2)
+json.dump(dicttree, outhandle, ensure_ascii=False)  #, indent=2)
 
 inhandle.close()
 outhandle.close()

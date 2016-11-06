@@ -2,6 +2,9 @@
 CREDITS
 =======
 
+HSK List
+http://lingomi.com,(This HSK Level 6 list was produced by Lingomi. Definitions provided by CC-CEDICT)
+
 # CC-CEDICT
 # Community maintained free Chinese-English dictionary.
 # 
