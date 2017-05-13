@@ -16,6 +16,8 @@
 
       $scope.notification = authData.password.email + " token expires " + (new Date(authData.expires * 1000));
 
+      $scope.email = authData.password.email;
+
       var tabsRef = ref.child(authData.uid).child("tabs");
       var sync = $firebase(tabsRef);
       $scope.tabs = sync.$asArray();
