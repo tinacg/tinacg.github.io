@@ -36,7 +36,7 @@
 	<div ng-show="loggedIn">
 	  <a href="/index.html">home</a> | 
 	  <a href ng-click="logout()">log out</a>
-	  (it is now {{nowFull}})
+	  (it is now {{nowFull}}) <span id="email">{{ email }}</span>
 	  <br>
 	  {{notification}}
       
@@ -71,7 +71,7 @@
                     
                     <tr>
                         <td>&nbsp;</td>
-                        <td id="weekdayHack">{{ email }}</td>
+                        <td id="weekdayHack">{{ weekdayHack }}</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                     </tr>
@@ -264,16 +264,18 @@
              appendWeekdayHackMessage(msg);
          }
      }
-     
-     setupWeekdayMessage(0, "groc for Mon, set rice and sorvete next to Asus for Mon AM");
-     setupWeekdayMessage(1, "AM groc, arroz de molho, feijao");
-     setupWeekdayMessage(2, "PTL Repos, 4pm Skype");
-     setupWeekdayMessage(3, "7pm groc, arroz de molho, new jeans, towel");
-     setupWeekdayMessage(4, "check claro and vivo");
-     setupWeekdayMessage(5, "It's Friday, go nuts");
-     setupWeekdayMessage(6, "9:30am liga Nai Nai");
-     
-     setupDayMessage(26, "Avisa Sr Yeh Val quantos dias (quintas)");
+
+     function hardcodeWeekday () {
+         setupWeekdayMessage(0, "groc for Mon, set rice and sorvete next to Asus for Mon AM");
+         setupWeekdayMessage(1, "AM groc, arroz de molho, feijao");
+         setupWeekdayMessage(2, "PTL Repos, 4pm Skype");
+         setupWeekdayMessage(3, "7pm groc, arroz de molho, new jeans, towel");
+         setupWeekdayMessage(4, "check claro and vivo");
+         setupWeekdayMessage(5, "It's Friday, go nuts");
+         setupWeekdayMessage(6, "9:30am liga Nai Nai");
+         
+         setupDayMessage(26, "Avisa Sr Yeh Val quantos dias (quintas)");
+     }
     </script>
   </body>
 </html>

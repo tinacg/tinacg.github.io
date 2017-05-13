@@ -18,6 +18,62 @@
 
       $scope.email = authData.password.email;
 
+      // ADD WEEKDAY MSG
+
+      function setWeekdayHackMessage(text) {
+        if ($scope.email == "heitorchang@gmail.com") {
+          $scope.weekdayHack = text;
+        }
+     }
+     
+     function appendWeekdayHackMessage(text) {
+        if ($scope.email == "heitorchang@gmail.com") {
+          $scope.weekdayHack += text;
+        }
+     }
+
+     function setupWeekdayMessage(weekdayNum, msg) {
+         
+         var now = new Date();
+         var nowWeekday = now.getDay();
+
+         // Sunday  =   0
+         // Monday  =   1
+         // Tuesday =   2
+         // Wednesday = 3
+         // Thursday =  4
+         // Friday   =  5
+         // Saturday =  6
+
+         var dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+         if (nowWeekday === weekdayNum) {
+             msg = dayNames[nowWeekday] + ": " + msg;
+             setWeekdayHackMessage(msg);
+         }
+     }
+
+     function setupDayMessage(dayNum, msg) {
+         var now = new Date();
+         var nowDay = now.getDate();
+
+         if (nowDay === dayNum) {
+             msg = dayNum + " of month: " + msg;
+             appendWeekdayHackMessage(msg);
+         }
+     }
+
+         setupWeekdayMessage(0, "groc for Mon, set rice and sorvete next to Asus for Mon AM");
+         setupWeekdayMessage(1, "AM groc, arroz de molho, feijao");
+         setupWeekdayMessage(2, "PTL Repos, 4pm Skype");
+         setupWeekdayMessage(3, "7pm groc, arroz de molho, new jeans, towel");
+         setupWeekdayMessage(4, "check claro and vivo");
+         setupWeekdayMessage(5, "It's Friday, go nuts");
+         setupWeekdayMessage(6, "9:30am liga Nai Nai");
+         
+         setupDayMessage(26, "Avisa Sr Yeh Val quantos dias (quintas)");
+
+      // END ADD WEEKDAY MSG
+      
       var tabsRef = ref.child(authData.uid).child("tabs");
       var sync = $firebase(tabsRef);
       $scope.tabs = sync.$asArray();
