@@ -28,7 +28,7 @@
      
      function appendWeekdayHackMessage(text) {
         if ($scope.email == "heitorchang@gmail.com") {
-          $scope.weekdayHack += "<br>" + text;
+          $scope.weekdayHack += " / " + text;
         }
      }
 
