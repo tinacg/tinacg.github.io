@@ -62,17 +62,16 @@
          }
      }
 
-         setupWeekdayMessage(0, "groc for Mon, set rice and sorvete next to Asus for Mon AM");
-         setupWeekdayMessage(1, "groc, arroz, feijao, PTL Repos");
-         // setupWeekdayMessage(2, "PTL Repos, 4pm Skype");
-         setupWeekdayMessage(2, "2pm Dra Lucia");
-         setupWeekdayMessage(3, "7pm groc, arroz de molho, new jeans, towel");
-         setupWeekdayMessage(4, "check claro and vivo");
-         setupWeekdayMessage(5, "It's Friday, go nuts");
-         setupWeekdayMessage(6, "9:30am liga Nai Nai");
-         
-         setupDayMessage(26, "Avisa Sr Yeh Val quantos dias (quintas)");
-
+      setupWeekdayMessage(0, "groc for Mon, set rice and sorvete next to Asus for Mon AM");
+      setupWeekdayMessage(1, "groc, arroz, feijao, PTL Repos");
+      setupWeekdayMessage(2, "2pm Dra Lucia");
+      setupWeekdayMessage(3, "7pm groc, arroz de molho, feijao, jeans, towel");
+      setupWeekdayMessage(4, "check claro and vivo");
+      setupWeekdayMessage(5, "It's Friday, go nuts");
+      setupWeekdayMessage(6, "9:30am liga Nai Nai");
+      
+      setupDayMessage(26, "Avisa Sr Yeh Val quantos dias (quintas)");
+      
       // END ADD WEEKDAY MSG
       
       var tabsRef = ref.child(authData.uid).child("tabs");
