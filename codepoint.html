@@ -40,7 +40,11 @@
          };
 
          hex.onkeyup = function() {
-             plain.value = String.fromCodePoint(parseInt(hex.value, 16));
+             if (hex.value.length > 0) {
+                 plain.value = String.fromCodePoint(parseInt(hex.value, 16));
+             } else {
+                 plain.value ="";
+             }
          };
          
         </script>
