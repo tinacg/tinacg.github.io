@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Unicode Code Point</title>
+        <style>
+         .floatLeft {
+             float: left;
+             padding: 20px;
+         }
+
+         input {
+             font-size: 2em;
+         }
+        </style>
+    </head>
+    <body>
+        <div class="floatLeft">
+            Plain Text (only first char considered)<br><br>
+            <input id="plain" autofocus>
+        </div>
+        <div class="floatLeft">
+            Code Point (only Basic Multilingual Plane)<br><br>
+            Hex <input id="hex">
+        </div>
+        <script>
+         var plain = document.getElementById("plain");
+         var hex = document.getElementById("hex");
+         // var codeplain = document.getElementById("codeplain");
+         
+         plain.onkeyup = function() {
+             // console.log(plain.value)
+             // codeplain.value = plain.value;
+             if (plain.value.length > 0) {
+                 hex.value = plain.value.charCodeAt(0).toString(16);
+             } else {
+                 hex.value = "";
+             }
+             // plain.value = "";
+         };
+
+         hex.onkeyup = function() {
+             plain.value = String.fromCodePoint(parseInt(hex.value, 16));
+         };
+         
+        </script>
+    </body>
+</html>
