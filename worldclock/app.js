@@ -1,8 +1,3 @@
-var localtime = document.getElementById("local");
-var chi = document.getElementById("chi");
-var tw = document.getElementById("tw");
-// var hk = document.getElementById("hk");
-
 moment.tz.load({
   zones: [],
   links: [],
@@ -11,6 +6,12 @@ moment.tz.load({
 
 // Display all names
 // moment.tz.names();
+
+var localtime = document.getElementById("local");
+var chi = document.getElementById("chi");
+var tw = document.getElementById("tw");
+var ro = document.getElementById("ro");
+var bei = document.getElementById("bei");
 
 localtime.innerText = moment().tz("America/Sao_Paulo").format("HH:mm");
 ny.innerText = moment().tz("America/New_York").format("HH:mm");
