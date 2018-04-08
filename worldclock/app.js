@@ -9,10 +9,11 @@ moment.tz.load({
   version: "2014e",
 });
 
-moment.tz.names();
+// Display all names
+// moment.tz.names();
 
-localtime.innerHTML = moment().tz("America/Sao_Paulo").format("HH:mm");
-// chi.innerHTML = moment().tz("America/Chicago").format("HH:mm");
-ny.innerHTML = moment().tz("America/New_York").format("HH:mm");
-tw.innerHTML = moment().tz("Asia/Taipei").format("HH:mm");
-// hk.innerHTML = moment().tz("Asia/Hong_Kong").format("HH:mm");
+localtime.innerText = moment().tz("America/Sao_Paulo").format("HH:mm");
+ny.innerText = moment().tz("America/New_York").format("HH:mm");
+tw.innerText = moment().tz("Asia/Taipei").format("HH:mm");
+ro.innerText = moment().tz("Europe/Rome").format("HH:mm");
+bei.innerText = moment().tz("Asia/Shanghai").format("HH:mm");
