@@ -85,6 +85,7 @@
              map = new google.maps.Map(document.getElementById("map_canvas"),
                                        mapOptions);
 
+             /*
              rect = new google.maps.Rectangle({
                  bounds: toBounds(toLatLng(0.0, 0.0), toLatLng(0.000001,0.000001)),
                  fillColor: "#FFFF00",
@@ -92,11 +93,13 @@
                  strokeColor: "#0000FF",
                  strokeWeight: 2
              });
-
+             */
+             
              google.maps.event.addListener(map, 'click', function(event) {
                  getAddress(event.latLng);
              });
 
+             /*
              google.maps.event.addListener(map, 'dblclick', function(event) {
                  if(state == 0) {
                      pt1 = event.latLng;
@@ -104,13 +107,15 @@
                      state = 1;
                  }
              });
-
+             
              google.maps.event.addListener(map, 'mousemove', function(event) {
                  if(rect.getMap() == map) {
                      rect.setBounds(toBounds(pt1, event.latLng));
                  }
              });
+             */
 
+             /*
              // Remove the zoom window and zoom in
              google.maps.event.addListener(rect, 'click', function(event) {
                  rect.setMap(null);
@@ -136,7 +141,8 @@
 
              google.maps.event.addListener(map, 'rightclick', function(event) {
                  map.setZoom(map.getZoom() - 2);
-             }); 
+             });
+             */
          }
 
          function getAddress(latLng) {
