@@ -95,7 +95,7 @@
              });
              */
              
-             google.maps.event.addListener(map, 'click', function(event) {
+             google.maps.event.addListener(map, 'rightclick', function(event) {
                  getAddress(event.latLng);
              });
 
@@ -215,6 +215,7 @@
             <input id="check_sp" type="checkbox" checked="checked">SP
             <input type="button" value="clear" onclick="document.getElementById('text_address').value=''; document.getElementById('text_address').focus()">
             <input id="button3" type="button" value="clear markers" onclick="clearMarkers()">
+            right-click to get address
         </div><div id="map_canvas" style="width:100%; height:100%">
 
         </div>
